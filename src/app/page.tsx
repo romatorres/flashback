@@ -1,15 +1,16 @@
 import Header from "@/components/site/Header";
 import Hero from "@/components/site/Hero";
+import About from "@/components/site/About";
 
 export default function Home() {
   return (
     <div>
       <Header />
       <Hero />
-      {/* <div id="about">
+      <div id="about">
         <About />
       </div>
-      <div id="shows">
+      {/*  <div id="shows">
         <Shows />
       </div>
       <div id="videos">

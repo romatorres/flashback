@@ -194,6 +194,16 @@
   .animate-shimmer {
     animation: shimmer 3s ease-in-out infinite;
   }
+
+  .bg-pattern-stripes {
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 35px,
+      var(--accent) 35px,
+      var(--accent) 70px
+    );
+  }
 }
 
 @keyframes shimmer {

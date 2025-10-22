@@ -14,10 +14,19 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../ui/sheet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -29,7 +38,11 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+          scrolled ? "bg-background/80 backdrop-blur-sm" : "bg-transparent"
+        }`}
+      >
         <div className="container mx-auto px-4 h-20 flex items-center justify-between">
           {/* Mobile menu */}
           <Sheet open={open} onOpenChange={setOpen}>

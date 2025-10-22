@@ -33,13 +33,13 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url("img/disco-hero.jpg")` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/50 to-background"></div>
       </div>
 
       {/* Animated sparkles */}
@@ -68,46 +68,41 @@ export default function Hero() {
         <Image
           src="/img/logo.svg"
           alt="Banda Flashback"
-          width={320}
-          height={320}
-          className="w-48 md:w-64 lg:w-80 h-auto mb-3 hover:scale-101 drop-shadow-[0_0_40px_rgba(0,0,0,1)] transition-all duration-300"
+          width={288}
+          height={96}
+          className="w-48 md:w-64 lg:w-72 h-auto mb-2 hover:scale-101 drop-shadow-[0_0_40px_rgba(0,0,0,1)] transition-all duration-300"
         />
-        <p className="font-gravitas-one text-4xl md:text-6xl lg:text-7xl bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">
-          Let&apos;s
-        </p>
-        <p className="font-gravitas-one text-4xl md:text-6xl lg:text-8xl mb-4 bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">
-          Dance
-        </p>
-        <p className="font-outfit-sans text-lg md:text-2xl mb-8 text-foreground font-light tracking-wide max-w-3xl mx-auto">
-          Reviva a magia dos anos 60 e 70 com clássicos que marcaram gerações
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button
-            size="lg"
-            variant="disco"
-            onClick={() => scrollToSection("shows")}
-            className="text-xl px-8 py-6"
-          >
-            Um pouco sobre nós
-          </Button>
-          <Button
-            variant="disco"
-            className="group h-[50px] w-64 p-0.5"
-            onClick={() => scrollToSection("contact")}
-          >
-            <span className="flex cursor-pointer text-xl w-full h-full rounded-md items-center justify-center bg-background group-hover:bg-background/70 transition duration-100">
-              Contrate nosso show
-            </span>
-          </Button>
+        <div>
+          <p className="font-gravitas-one text-4xl md:text-5xl lg:text-6xl bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">
+            Let&apos;s
+          </p>
+          <p className="font-gravitas-one text-4xl md:text-6xl lg:text-8xl mb-4 bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">
+            Dance
+          </p>
+          <p className="font-outfit-sans text-lg md:text-2xl mb-6 text-foreground font-light tracking-wide max-w-3xl mx-auto">
+            Reviva a magia dos anos 60 e 70 com clássicos que marcaram gerações
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              size="lg"
+              variant="disco"
+              onClick={() => scrollToSection("shows")}
+              className="text-xl px-8 py-6"
+            >
+              Um pouco sobre nós
+            </Button>
+            <Button
+              variant="disco"
+              className="group h-[50px] w-64 p-0.5"
+              onClick={() => scrollToSection("contact")}
+            >
+              <span className="flex cursor-pointer text-xl w-full h-full rounded-md items-center justify-center bg-background group-hover:bg-background/70 transition duration-100">
+                Contrate nosso show
+              </span>
+            </Button>
+          </div>
         </div>
       </div>
-
-      {/* Scroll indicator */}
-      {/* <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-float">
-        <div className="w-6 h-10 border-2 border-accent rounded-full flex items-start justify-center p-2">
-          <div className="w-1 h-2 bg-accent rounded-full animate-glow"></div>
-        </div>
-      </div> */}
     </section>
   );
 }
