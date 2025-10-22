@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  FacebookIcon as Facebook,
-  Instagram,
-  Youtube,
-  Menu,
-} from "lucide-react";
+import { Menu } from "lucide-react";
 import {
   BiLogoFacebookCircle,
   BiLogoInstagram,
@@ -35,7 +30,7 @@ export default function Header() {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+        <div className="container mx-auto px-4 h-20 flex items-center justify-between">
           {/* Mobile menu */}
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild className="md:hidden">
@@ -86,7 +81,7 @@ export default function Header() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <Facebook className="w-5 h-5 mr-3" />
+                      <BiLogoFacebookCircle />
                       <span>Facebook</span>
                     </a>
                   </Button>
@@ -101,7 +96,7 @@ export default function Header() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <Instagram className="w-5 h-5 mr-3" />
+                      <BiLogoInstagram />
                       <span>Instagram</span>
                     </a>
                   </Button>
@@ -116,7 +111,7 @@ export default function Header() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <Youtube className="w-5 h-5 mr-3" />
+                      <BiLogoYoutube />
                       <span>Youtube</span>
                     </a>
                   </Button>
@@ -128,28 +123,28 @@ export default function Header() {
           <div className="flex-1 hidden md:block"></div>
 
           {/* Desktop navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-10 text-xl font-semibold">
             <button
               onClick={() => scrollToSection("about")}
-              className="text-foreground hover:text-primary transition-colors text-xl cursor-pointer"
+              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:text-disco-orange transition-colors"
             >
               Sobre
             </button>
             <button
               onClick={() => scrollToSection("shows")}
-              className="text-foreground hover:text-primary transition-colors text-xl cursor-pointer"
+              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:text-disco-orange transition-colors"
             >
               Shows
             </button>
             <button
               onClick={() => scrollToSection("videos")}
-              className="text-foreground hover:text-primary transition-colors text-xl cursor-pointer"
+              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:text-disco-orange transition-colors"
             >
               Vídeos
             </button>
             <button
               onClick={() => scrollToSection("contact")}
-              className="text-foreground hover:text-primary transition-colors text-xl cursor-pointer"
+              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:text-disco-orange transition-colors"
             >
               Contatos
             </button>
@@ -161,48 +156,32 @@ export default function Header() {
 
       {/* Fixed social icons on desktop - vertical on right side */}
       <div className="hidden md:flex fixed right-4 top-1/2 -translate-y-1/2 z-50 flex-col gap-6">
-        <Button
-          variant="ghost"
-          size="icon"
-          className=" hover:text-primary transition-colors border border-primary rounded-full [&_svg]:size-7"
-          asChild
+        <a
+          href="https://facebook.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center border-2 border-foreground text-disco-orange rounded-full p-1.5 transition-colors hover:translate-y-[-2px]"
         >
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <BiLogoFacebookCircle />
-          </a>
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="hover:text-primary transition-colors border border-primary rounded-full [&_svg]:size-7"
-          asChild
+          <BiLogoFacebookCircle size={30} />
+        </a>
+
+        <a
+          href="https://instagram.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center border-2 border-foreground text-disco-orange rounded-full p-1.5 transition-colors hover:translate-y-[-2px]"
         >
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <BiLogoInstagram />
-          </a>
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="hover:text-primary transition-colors border border-primary rounded-full [&_svg]:size-6"
-          asChild
+          <BiLogoInstagram size={30} />
+        </a>
+
+        <a
+          href="https://youtube.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center border-2 border-foreground text-disco-orange rounded-full p-1.5 transition-colors hover:translate-y-[-2px]"
         >
-          <a
-            href="https://youtube.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <BiLogoYoutube />
-          </a>
-        </Button>
+          <BiLogoYoutube size={28} />
+        </a>
       </div>
     </>
   );
