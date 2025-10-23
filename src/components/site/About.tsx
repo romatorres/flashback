@@ -28,8 +28,8 @@ const About = () => {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <h2 className="flex justify-center font-gravitas-one text-4xl md:text-5xl lg:text-6xl mb-16 bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">
-          Sinta Nossa Vibe
+        <h2 className="flex justify-center font-gravitas-one text-4xl md:text-5xl lg:text-6xl mb-20 bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">
+          Sobre a Flashback
         </h2>
 
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">

@@ -14,6 +14,7 @@ import {
   SheetTrigger,
 } from "../ui/sheet";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -43,7 +44,16 @@ export default function Header() {
         }`}
       >
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex-1" />
+          <div className="flex-1">
+            {scrolled && (
+              <Image
+                src="/img/logo-icon.png"
+                alt="Logo Icon"
+                width={40}
+                height={40}
+              />
+            )}
+          </div>
 
           {/* Desktop navigation */}
           <nav className="hidden md:flex items-center gap-10 text-xl font-semibold">
@@ -123,27 +133,27 @@ export default function Header() {
           href="https://facebook.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center border-2 border-foreground text-disco-orange rounded-full p-1.5 transition-colors hover:translate-y-[-2px]"
+          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-3px]"
         >
-          <BiLogoFacebookCircle size={30} />
+          <BiLogoFacebookCircle size={26} />
         </a>
 
         <a
           href="https://instagram.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center border-2 border-foreground text-disco-orange rounded-full p-1.5 transition-colors hover:translate-y-[-2px]"
+          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-3px]"
         >
-          <BiLogoInstagram size={30} />
+          <BiLogoInstagram size={26} />
         </a>
 
         <a
           href="https://youtube.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center border-2 border-foreground text-disco-orange rounded-full p-1.5 transition-colors hover:translate-y-[-2px]"
+          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-3px]"
         >
-          <BiLogoYoutube size={28} />
+          <BiLogoYoutube size={24} />
         </a>
       </div>
     </>

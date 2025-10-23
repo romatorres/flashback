@@ -84,10 +84,11 @@ export default function Hero() {
           <p className="font-gravitas-one text-6xl md:text-7xl lg:text-[80px] mb-4 bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">
             Dance
           </p>
-          <p className="font-outfit-sans text-lg md:text-2xl mb-6 text-foreground font-light tracking-wide max-w-3xl mx-auto">
-            Reviva a magia dos anos 60 e 70 com clássicos que marcaram gerações
+          <p className="font-outfit-sans text-xl md:text-2xl mb-6 text-foreground tracking-wide max-w-3xl mx-auto">
+            Reviva a magia dos anos 60 e 70 com clássicos que marcaram gerações!
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row gap-6 justify-center md:mb-10 mb-0">
             <Button
               size="lg"
               variant="disco"
@@ -112,7 +113,7 @@ export default function Hero() {
               href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center border-2 border-foreground text-disco-orange rounded-full p-1.5 transition-colors hover:translate-y-[-2px]"
+              className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-colors hover:translate-y-[-2px]"
             >
               <BiLogoFacebookCircle size={30} />
             </a>
@@ -121,7 +122,7 @@ export default function Hero() {
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center border-2 border-foreground text-disco-orange rounded-full p-1.5 transition-colors hover:translate-y-[-2px]"
+              className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-colors hover:translate-y-[-2px]"
             >
               <BiLogoInstagram size={30} />
             </a>
@@ -130,7 +131,7 @@ export default function Hero() {
               href="https://youtube.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center border-2 border-foreground text-disco-orange rounded-full p-1.5 transition-colors hover:translate-y-[-2px]"
+              className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-colors hover:translate-y-[-2px]"
             >
               <BiLogoYoutube size={28} />
             </a>
