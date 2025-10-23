@@ -28,15 +28,15 @@ const About = () => {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <h2 className="flex justify-center font-gravitas-one text-4xl md:text-5xl lg:text-6xl mb-4 bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">
+        <h2 className="flex justify-center font-gravitas-one text-4xl md:text-5xl lg:text-6xl mb-16 bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">
           Sinta Nossa Vibe
         </h2>
 
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-          <div className="grid grid-cols-2 gap-4 items-center">
-            <div>
+          <div className="grid grid-cols-2 gap-8 items-center">
+            <div className="transform -translate-y-8">
               <Image
-                src="/img/fototeste.jpg"
+                src="/img/vivinho01.jpg"
                 alt="Foto da banda 1"
                 width={300}
                 height={400}
@@ -45,7 +45,7 @@ const About = () => {
             </div>
             <div className="transform translate-y-8">
               <Image
-                src="/img/fototeste.jpg"
+                src="/img/vivinho02.jpg"
                 alt="Foto da banda 2"
                 width={300}
                 height={400}
@@ -54,16 +54,16 @@ const About = () => {
             </div>
             <div className="transform -translate-y-8">
               <Image
-                src="/img/fototeste.jpg"
+                src="/img/vivinho03.jpg"
                 alt="Foto da banda 3"
                 width={300}
                 height={400}
                 className="rounded-lg object-cover w-full h-full"
               />
             </div>
-            <div>
+            <div className="transform translate-y-8">
               <Image
-                src="/img/fototeste.jpg"
+                src="/img/vivinho04.jpg"
                 alt="Foto da banda 4"
                 width={300}
                 height={400}

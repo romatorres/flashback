@@ -1,12 +1,11 @@
 "use client";
 
-import { Menu } from "lucide-react";
 import {
   BiLogoFacebookCircle,
   BiLogoInstagram,
   BiLogoYoutube,
+  BiMenuAltRight,
 } from "react-icons/bi";
-import { Button } from "../ui/button";
 import {
   Sheet,
   SheetContent,
@@ -43,97 +42,8 @@ export default function Header() {
           scrolled ? "bg-background/80 backdrop-blur-sm" : "bg-transparent"
         }`}
       >
-        <div className="container mx-auto px-4 h-20 flex items-center justify-between">
-          {/* Mobile menu */}
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon">
-                <Menu className="w-6 h-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-[300px]">
-              <SheetHeader>
-                <SheetTitle className="sr-only">Menu Principal</SheetTitle>
-              </SheetHeader>
-              <nav className="flex flex-col gap-6 mt-8">
-                <button
-                  onClick={() => scrollToSection("about")}
-                  className="text-foreground hover:text-primary transition-colors font-medium text-left text-lg"
-                >
-                  Sobre
-                </button>
-                <button
-                  onClick={() => scrollToSection("shows")}
-                  className="text-foreground hover:text-primary transition-colors font-medium text-left text-lg"
-                >
-                  Shows
-                </button>
-                <button
-                  onClick={() => scrollToSection("videos")}
-                  className="text-foreground hover:text-primary transition-colors font-medium text-left text-lg"
-                >
-                  Vídeos
-                </button>
-                <button
-                  onClick={() => scrollToSection("contact")}
-                  className="text-foreground hover:text-primary transition-colors font-medium text-left text-lg"
-                >
-                  Contatos
-                </button>
-
-                {/* Social icons in mobile menu */}
-                <div className="flex flex-col gap-3 mt-8 pt-8 border-t border-border">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="hover:text-primary transition-colors w-full justify-start"
-                    asChild
-                  >
-                    <a
-                      href="https://facebook.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <BiLogoFacebookCircle />
-                      <span>Facebook</span>
-                    </a>
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="hover:text-primary transition-colors w-full justify-start"
-                    asChild
-                  >
-                    <a
-                      href="https://instagram.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <BiLogoInstagram />
-                      <span>Instagram</span>
-                    </a>
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="hover:text-primary transition-colors w-full justify-start"
-                    asChild
-                  >
-                    <a
-                      href="https://youtube.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <BiLogoYoutube />
-                      <span>Youtube</span>
-                    </a>
-                  </Button>
-                </div>
-              </nav>
-            </SheetContent>
-          </Sheet>
-
-          <div className="flex-1 hidden md:block"></div>
+        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+          <div className="flex-1" />
 
           {/* Desktop navigation */}
           <nav className="hidden md:flex items-center gap-10 text-xl font-semibold">
@@ -163,7 +73,47 @@ export default function Header() {
             </button>
           </nav>
 
-          <div className="flex-1 hidden md:block"></div>
+          <div className="flex-1 flex justify-end items-center">
+            {/* Mobile menu */}
+            <Sheet open={open} onOpenChange={setOpen}>
+              <SheetTrigger asChild className="md:hidden">
+                <button>
+                  <BiMenuAltRight className="w-10 h-10 text-foreground" />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px]">
+                <SheetHeader>
+                  <SheetTitle className="sr-only">Menu Principal</SheetTitle>
+                </SheetHeader>
+                <nav className="flex flex-col gap-6 mt-8">
+                  <button
+                    onClick={() => scrollToSection("about")}
+                    className="text-foreground hover:text-primary transition-colors font-medium text-center text-lg"
+                  >
+                    Sobre
+                  </button>
+                  <button
+                    onClick={() => scrollToSection("shows")}
+                    className="text-foreground hover:text-primary transition-colors font-medium text-center text-lg"
+                  >
+                    Shows
+                  </button>
+                  <button
+                    onClick={() => scrollToSection("videos")}
+                    className="text-foreground hover:text-primary transition-colors font-medium text-center text-lg"
+                  >
+                    Vídeos
+                  </button>
+                  <button
+                    onClick={() => scrollToSection("contact")}
+                    className="text-foreground hover:text-primary transition-colors font-medium text-center text-lg"
+                  >
+                    Contatos
+                  </button>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </header>
 
