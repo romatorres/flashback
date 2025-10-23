@@ -39,20 +39,23 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled ? "bg-background/80 backdrop-blur-sm" : "bg-transparent"
         }`}
       >
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex-1">
-            {scrolled && (
-              <Image
-                src="/img/logo-icon.png"
-                alt="Logo Icon"
-                width={40}
-                height={40}
-              />
-            )}
+            <Image
+              src="/img/logo-icon.png"
+              alt="Logo Icon"
+              width={40}
+              height={40}
+              className={`sm:hidden transition-all duration-300 ${
+                scrolled
+                  ? "opacity-100 scale-100 translate-y-0"
+                  : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
+              }`}
+            />
           </div>
 
           {/* Desktop navigation */}

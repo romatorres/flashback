@@ -5,12 +5,12 @@ const About = () => {
   const features = [
     {
       icon: Music,
-      title: "Som Autêntico",
+      title: "Repertório",
       description: "Instrumentos reais, groove real, soul real da era de ouro",
     },
     {
       icon: Zap,
-      title: "Alta Energia",
+      title: "Energia Alta",
       description: "Dança sem parar e performances eletrizantes em cada show",
     },
     {
@@ -28,7 +28,7 @@ const About = () => {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <h2 className="flex justify-center font-gravitas-one text-4xl md:text-5xl lg:text-6xl mb-20 bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">
+        <h2 className="flex justify-center font-gravitas-one text-4xl md:text-5xl lg:text-6xl sm:mb-24 mb-20 bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">
           Sobre a Flashback
         </h2>
 
@@ -72,15 +72,18 @@ const About = () => {
             </div>
           </div>
 
-          <div className="space-y-6">
-            <p className="font-body text-lg md:text-xl leading-relaxed text-foreground/90">
+          <div className="space-y-6 sm:mt-0 mt-10">
+            <h3 className="font-gravitas-one text-2xl text-disco-orange">
+              Nossa História
+            </h3>
+            <p className="text-lg md:text-lg leading-relaxed text-foreground/90">
               Nascida de um amor compartilhado pela era mais groovy da história
               da música, Groove Nation traz os sons vibrantes do disco, funk e
               soul para palcos por todo o país. Não somos apenas uma banda cover
               – somos uma máquina do tempo para os dias do Studio 54, calças
               boca-de-sino e sapatos plataforma.
             </p>
-            <p className="font-body text-lg md:text-xl leading-relaxed text-foreground/90">
+            <p className="text-lg md:text-lg leading-relaxed text-foreground/90">
               Nossa missão é simples: colocar você na pista de dança e mantê-lo
               lá a noite toda. De Earth, Wind & Fire a Donna Summer, de
               Parliament-Funkadelic a The Bee Gees, entregamos performances
@@ -90,19 +93,22 @@ const About = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 sm:mt-28 mt-6">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="bg-card border border-border rounded-2xl p-8 hover:border-accent transition-all duration-300 group"
+              className="text-start p-6 rounded-2xl bg-gradient-to-br from-accent/10 to-transparent border border-accent/20 hover:border-accent/40 transition-all duration-300 hover:scale-105"
             >
-              <feature.icon className="w-12 h-12 mb-4 text-accent group-hover:scale-110 transition-transform" />
+              <feature.icon className="w-12 h-12 mb-4 text-disco-orange group-hover:scale-110 transition-transform" />
               <h3 className="font-display text-2xl mb-3 text-foreground">
                 {feature.title}
               </h3>
-              <p className="font-body text-muted-foreground leading-relaxed">
+              <p className="font-body text-muted-foreground leading-relaxed mb-4">
                 {feature.description}
               </p>
+              <button className="cursor-pointer bg-gradient-to-l from-disco-orange to-disco-purple hover:from-disco-purple hover:to-disco-orange text-white font-semibold px-8 py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg">
+                Contrate
+              </button>
             </div>
           ))}
         </div>
