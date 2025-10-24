@@ -17,7 +17,7 @@ const About = () => {
     },
     {
       icon: Heart,
-      title: "Paixão Pura",
+      title: "Pura Paixão",
       description:
         "Tocamos com o coração, transmitindo emoção e amor por cada nota.",
     },
@@ -116,9 +116,14 @@ const About = () => {
               <p className="font-body text-muted-foreground leading-relaxed mb-4">
                 {feature.description}
               </p>
-              <button className="cursor-pointer bg-gradient-disco hover:shadow-glow-orange text-white font-semibold px-10 py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg">
-                Contrate
-              </button>
+              <a
+                href="https://wa.me/75981226159?text=Olá!%20Vim%20pelo%20site,%20quero%20mais%20informações%20sobre%20a%20banda"
+                target="_blank"
+              >
+                <button className="cursor-pointer bg-gradient-disco animate-shimmer bg-[length:200%_auto] text-foreground font-semibold px-10 py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg">
+                  Contrate
+                </button>
+              </a>
             </div>
           ))}
         </div>

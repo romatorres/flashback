@@ -77,8 +77,13 @@ export default function Agenda() {
                   </div>
                 </div>
 
-                <button className="cursor-pointer bg-gradient-disco hover:shadow-glow-orange text-white font-semibold px-10 py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg">
-                  <a href={show.ticketLink}>Mais Detalhes</a>
+                <button className="cursor-pointer bg-gradient-disco animate-shimmer bg-[length:200%_auto] text-foreground font-semibold px-10 py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg">
+                  <a
+                    href="https://wa.me/75981226159?text=Olá!%20Vim%20pelo%20site,%20quero%20mais%20informações%20sobre%20a%20festa"
+                    target="_blank"
+                  >
+                    Mais Detalhes
+                  </a>
                 </button>
               </div>
             </div>

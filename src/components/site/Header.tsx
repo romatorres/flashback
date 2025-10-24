@@ -67,6 +67,12 @@ export default function Header() {
           {/* Desktop navigation */}
           <nav className="hidden md:flex items-center gap-10 text-xl font-semibold">
             <button
+              onClick={() => scrollToSection("/")}
+              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:text-disco-orange transition-colors"
+            >
+              Home
+            </button>
+            <button
               onClick={() => scrollToSection("about")}
               className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:text-disco-orange transition-colors"
             >
@@ -106,6 +112,12 @@ export default function Header() {
                 </SheetHeader>
                 <nav className="flex flex-col gap-6 mt-8">
                   <button
+                    onClick={() => scrollToSection("/")}
+                    className="text-foreground hover:text-primary transition-colors font-medium text-center text-lg"
+                  >
+                    Home
+                  </button>
+                  <button
                     onClick={() => scrollToSection("about")}
                     className="text-foreground hover:text-primary transition-colors font-medium text-center text-lg"
                   >
@@ -137,12 +149,12 @@ export default function Header() {
       </header>
 
       {/* Fixed social icons on desktop - vertical on right side */}
-      <div className="hidden md:flex fixed right-4 top-1/2 -translate-y-1/2 z-50 flex-col gap-6">
+      <div className="hidden md:flex fixed right-4 top-1/2 -translate-y-1/2 z-50 flex-col gap-8">
         <a
           href="https://facebook.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-3px]"
+          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"
         >
           <BiLogoFacebookCircle size={26} />
         </a>
@@ -151,7 +163,7 @@ export default function Header() {
           href="https://instagram.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-3px]"
+          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"
         >
           <BiLogoInstagramAlt size={26} />
         </a>
@@ -160,7 +172,7 @@ export default function Header() {
           href="https://youtube.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-3px]"
+          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"
         >
           <BiLogoYoutube size={24} />
         </a>

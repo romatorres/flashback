@@ -90,8 +90,8 @@
   /* Gradientes */
   --gradient-disco: linear-gradient(
     135deg,
-    var(--disco-purple),
-    var(--disco-orange)
+    var(--disco-orange),
+    var(--disco-purple)
   );
   --gradient-gold: linear-gradient(
     135deg,
@@ -203,6 +203,12 @@
       var(--accent) 35px,
       var(--accent) 70px
     );
+  }
+
+  .bg-pattern-grid {
+    background-image: linear-gradient(var(--accent) 1px, transparent 1px),
+      linear-gradient(to right, var(--accent) 1px, transparent 1px);
+    background-size: 30px 30px;
   }
 }
 
