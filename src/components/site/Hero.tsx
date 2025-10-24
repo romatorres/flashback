@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import {
   BiLogoFacebookCircle,
-  BiLogoInstagram,
+  BiLogoInstagramAlt,
   BiLogoYoutube,
 } from "react-icons/bi";
 
@@ -92,7 +92,7 @@ export default function Hero() {
             <Button
               size="lg"
               variant="disco"
-              onClick={() => scrollToSection("shows")}
+              onClick={() => scrollToSection("about")}
               className="text-xl px-8 py-6"
             >
               Um pouco sobre nós
@@ -124,7 +124,7 @@ export default function Hero() {
               rel="noopener noreferrer"
               className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-colors hover:translate-y-[-2px]"
             >
-              <BiLogoInstagram size={30} />
+              <BiLogoInstagramAlt size={30} />
             </a>
 
             <a

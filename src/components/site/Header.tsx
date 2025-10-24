@@ -2,7 +2,7 @@
 
 import {
   BiLogoFacebookCircle,
-  BiLogoInstagram,
+  BiLogoInstagramAlt,
   BiLogoYoutube,
   BiMenuAltRight,
 } from "react-icons/bi";
@@ -29,10 +29,15 @@ export default function Header() {
   }, []);
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    if (id === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
       setOpen(false);
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+        setOpen(false);
+      }
     }
   };
 
@@ -50,6 +55,7 @@ export default function Header() {
               alt="Logo Icon"
               width={40}
               height={40}
+              onClick={() => scrollToSection("/")}
               className={`sm:hidden transition-all duration-300 ${
                 scrolled
                   ? "opacity-100 scale-100 translate-y-0"
@@ -67,10 +73,10 @@ export default function Header() {
               Sobre
             </button>
             <button
-              onClick={() => scrollToSection("shows")}
+              onClick={() => scrollToSection("agenda")}
               className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:text-disco-orange transition-colors"
             >
-              Shows
+              Agenda
             </button>
             <button
               onClick={() => scrollToSection("videos")}
@@ -106,10 +112,10 @@ export default function Header() {
                     Sobre
                   </button>
                   <button
-                    onClick={() => scrollToSection("shows")}
+                    onClick={() => scrollToSection("agenda")}
                     className="text-foreground hover:text-primary transition-colors font-medium text-center text-lg"
                   >
-                    Shows
+                    Agenda
                   </button>
                   <button
                     onClick={() => scrollToSection("videos")}
@@ -147,7 +153,7 @@ export default function Header() {
           rel="noopener noreferrer"
           className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-3px]"
         >
-          <BiLogoInstagram size={26} />
+          <BiLogoInstagramAlt size={26} />
         </a>
 
         <a

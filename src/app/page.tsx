@@ -1,6 +1,7 @@
 import Header from "@/components/site/Header";
 import Hero from "@/components/site/Hero";
 import About from "@/components/site/About";
+import Agenda from "@/components/site/Agenda";
 
 export default function Home() {
   return (
@@ -10,10 +11,10 @@ export default function Home() {
       <div id="about">
         <About />
       </div>
-      {/*  <div id="shows">
-        <Shows />
+      <div id="agenda">
+        <Agenda />
       </div>
-      <div id="videos">
+      {/*  <div id="videos">
         <Videos />
       </div>
       <div id="contact">
