@@ -4,7 +4,8 @@ import { Calendar, MapPin, Clock } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export default function Agenda() {
-  const cardsAnimation = useScrollAnimation({ threshold: 0.1 });
+  const cardsAnimation = useScrollAnimation({ threshold: 0.2 });
+  const titleAnimation = useScrollAnimation({ threshold: 0.2 });
   const shows = [
     {
       date: "14 de Novembro, 2025",
@@ -39,8 +40,14 @@ export default function Agenda() {
   return (
     <section id="shows" className="py-20 px-4 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background"></div>
-
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div
+        ref={titleAnimation.ref}
+        className={`relative max-w-6xl mx-auto z-10 text-center mb-20 transition-all duration-700 ${
+          titleAnimation.isVisible
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-10"
+        }`}
+      >
         <h2 className="flex justify-center font-gravitas-one text-4xl md:text-5xl lg:text-6xl sm:mb-24 mb-20 bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">
           Nossa agenda
         </h2>
