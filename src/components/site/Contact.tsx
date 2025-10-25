@@ -1,4 +1,9 @@
 import { SiWhatsapp, SiMaildotru } from "react-icons/si";
+import {
+  BiLogoFacebookCircle,
+  BiLogoInstagramAlt,
+  BiLogoYoutube,
+} from "react-icons/bi";
 import { TfiComments } from "react-icons/tfi";
 
 export default function Contact() {
@@ -46,6 +51,34 @@ export default function Contact() {
                     <SiWhatsapp />
                   </span>
                   75 98122-6159
+                </a>
+              </div>
+              <div className="md:hidden flex justify-center mt-6 gap-6">
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"
+                >
+                  <BiLogoFacebookCircle size={20} />
+                </a>
+
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"
+                >
+                  <BiLogoInstagramAlt size={20} />
+                </a>
+
+                <a
+                  href="https://youtube.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"
+                >
+                  <BiLogoYoutube size={20} />
                 </a>
               </div>
             </div>

@@ -11,8 +11,8 @@ export default function Footer() {
             <Image
               src="/img/logo-icon_gradient.png"
               alt="Logomarca"
-              width={40}
-              height={40}
+              width={45}
+              height={45}
             />
           </a>
         </div>
@@ -32,8 +32,8 @@ export default function Footer() {
               <Image
                 src="/img/logo-roma.svg"
                 alt="Logo Parceiro"
-                width={28}
-                height={28}
+                width={26}
+                height={26}
               />
             </span>
           </a>

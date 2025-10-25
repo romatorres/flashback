@@ -57,7 +57,7 @@ export default function Agenda() {
             <div
               key={index}
               className={`bg-card border-2 border-border rounded-2xl p-4
-               hover:border-accent transition-all duration-300 group relative overflow-hidden ${
+               hover:border-accent transition-all duration-300 group relative overflow-hidden  ${
                  cardsAnimation.isVisible
                    ? "opacity-100 translate-y-0"
                    : "opacity-0 translate-y-10"
@@ -71,7 +71,7 @@ export default function Agenda() {
               {/* Dashed line */}
               <div className="absolute right-10 top-0 bottom-0 border-l-2 border-dashed border-border/50"></div>
 
-              <div className="pr-10">
+              <div className="pr-10 flex flex-col items-start">
                 <div className="flex items-center gap-2 mb-3">
                   <Calendar className="w-5 h-5 text-accent" />
                   <p className="font-display text-2xl text-foreground">
