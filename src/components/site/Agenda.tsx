@@ -1,6 +1,10 @@
+"use client";
+
 import { Calendar, MapPin, Clock } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export default function Agenda() {
+  const cardsAnimation = useScrollAnimation({ threshold: 0.1 });
   const shows = [
     {
       date: "14 de Novembro, 2025",
@@ -41,12 +45,17 @@ export default function Agenda() {
           Nossa agenda
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div ref={cardsAnimation.ref} className="grid md:grid-cols-2 gap-6">
           {shows.map((show, index) => (
             <div
               key={index}
-              className="bg-card border-2 border-border rounded-2xl p-4
-               hover:border-accent transition-all duration-300 group relative overflow-hidden"
+              className={`bg-card border-2 border-border rounded-2xl p-4
+               hover:border-accent transition-all duration-300 group relative overflow-hidden ${
+                 cardsAnimation.isVisible
+                   ? "opacity-100 translate-y-0"
+                   : "opacity-0 translate-y-10"
+               }`}
+              style={{ transitionDelay: `${index * 150}ms` }}
             >
               {/* Ticket stub notch */}
               <div className="absolute top-0 right-6 w-8 h-8 bg-background rounded-full transform -translate-y-1/2"></div>

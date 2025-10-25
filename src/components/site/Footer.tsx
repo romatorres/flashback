@@ -5,32 +5,39 @@ export default function Footer() {
 
   return (
     <footer className="py-8 px-4 border-t border-border">
-      <div className="max-w-7xl mx-auto text-center flex flex-col md:flex-row justify-between items-center">
-        <a href="#home">
-          <Image
-            src="/img/logo-icon.png"
-            alt="Logomarca"
-            width={40}
-            height={40}
-          />
-        </a>
+      <div className="max-w-7xl mx-auto text-center flex flex-col md:flex-row justify-between items-center sm:gap-0 gap-3">
         <div>
-          <p className="font-body text-muted-foreground">
+          <a href="#home">
+            <Image
+              src="/img/logo-icon_gradient.png"
+              alt="Logomarca"
+              width={40}
+              height={40}
+            />
+          </a>
+        </div>
+        <div>
+          <p className="font-body text-muted-foreground sm:text-base text-sm">
             ©{getCurrentYear} Banda Flashback. Todos os direitos reservados.
           </p>
         </div>
-        <a
-          href="https://romatorres.dev.br"
-          target="_blank"
-          className="hover:-translate-x-0.5 duration-300"
-        >
-          <Image
-            src="/img/logo-roma.svg"
-            alt="Logo Parceiro"
-            width={28}
-            height={28}
-          />
-        </a>
+        <div className=" sm:mt-0 mt-3">
+          <a
+            href="https://romatorres.dev.br"
+            target="_blank"
+            className="hover:-translate-x-0.5 duration-300"
+          >
+            <span className="flex flex-row gap-2 items-center">
+              <p className="text-sm text-muted-foreground">By:</p>
+              <Image
+                src="/img/logo-roma.svg"
+                alt="Logo Parceiro"
+                width={28}
+                height={28}
+              />
+            </span>
+          </a>
+        </div>
       </div>
     </footer>
   );
