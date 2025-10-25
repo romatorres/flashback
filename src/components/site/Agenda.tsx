@@ -3,30 +3,30 @@ import { Calendar, MapPin, Clock } from "lucide-react";
 export default function Agenda() {
   const shows = [
     {
-      date: "15 de Março, 2025",
-      venue: "The Disco Palace",
-      city: "São Paulo, SP",
+      date: "14 de Novembro, 2025",
+      venue: "Aria Hall",
+      city: "Feida de Santana, BA",
       time: "21:00",
       ticketLink: "#",
     },
     {
-      date: "22 de Março, 2025",
-      venue: "Funky Town Hall",
-      city: "Rio de Janeiro, RJ",
-      time: "20:30",
-      ticketLink: "#",
-    },
-    {
-      date: "5 de Abril, 2025",
-      venue: "Soul Train Station",
-      city: "Belo Horizonte, MG",
+      date: "13 de Dezembro, 2025",
+      venue: "Evento Particular",
+      city: "Valente, BA",
       time: "22:00",
       ticketLink: "#",
     },
     {
-      date: "12 de Abril, 2025",
-      venue: "Boogie Nights Club",
-      city: "Curitiba, PR",
+      date: "18 de Dezembro, 2025",
+      venue: "Natal Encantado",
+      city: "Feira de Santana, BA",
+      time: "22:00",
+      ticketLink: "#",
+    },
+    {
+      date: "18 de Janeiro, 2026",
+      venue: "Evento Particular",
+      city: "Feira de Santana, BA",
       time: "21:00",
       ticketLink: "#",
     },
@@ -45,16 +45,17 @@ export default function Agenda() {
           {shows.map((show, index) => (
             <div
               key={index}
-              className="bg-card border-2 border-border rounded-2xl p-6 hover:border-accent transition-all duration-300 group relative overflow-hidden"
+              className="bg-card border-2 border-border rounded-2xl p-4
+               hover:border-accent transition-all duration-300 group relative overflow-hidden"
             >
               {/* Ticket stub notch */}
-              <div className="absolute top-0 right-8 w-8 h-8 bg-background rounded-full transform -translate-y-1/2"></div>
-              <div className="absolute bottom-0 right-8 w-8 h-8 bg-background rounded-full transform translate-y-1/2"></div>
+              <div className="absolute top-0 right-6 w-8 h-8 bg-background rounded-full transform -translate-y-1/2"></div>
+              <div className="absolute bottom-0 right-6 w-8 h-8 bg-background rounded-full transform translate-y-1/2"></div>
 
               {/* Dashed line */}
-              <div className="absolute right-12 top-0 bottom-0 border-l-2 border-dashed border-border/50"></div>
+              <div className="absolute right-10 top-0 bottom-0 border-l-2 border-dashed border-border/50"></div>
 
-              <div className="pr-16">
+              <div className="pr-10">
                 <div className="flex items-center gap-2 mb-3">
                   <Calendar className="w-5 h-5 text-accent" />
                   <p className="font-display text-2xl text-foreground">

@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@plugin "taos/plugin";
+
 @theme inline {
   /* Cores do sistema */
   --color-background: var(--background);
@@ -167,6 +169,10 @@
 
 /* Classes utilitárias para gradientes */
 @layer utilities {
+  html.js :where([class*="taos:"]:not(.taos-init)) {
+    opacity: 0;
+  }
+
   .bg-gradient-disco {
     background-image: var(--gradient-disco);
   }

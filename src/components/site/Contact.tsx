@@ -45,7 +45,7 @@ export default function Contact() {
                   <span className="text-disco-orange">
                     <SiWhatsapp />
                   </span>
-                  75 981226159
+                  75 98122-6159
                 </a>
               </div>
             </div>
