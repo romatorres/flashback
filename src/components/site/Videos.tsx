@@ -3,8 +3,11 @@ import { useState } from "react";
 import { BiPlay } from "react-icons/bi";
 import { IoClose } from "react-icons/io5";
 import Image from "next/image";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Videos = () => {
+  const titleAnimation = useScrollAnimation({ threshold: 0.2 });
+  const featuresAnimation = useScrollAnimation({ threshold: 0.2 });
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
   const videos = [
@@ -27,15 +30,29 @@ const Videos = () => {
     <section className="py-20 px-4 relative overflow-hidden">
       <div className="absolute inset-0 opacity-5 bg-pattern-grid"></div>
       <div className="relative max-w-7xl mx-auto">
-        <h2 className="flex justify-center font-gravitas-one text-4xl md:text-5xl lg:text-6xl sm:mb-24 mb-20 bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">
-          Assista Nosso Show
-        </h2>
-        <div className="max-w-4xl mx-auto">
-          {videos.map((video) => (
+        <div
+          ref={titleAnimation.ref}
+          className={`text-center mb-20 transition-all duration-700 ${
+            titleAnimation.isVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-10"
+          }`}
+        >
+          <h2 className="flex justify-center font-gravitas-one text-4xl md:text-5xl lg:text-6xl sm:mb-24 mb-20 bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">
+            Assista Nosso Show
+          </h2>
+        </div>
+        <div ref={featuresAnimation.ref} className="max-w-4xl mx-auto">
+          {videos.map((video, index) => (
             <div
-              key={video.id}
-              className="group relative overflow-hidden rounded-2xl bg-card border-2 border-border hover:border-accent transition-all duration-300 cursor-pointer"
+              key={`${video.id}-${index}`}
               onClick={() => openVideo(video.id)}
+              className={`group relative overflow-hidden rounded-2xl bg-card border-2 border-border hover:border-accent transition-all duration-700 delay-500 cursor-pointer${
+                featuresAnimation.isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
+              }`}
+              style={{ transitionDelay: `${index * 150}ms` }}
             >
               <div className="relative aspect-video overflow-hidden">
                 <Image
