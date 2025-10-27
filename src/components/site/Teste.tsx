@@ -34,7 +34,7 @@ const About = () => {
                 : "opacity-0 scale-95"
             }`}
           >
-            <div className="absolute inset-32 top-52 left-0 bg-gradient-disco rounded-full blur-5xl opacity-30 transition duration-500 animate-pulse"></div>
+            <div className="absolute -inset-4 h-72 w-72 top-36 left-8 bg-gradient-disco rounded-full blur-xl opacity-30 transition duration-500 animate-pulse"></div>
             <div>
               <Image
                 src="/img/vivinho.png"
