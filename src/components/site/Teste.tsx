@@ -28,14 +28,14 @@ const About = () => {
           {/* Singer Photo */}
           <div
             ref={photoAnimation.ref}
-            className={`relative group self-end transition-all duration-700 delay-500 ${
+            className={`relative self-end transition-all duration-700 delay-500 ${
               photoAnimation.isVisible
                 ? "opacity-100 scale-100"
                 : "opacity-0 scale-95"
             }`}
           >
-            <div className="absolute -inset-4 h-72 w-72 top-36 left-8 bg-gradient-disco rounded-full blur-xl opacity-30 transition duration-500 animate-pulse"></div>
-            <div>
+            {/* Imagem */}
+            <div className="relative z-10">
               <Image
                 src="/img/vivinho.png"
                 alt="foto do cantor vivinho"
@@ -43,6 +43,9 @@ const About = () => {
                 height={480}
               />
             </div>
+
+            {/* Gradiente abaixo da imagem */}
+            <div className="absolute bottom-8 left-48 -translate-x-1/2 h-72 w-72 bg-gradient-disco rounded-full blur-3xl opacity-30 transition duration-500 animate-pulse -z-10"></div>
           </div>
 
           {/* Content */}

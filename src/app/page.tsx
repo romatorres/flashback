@@ -5,7 +5,6 @@ import Agenda from "@/components/site/Agenda";
 import Videos from "@/components/site/Videos";
 import Contact from "@/components/site/Contact";
 import Footer from "@/components/site/Footer";
-import Teste from "@/components/site/Teste";
 
 export default function Home() {
   return (
@@ -24,7 +23,6 @@ export default function Home() {
       <div id="contact">
         <Contact />
       </div>
-      <Teste />
       <Footer />
     </div>
   );

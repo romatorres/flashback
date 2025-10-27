@@ -15,11 +15,13 @@ import {
 } from "../ui/sheet";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useScrollToSection } from "@/hooks/useScrollToSection";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const { scrollTo } = useScrollToSection();
 
   useEffect(() => {
     setIsMounted(true);
@@ -34,16 +36,8 @@ export default function Header() {
   }, []);
 
   const scrollToSection = (id: string) => {
-    if (id === "/") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      setOpen(false);
-    } else {
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-        setOpen(false);
-      }
-    }
+    scrollTo(id);
+    setOpen(false);
   };
 
   return (
@@ -53,7 +47,7 @@ export default function Header() {
           scrolled ? "bg-background/80 backdrop-blur-sm" : "bg-transparent"
         }`}
       >
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+        <div className="container mx-auto px-4 h-[72px] flex items-center justify-between">
           <div className="flex-1">
             <Image
               src="/img/logo-icon.png"

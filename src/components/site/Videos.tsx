@@ -28,7 +28,9 @@ const Videos = () => {
 
   return (
     <section className="py-20 px-4 relative overflow-hidden">
-      <div className="absolute inset-0 opacity-5 bg-pattern-grid"></div>
+      {/* Background pattern */}
+      {/* <div className="absolute inset-0 opacity-5 bg-pattern-grid"></div> */}
+      <div className="absolute inset-0 opacity-5 bg-pattern-stripes"></div>
       <div className="relative max-w-7xl mx-auto">
         <div
           ref={titleAnimation.ref}

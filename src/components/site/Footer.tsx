@@ -1,20 +1,24 @@
+"use client";
+
 import Image from "next/image";
+import { useScrollToSection } from "@/hooks/useScrollToSection";
 
 export default function Footer() {
   const getCurrentYear = new Date().getFullYear();
+  const { scrollTo } = useScrollToSection();
 
   return (
     <footer className="py-8 px-4 border-t border-border">
       <div className="max-w-7xl mx-auto text-center flex flex-col md:flex-row justify-between items-center sm:gap-0 gap-3">
         <div>
-          <a href="#home">
+          <button onClick={() => scrollTo("/")} className="cursor-pointer">
             <Image
               src="/img/logo-icon_gradient.png"
               alt="Logomarca"
               width={45}
               height={45}
             />
-          </a>
+          </button>
         </div>
         <div>
           <p className="font-body text-muted-foreground sm:text-base text-sm">
