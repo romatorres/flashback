@@ -71,13 +71,13 @@ export default function Contact() {
                 <p className="sm:text-xl text-lg text-foreground my-5">
                   Entre em contato conosco para reservas e consultas!
                 </p>
-                <div className="flex flex-col gap-1 mt-4">
+                <div className="flex flex-col sm:gap-1 gap-3 mt-4">
                   <div>
                     <a
                       href="https://mail.google.com/mail/?view=cm&fs=1&to=contatoflashback@gmail.com&su=Contratar%20a%20banda&body=Olá,%20gostaria%20de%20um%20orçamento."
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 sm:text-2xl text-xl text-foreground hover:bg-accent/20 py-2 px-3 rounded-md transition-colors duration-300"
+                      className="flex items-center gap-3 sm:text-2xl text-xl text-foreground hover:bg-accent/20 sm:py-2 py-0 sm:px-3 px-0 rounded-md transition-colors duration-300"
                     >
                       <span className="text-disco-orange">
                         <SiMaildotru />
@@ -91,7 +91,7 @@ export default function Contact() {
                     <a
                       href="https://wa.me/75981226159?text=Olá!%20Vim%20pelo%20site,%20quero%20mais%20informações%20sobre%20a%20banda"
                       target="_blank"
-                      className="flex items-center gap-3 sm:text-2xl text-xl text-foreground hover:bg-accent/20 py-2 px-3 rounded-md transition-colors duration-300"
+                      className="flex items-center gap-3 sm:text-2xl text-xl text-foreground hover:bg-accent/20 sm:py-2 py-0 sm:px-3 px-0 rounded-md transition-colors duration-300"
                     >
                       <span className="text-disco-orange">
                         <SiWhatsapp />
