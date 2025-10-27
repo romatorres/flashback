@@ -40,18 +40,19 @@ export default function Agenda() {
   return (
     <section id="shows" className="py-20 px-4 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background"></div>
-      <div
-        ref={titleAnimation.ref}
-        className={`relative max-w-6xl mx-auto z-10 text-center mb-20 transition-all duration-700 ${
-          titleAnimation.isVisible
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-10"
-        }`}
-      >
-        <h2 className="flex justify-center font-gravitas-one text-4xl md:text-5xl lg:text-6xl sm:mb-24 mb-20 bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">
-          Nossa agenda
-        </h2>
-
+      <div className="relative max-w-6xl mx-auto z-10">
+        <div
+          ref={titleAnimation.ref}
+          className={`text-center mb-20 transition-all duration-700 ${
+            titleAnimation.isVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-10"
+          }`}
+        >
+          <h2 className="flex justify-center font-gravitas-one text-4xl md:text-5xl lg:text-6xl sm:mb-24 mb-20 bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">
+            Nossa agenda
+          </h2>
+        </div>
         <div ref={cardsAnimation.ref} className="grid md:grid-cols-2 gap-6">
           {shows.map((show, index) => (
             <div
