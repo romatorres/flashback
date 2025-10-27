@@ -19,6 +19,11 @@ import Image from "next/image";
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -100,50 +105,52 @@ export default function Header() {
 
           <div className="flex-1 flex justify-end items-center">
             {/* Mobile menu */}
-            <Sheet open={open} onOpenChange={setOpen}>
-              <SheetTrigger asChild className="md:hidden">
-                <button>
-                  <BiMenuAltRight className="w-10 h-10 text-foreground" />
-                </button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-[300px]">
-                <SheetHeader>
-                  <SheetTitle className="sr-only">Menu Principal</SheetTitle>
-                </SheetHeader>
-                <nav className="flex flex-col gap-6 mt-8">
-                  <button
-                    onClick={() => scrollToSection("/")}
-                    className="text-foreground hover:text-primary transition-colors font-medium text-center text-lg"
-                  >
-                    Home
+            {isMounted && (
+              <Sheet open={open} onOpenChange={setOpen}>
+                <SheetTrigger asChild className="md:hidden">
+                  <button>
+                    <BiMenuAltRight className="w-10 h-10 text-foreground" />
                   </button>
-                  <button
-                    onClick={() => scrollToSection("about")}
-                    className="text-foreground hover:text-primary transition-colors font-medium text-center text-lg"
-                  >
-                    Sobre
-                  </button>
-                  <button
-                    onClick={() => scrollToSection("agenda")}
-                    className="text-foreground hover:text-primary transition-colors font-medium text-center text-lg"
-                  >
-                    Agenda
-                  </button>
-                  <button
-                    onClick={() => scrollToSection("videos")}
-                    className="text-foreground hover:text-primary transition-colors font-medium text-center text-lg"
-                  >
-                    Vídeos
-                  </button>
-                  <button
-                    onClick={() => scrollToSection("contact")}
-                    className="text-foreground hover:text-primary transition-colors font-medium text-center text-lg"
-                  >
-                    Contatos
-                  </button>
-                </nav>
-              </SheetContent>
-            </Sheet>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-[300px]">
+                  <SheetHeader>
+                    <SheetTitle className="sr-only">Menu Principal</SheetTitle>
+                  </SheetHeader>
+                  <nav className="flex flex-col gap-6 mt-8">
+                    <button
+                      onClick={() => scrollToSection("/")}
+                      className="text-foreground hover:text-primary transition-colors font-medium text-center text-lg"
+                    >
+                      Home
+                    </button>
+                    <button
+                      onClick={() => scrollToSection("about")}
+                      className="text-foreground hover:text-primary transition-colors font-medium text-center text-lg"
+                    >
+                      Sobre
+                    </button>
+                    <button
+                      onClick={() => scrollToSection("agenda")}
+                      className="text-foreground hover:text-primary transition-colors font-medium text-center text-lg"
+                    >
+                      Agenda
+                    </button>
+                    <button
+                      onClick={() => scrollToSection("videos")}
+                      className="text-foreground hover:text-primary transition-colors font-medium text-center text-lg"
+                    >
+                      Vídeos
+                    </button>
+                    <button
+                      onClick={() => scrollToSection("contact")}
+                      className="text-foreground hover:text-primary transition-colors font-medium text-center text-lg"
+                    >
+                      Contatos
+                    </button>
+                  </nav>
+                </SheetContent>
+              </Sheet>
+            )}
           </div>
         </div>
       </header>
