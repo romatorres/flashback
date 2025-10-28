@@ -6,20 +6,20 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard,
-  Users,
   Settings,
   Menu,
   X,
   User,
   ChevronUp,
   ChevronDown,
+  Calendar,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ButtonSignOut } from "./button-signout";
 
 const navigation = [
   { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
-  { name: "Usuários", href: "/admin/users", icon: Users },
+  { name: "Agenda", href: "/admin/agenda", icon: Calendar },
   { name: "Configurações", href: "/admin/settings", icon: Settings },
 ];
 
