@@ -52,7 +52,7 @@ export function LoginForm() {
           //show loading
         },
         onSuccess: (ctx) => {
-          router.replace("/dashboard");
+          router.replace("/admin");
         },
         onError: (ctx) => {
           // display the error message
