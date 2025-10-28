@@ -24,6 +24,8 @@ export const metadata: Metadata = {
     "Reviva a magia dos anos 60 e 70 com clássicos que marcaram gerações",
 };
 
+import { Toaster } from "sonner";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -36,6 +38,7 @@ export default function RootLayout({
         cz-shortcut-listen="true"
       >
         {children}
+        <Toaster />
       </body>
     </html>
   );

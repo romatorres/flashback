@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "sonner";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
@@ -67,12 +68,11 @@ export function SignupForm() {
           //show loading
         },
         onSuccess: (ctx) => {
-          console.log("Cadastrado", ctx);
+          toast.success("Cadastro realizado com sucesso! Faça login para continuar.");
           router.replace("/login");
         },
         onError: (ctx) => {
-          // display the error message
-          alert(ctx.error.message);
+          toast.error(ctx.error.message);
         },
       }
     );

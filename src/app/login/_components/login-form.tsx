@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "sonner";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
@@ -52,11 +53,11 @@ export function LoginForm() {
           //show loading
         },
         onSuccess: (ctx) => {
+          toast.success("Login realizado com sucesso!");
           router.replace("/admin");
         },
         onError: (ctx) => {
-          // display the error message
-          alert(ctx.error.message);
+          toast.error(ctx.error.message);
         },
       }
     );
