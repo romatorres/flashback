@@ -262,3 +262,373 @@
     background-size: 30px 30px;
   }
 }
+
+/* ===== ESTILOS ESPECÍFICOS PARA O PAINEL ADMINISTRATIVO ===== */
+@layer components {
+  /* Layout principal do admin */
+  .admin-layout {
+    @apply min-h-screen;
+    background: linear-gradient(135deg, #140a1f 0%, #1f122b 50%, #190e25 100%);
+  }
+
+  /* Sidebar do admin */
+  .admin-sidebar {
+    @apply bg-card border-border;
+    background: linear-gradient(180deg, #1f122b 0%, #140a1f 100%);
+    border-right: 1px solid var(--border);
+    box-shadow: 0 0 30px rgba(176, 58, 211, 0.1);
+  }
+
+  .admin-sidebar-header {
+    @apply border-border;
+    background: linear-gradient(
+      135deg,
+      var(--disco-purple),
+      var(--disco-orange)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .admin-nav-item {
+    @apply text-muted-foreground hover:text-foreground transition-all duration-300;
+    border-radius: var(--radius-md);
+  }
+
+  .admin-nav-item:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(176, 58, 211, 0.1),
+      rgba(249, 122, 31, 0.1)
+    );
+  }
+
+  .admin-nav-item.active {
+    @apply text-foreground;
+    background: linear-gradient(
+      135deg,
+      var(--disco-purple),
+      var(--disco-orange)
+    );
+  }
+
+  .admin-nav-item.active .admin-nav-icon {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+  }
+
+  /* Header do admin */
+  .admin-header {
+    @apply bg-card border-border;
+    background: rgba(31, 18, 43, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .admin-header-logo {
+    background: linear-gradient(135deg, var(--disco-gold), var(--disco-orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bold;
+    text-shadow: 0 0 20px rgba(249, 195, 31, 0.3);
+  }
+
+  /* Conteúdo principal do admin */
+  .admin-main {
+    @apply p-6;
+    background: transparent;
+  }
+
+  .admin-card {
+    @apply bg-card border-border rounded-lg;
+    background: rgba(31, 18, 43, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .admin-card:hover {
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+  }
+
+  /* Títulos do admin */
+  .admin-title {
+    background: linear-gradient(135deg, var(--disco-purple), var(--disco-gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bold;
+  }
+
+  .admin-subtitle {
+    @apply text-muted-foreground;
+  }
+
+  /* Botões do admin */
+  .admin-button-primary {
+    background: linear-gradient(
+      135deg,
+      var(--disco-purple),
+      var(--disco-orange)
+    );
+    @apply text-white border-0 rounded-lg font-medium transition-all duration-300;
+  }
+
+  .admin-button-primary:hover {
+    background: linear-gradient(
+      135deg,
+      var(--disco-orange),
+      var(--disco-purple)
+    );
+  }
+
+  .admin-button-secondary {
+    @apply bg-secondary text-secondary-foreground border border-border rounded-lg font-medium transition-all duration-300;
+  }
+
+  .admin-button-secondary:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(249, 195, 31, 0.1),
+      rgba(249, 122, 31, 0.1)
+    );
+  }
+
+  .admin-button-ghost {
+    @apply text-muted-foreground hover:text-foreground hover:bg-black/20 transition-all duration-300;
+  }
+
+  /* Menu do usuário */
+  .admin-user-menu {
+    @apply border-border;
+    background: linear-gradient(
+      180deg,
+      rgba(31, 18, 43, 0.8),
+      rgba(20, 10, 31, 0.9)
+    );
+    border-top: 1px solid var(--border);
+  }
+
+  .admin-user-button {
+    @apply hover:bg-accent/10 transition-all duration-300 cursor-pointer;
+  }
+
+  .admin-user-button:hover {
+    @apply bg-black/30;
+  }
+
+  .admin-user-avatar {
+    background: linear-gradient(135deg, var(--disco-blue), var(--disco-purple));
+    box-shadow: 0 0 15px rgba(176, 58, 211, 0.3);
+  }
+
+  .admin-user-dropdown {
+    @apply bg-card border-border;
+    background: rgba(31, 18, 43, 0.95);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Notificações */
+  .admin-notification-badge {
+    background: linear-gradient(135deg, var(--disco-orange), var(--disco-gold));
+    @apply text-white text-xs rounded-full;
+    box-shadow: var(--glow-orange);
+    animation: pulse 2s infinite;
+  }
+
+  /* Overlay mobile */
+  .admin-mobile-overlay {
+    @apply bg-black/50;
+    backdrop-filter: blur(5px);
+  }
+
+  /* Estados de loading e hover */
+  .admin-loading {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(176, 58, 211, 0.1),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* Scrollbar customizada para o admin */
+  .admin-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .admin-scrollbar::-webkit-scrollbar-track {
+    background: rgba(31, 18, 43, 0.3);
+  }
+
+  .admin-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+      135deg,
+      var(--disco-purple),
+      var(--disco-orange)
+    );
+    border-radius: 3px;
+  }
+
+  .admin-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, var(--disco-orange), var(--disco-gold));
+  }
+
+  /* Inputs e forms do admin */
+  .admin-input {
+    @apply bg-input border-border text-foreground placeholder-muted-foreground;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent;
+    @apply transition-all duration-300 rounded-lg;
+  }
+
+  .admin-input:focus {
+    box-shadow: 0 0 0 2px rgba(176, 58, 211, 0.2);
+  }
+
+  .admin-select {
+    @apply bg-input border-border text-foreground placeholder-muted-foreground;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent;
+    @apply transition-all duration-300 rounded-lg;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
+
+  .admin-textarea {
+    @apply bg-input border-border text-foreground placeholder-muted-foreground;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent;
+    @apply transition-all duration-300 rounded-lg resize-none;
+  }
+
+  /* Toggle switch do admin */
+  .admin-toggle {
+    @apply relative inline-flex h-6 w-11 items-center rounded-full transition-colors;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background;
+    background: linear-gradient(135deg, var(--muted), var(--muted));
+  }
+
+  .admin-toggle.active {
+    background: linear-gradient(
+      135deg,
+      var(--disco-purple),
+      var(--disco-orange)
+    );
+  }
+
+  .admin-toggle-thumb {
+    @apply inline-block h-4 w-4 transform rounded-full bg-background transition-transform shadow-lg;
+  }
+
+  .admin-toggle.active .admin-toggle-thumb {
+    transform: translateX(1.25rem);
+  }
+
+  /* Badges e status do admin */
+  .admin-badge {
+    @apply inline-flex px-3 py-1 text-xs font-semibold rounded-full border;
+  }
+
+  .admin-badge-primary {
+    @apply inline-flex px-3 py-1 text-xs font-semibold rounded-full border;
+    background: rgba(176, 58, 211, 0.1);
+    color: var(--disco-purple);
+    border-color: rgba(176, 58, 211, 0.3);
+  }
+
+  .admin-badge-success {
+    @apply inline-flex px-3 py-1 text-xs font-semibold rounded-full border;
+    background: rgba(0, 255, 0, 0.1);
+    color: var(--disco-green);
+    border-color: rgba(0, 255, 0, 0.3);
+  }
+
+  .admin-badge-warning {
+    @apply inline-flex px-3 py-1 text-xs font-semibold rounded-full border;
+    background: rgba(249, 195, 31, 0.1);
+    color: var(--disco-gold);
+    border-color: rgba(249, 195, 31, 0.3);
+  }
+
+  .admin-badge-danger {
+    @apply inline-flex px-3 py-1 text-xs font-semibold rounded-full border;
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--destructive);
+    border-color: rgba(239, 68, 68, 0.3);
+  }
+
+  /* Tabelas do admin */
+  .admin-table {
+    @apply min-w-full divide-y divide-border;
+  }
+
+  .admin-table-header {
+    @apply bg-muted/30;
+  }
+
+  .admin-table-header th {
+    @apply px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider;
+  }
+
+  .admin-table-row {
+    @apply hover:bg-muted/20 transition-colors duration-200;
+  }
+
+  .admin-table-cell {
+    @apply px-6 py-4 whitespace-nowrap text-sm;
+  }
+
+  /* Animações específicas do admin */
+  .admin-fade-in {
+    animation: adminFadeIn 0.5s ease-out;
+  }
+
+  .admin-slide-up {
+    animation: adminSlideUp 0.3s ease-out;
+  }
+
+  .admin-glow-pulse {
+    animation: adminGlowPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes adminFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes adminSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes adminGlowPulse {
+    0%,
+    100% {
+      box-shadow: 0 0 20px rgba(176, 58, 211, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(176, 58, 211, 0.6);
+    }
+  }
+}

@@ -26,7 +26,7 @@ export function ButtonSignOut({ variant = "default" }: ButtonSignOutProps) {
     return (
       <button
         onClick={signOut}
-        className="w-full flex items-center px-0 py-2 text-sm text-red-600 hover:text-red-700 transition-colors cursor-pointer"
+        className="w-full flex items-center px-0 py-2 text-sm text-destructive hover:text-destructive/80 transition-colors cursor-pointer"
       >
         <LogOut className="h-4 w-4 mr-3" />
         Sair da conta
@@ -35,7 +35,7 @@ export function ButtonSignOut({ variant = "default" }: ButtonSignOutProps) {
   }
 
   return (
-    <Button onClick={signOut} variant="outline" className="w-full">
+    <Button onClick={signOut} className="admin-button-secondary w-full">
       <LogOut className="h-4 w-4 mr-2" />
       Sair da conta
     </Button>

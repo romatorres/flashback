@@ -38,26 +38,31 @@ export default function UsersPage() {
   // Filtrar usuários baseado no termo de busca
   const filteredUsers = useMemo(() => {
     if (!searchTerm) return users;
-    
-    return users.filter((user) =>
-      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.status.toLowerCase().includes(searchTerm.toLowerCase())
+
+    return users.filter(
+      (user) =>
+        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.status.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [searchTerm]);
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Usuários</h1>
-          <p className="text-gray-600">Gerencie os usuários do sistema</p>
+      <div className="admin-card p-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="admin-title text-3xl font-bold mb-2">Usuários</h1>
+            <p className="admin-subtitle text-lg">
+              Gerencie os usuários do sistema
+            </p>
+          </div>
+          <Button className="admin-button-primary">
+            <Plus className="h-4 w-4 mr-2" />
+            Novo Usuário
+          </Button>
         </div>
-        <Button>
-          <Plus className="h-4 w-4 mr-2" />
-          Novo Usuário
-        </Button>
       </div>
 
       <SearchFilter
@@ -67,61 +72,70 @@ export default function UsersPage() {
       />
 
       {/* Users table */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+      <div className="admin-card overflow-hidden">
+        <div className="overflow-x-auto admin-scrollbar">
+          <table className="min-w-full divide-y divide-border">
+            <thead className="bg-muted/30">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Usuário
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Função
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Status
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Último Login
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Ações
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="divide-y divide-border">
               {filteredUsers.length > 0 ? (
                 filteredUsers.map((user) => (
-                  <tr key={user.id} className="hover:bg-gray-50">
+                  <tr
+                    key={user.id}
+                    className="hover:bg-muted/20 transition-colors"
+                  >
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
-                        <div className="text-sm font-medium text-gray-900">
+                        <div className="text-sm font-medium text-foreground">
                           {user.name}
                         </div>
-                        <div className="text-sm text-gray-500">{user.email}</div>
+                        <div className="text-sm text-muted-foreground">
+                          {user.email}
+                        </div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                      <span className="inline-flex px-3 py-1 text-xs font-semibold rounded-full bg-disco-blue/20 text-disco-blue border border-disco-blue/30">
                         {user.role}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span
-                        className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                        className={`inline-flex px-3 py-1 text-xs font-semibold rounded-full border ${
                           user.status === "Ativo"
-                            ? "bg-green-100 text-green-800"
-                            : "bg-red-100 text-red-800"
+                            ? "bg-disco-green/20 text-disco-green border-disco-green/30"
+                            : "bg-destructive/20 text-destructive border-destructive/30"
                         }`}
                       >
                         {user.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                       {user.lastLogin}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <Button variant="ghost" size="sm">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="admin-button-ghost"
+                      >
                         Editar
                       </Button>
                     </td>
@@ -129,11 +143,13 @@ export default function UsersPage() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={5} className="px-6 py-8 text-center text-gray-500">
-                    {searchTerm ? 
-                      `Nenhum usuário encontrado para "${searchTerm}"` : 
-                      "Nenhum usuário encontrado"
-                    }
+                  <td
+                    colSpan={5}
+                    className="px-6 py-8 text-center text-muted-foreground"
+                  >
+                    {searchTerm
+                      ? `Nenhum usuário encontrado para "${searchTerm}"`
+                      : "Nenhum usuário encontrado"}
                   </td>
                 </tr>
               )}
