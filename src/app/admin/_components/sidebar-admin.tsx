@@ -123,12 +123,8 @@ function UserMenu({ user }: { user: { name: string; email: string } }) {
       {/* Dropdown menu */}
       {isOpen && (
         <div className="admin-user-dropdown">
-          <div className="py-2">
-            <div className="border-t border-border mt-2 pt-2">
-              <div className="px-4 py-2 admin-button-ghost">
-                <ButtonSignOut variant="menu" />
-              </div>
-            </div>
+          <div className="px-4 py-2 admin-button-ghost">
+            <ButtonSignOut variant="menu" />
           </div>
         </div>
       )}

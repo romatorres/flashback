@@ -13,7 +13,7 @@ interface AdminHeaderProps {
 export function AdminHeader({}: AdminHeaderProps) {
   return (
     <header className="admin-header fixed top-0 right-0 z-50 lg:w-[calc(100%-16rem)]">
-      <div className="flex items-center justify-between h-[57px] px-6">
+      <div className="flex items-center justify-between h-[58px] px-6">
         {/* Left side */}
         <div>
           <h3 className="admin-header-logo text-xl font-bold">FLASHBACK</h3>

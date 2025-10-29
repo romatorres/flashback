@@ -31,7 +31,7 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
   const router = useRouter();
 
   const form = useForm<LoginFormValues>({
@@ -49,10 +49,10 @@ export function LoginForm() {
         password: formData.password,
       },
       {
-        onRequest: (ctx) => {
+        onRequest: () => {
           //show loading
         },
-        onSuccess: (ctx) => {
+        onSuccess: () => {
           toast.success("Login realizado com sucesso!");
           router.replace("/admin");
         },
@@ -108,9 +108,9 @@ export function LoginForm() {
                     disabled={isLoading}
                   >
                     {showPassword ? (
-                      <EyeOff className="h-4 w-4 text-muted-foreground" />
-                    ) : (
                       <Eye className="h-4 w-4 text-muted-foreground" />
+                    ) : (
+                      <EyeOff className="h-4 w-4 text-muted-foreground" />
                     )}
                     <span className="sr-only">
                       {showPassword ? "Esconder senha" : "Mostrar senha"}
