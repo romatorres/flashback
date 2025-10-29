@@ -10,11 +10,19 @@ import {
   Menu,
   X,
   User,
-  ChevronUp,
-  ChevronDown,
   Calendar,
+  UserCircle,
+  LogOut,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { ButtonSignOut } from "./button-signout";
 
 const navigation = [
@@ -91,43 +99,55 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
 }
 
 function UserMenu({ user }: { user: { name: string; email: string } }) {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
     <div className="admin-user-menu">
-      {/* User button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="admin-user-button w-full flex items-center justify-between p-4"
-      >
-        <div className="flex items-center space-x-3">
-          <div className="admin-user-avatar h-8 w-8 rounded-full flex items-center justify-center">
-            <User className="h-4 w-4 text-white" />
-          </div>
-          <div className="flex-1 min-w-0 text-left">
-            <p className="text-sm font-medium text-foreground truncate">
-              {user.name}
-            </p>
-            <p className="text-xs text-muted-foreground truncate">
-              {user.email}
-            </p>
-          </div>
-        </div>
-        {isOpen ? (
-          <ChevronUp className="h-4 w-4 text-muted-foreground" />
-        ) : (
-          <ChevronDown className="h-4 w-4 text-muted-foreground" />
-        )}
-      </button>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button className="admin-user-button w-full flex items-center justify-between p-4 hover:bg-accent/10 transition-colors">
+            <div className="flex items-center space-x-3">
+              <div className="admin-user-avatar h-8 w-8 rounded-full flex items-center justify-center">
+                <User className="h-4 w-4 text-white" />
+              </div>
+              <div className="flex-1 min-w-0 text-left">
+                <p className="text-sm font-medium text-foreground truncate">
+                  {user.name}
+                </p>
+                <p className="text-xs text-muted-foreground truncate">
+                  {user.email}
+                </p>
+              </div>
+            </div>
+          </button>
+        </DropdownMenuTrigger>
 
-      {/* Dropdown menu */}
-      {isOpen && (
-        <div className="admin-user-dropdown">
-          <div className="px-4 py-2 admin-button-ghost">
-            <ButtonSignOut variant="menu" />
-          </div>
-        </div>
-      )}
+        <DropdownMenuContent
+          className=" w-56 mb-2 ml-4"
+          side="top"
+          align="start"
+        >
+          <DropdownMenuLabel className="admin-title">
+            Minha Conta
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator className="bg-border" />
+
+          <DropdownMenuItem className="admin-button-ghost cursor-pointer">
+            <UserCircle className="h-4 w-4 mr-2" />
+            Meu Perfil
+          </DropdownMenuItem>
+
+          <DropdownMenuSeparator className="bg-border" />
+
+          <DropdownMenuItem
+            className="text-destructive hover:text-destructive/80 hover:bg-destructive/10 cursor-pointer"
+            asChild
+          >
+            <div className="flex items-center">
+              <LogOut className="h-4 w-4 mr-2" />
+              <ButtonSignOut variant="menu" />
+            </div>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   );
 }

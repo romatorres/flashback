@@ -41,8 +41,10 @@ export const useAgendaStore = create<AgendaState>()(
         }
         const data = await response.json();
         set({ agendas: data, loading: false });
-      } catch (error: any) {
-        set({ error: error.message, loading: false });
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          set({ error: error.message, loading: false });
+        }
       }
     },
     createAgenda: async (newAgenda) => {
@@ -63,8 +65,10 @@ export const useAgendaStore = create<AgendaState>()(
           agendas: [...state.agendas, data],
           loading: false,
         }));
-      } catch (error: any) {
-        set({ error: error.message, loading: false });
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          set({ error: error.message, loading: false });
+        }
       }
     },
     updateAgenda: async (id, updatedAgenda) => {
@@ -87,8 +91,10 @@ export const useAgendaStore = create<AgendaState>()(
           ),
           loading: false,
         }));
-      } catch (error: any) {
-        set({ error: error.message, loading: false });
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          set({ error: error.message, loading: false });
+        }
       }
     },
     deleteAgenda: async (id) => {
@@ -104,8 +110,10 @@ export const useAgendaStore = create<AgendaState>()(
           agendas: state.agendas.filter((agenda) => agenda.id !== id),
           loading: false,
         }));
-      } catch (error: any) {
-        set({ error: error.message, loading: false });
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          set({ error: error.message, loading: false });
+        }
       }
     },
     setSelectedAgenda: (agenda) => {

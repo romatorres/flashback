@@ -41,9 +41,8 @@ const signupSchema = z
 type SignupFormValues = z.infer<typeof signupSchema>;
 
 export function SignupForm() {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const form = useForm<SignupFormValues>({
@@ -64,10 +63,10 @@ export function SignupForm() {
         password: formData.password,
       },
       {
-        onRequest: (ctx) => {
+        onRequest: () => {
           //show loading
         },
-        onSuccess: (ctx) => {
+        onSuccess: () => {
           toast.success("Cadastro realizado com sucesso! Faça login para continuar.");
           router.replace("/login");
         },
@@ -91,7 +90,7 @@ export function SignupForm() {
                 <Input
                   placeholder="Seu nome completo"
                   {...field}
-                  disabled={isLoading}
+                  disabled={form.formState.isSubmitting}
                 />
               </FormControl>
               <FormMessage />
@@ -110,7 +109,7 @@ export function SignupForm() {
                   placeholder="seu@email.com"
                   type="email"
                   {...field}
-                  disabled={isLoading}
+                  disabled={form.formState.isSubmitting}
                 />
               </FormControl>
               <FormMessage />
@@ -130,15 +129,14 @@ export function SignupForm() {
                     placeholder="••••••••"
                     type={showPassword ? "text" : "password"}
                     {...field}
-                    disabled={isLoading}
+                    disabled={form.formState.isSubmitting}
                   />
                   <Button
                     type="button"
                     variant="ghost"
                     size="sm"
                     className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                    onClick={() => setShowPassword(!showPassword)}
-                    disabled={isLoading}
+                    disabled={form.formState.isSubmitting}
                   >
                     {showPassword ? (
                       <EyeOff className="h-4 w-4 text-muted-foreground" />
@@ -168,7 +166,7 @@ export function SignupForm() {
                     placeholder="••••••••"
                     type={showConfirmPassword ? "text" : "password"}
                     {...field}
-                    disabled={isLoading}
+                    disabled={form.formState.isSubmitting}
                   />
                   <Button
                     type="button"
@@ -176,7 +174,7 @@ export function SignupForm() {
                     size="sm"
                     className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    disabled={isLoading}
+                    disabled={form.formState.isSubmitting}
                   >
                     {showConfirmPassword ? (
                       <EyeOff className="h-4 w-4 text-muted-foreground" />
@@ -194,7 +192,7 @@ export function SignupForm() {
           )}
         />
 
-        <Button type="submit" className="w-full" disabled={isLoading}>
+        <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
           {form.formState.isSubmitting ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

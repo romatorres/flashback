@@ -30,9 +30,11 @@ const formSchema = z.object({
     .max(100, { message: "O título deve ter no máximo 100 caracteres." }),
   DataHora: z
     .date({
-      required_error: "A data e hora são obrigatórias.",
+      message: "A data e hora são obrigatórias.",
     })
-    .min(new Date(), { message: "A data e hora não podem ser anteriores a agora." }),
+    .refine((date) => date > new Date(), {
+      message: "A data e hora não podem ser anteriores a agora.",
+    }),
   Local: z
     .string()
     .min(1, { message: "O local é obrigatório." })
@@ -78,7 +80,9 @@ export function AgendaForm({ onSuccess }: AgendaFormProps) {
         Titulo: selectedAgenda.Titulo || "",
         Local: selectedAgenda.Local || "",
         Detalhes: selectedAgenda.Detalhes || "",
-        DataHora: selectedAgenda.Data ? new Date(selectedAgenda.Data) : undefined,
+        DataHora: selectedAgenda.Data
+          ? new Date(selectedAgenda.Data)
+          : undefined,
       });
     } else {
       form.reset({
