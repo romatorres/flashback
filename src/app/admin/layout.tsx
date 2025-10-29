@@ -20,7 +20,7 @@ export default async function AdminLayout({
   return (
     <div className="admin-layout">
       <AdminSidebar user={session.user} />
-      <div className="lg:pl-64">
+      <div className="md:pl-64">
       <AdminHeader />
       <div className="flex-1 p-6 pt-[73px]">{children}</div>
     </div>

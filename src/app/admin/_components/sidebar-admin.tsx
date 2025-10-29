@@ -39,7 +39,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div
-          className="admin-mobile-overlay fixed inset-0 z-40 lg:hidden"
+          className="admin-mobile-overlay fixed inset-0 z-40 md:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
@@ -47,12 +47,12 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
       {/* Mobile sidebar */}
       <div
         className={cn(
-          "fixed inset-y-0 left-0 z-50 w-64 admin-sidebar shadow-lg transform transition-transform duration-300 ease-in-out lg:hidden",
+          "fixed inset-y-0 left-0 z-50 w-64 admin-sidebar shadow-lg transform transition-transform duration-300 ease-in-out md:hidden",
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
         <div className="admin-sidebar-header flex items-center justify-between h-16 px-4">
-          <h2 className="text-lg font-semibold">FLASHBACK ADMIN</h2>
+          <h2 className="text-lg font-semibold">Painel</h2>
           <Button
             variant="ghost"
             size="sm"
@@ -66,17 +66,17 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
       </div>
 
       {/* Desktop sidebar */}
-      <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
+      <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
         <div className="flex flex-col flex-grow admin-sidebar admin-scrollbar">
           <div className="admin-sidebar-header flex items-center h-16 px-4">
-            <h2 className="text-lg font-semibold">PAINEL</h2>
+            <h2 className="text-lg font-semibold">Painel</h2>
           </div>
           <SidebarContent pathname={pathname} user={user} />
         </div>
       </div>
 
       {/* Mobile menu button */}
-      <div className="lg:hidden">
+      <div className="md:hidden">
         <Button
           variant="ghost"
           size="sm"

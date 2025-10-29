@@ -24,12 +24,15 @@ interface AgendaState {
 }
 
 export const useAgendaStore = create<AgendaState>()(
-  devtools((set) => ({
+  devtools((set, get) => ({
     agendas: [],
     selectedAgenda: null,
     loading: false,
     error: null,
     fetchAgendas: async () => {
+      if (get().agendas.length > 0) {
+        return; // Evita a busca se os dados já estiverem carregados
+      }
       set({ loading: true, error: null });
       try {
         const response = await fetch("/api/agenda");

@@ -74,13 +74,13 @@ export default function AgendaPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="admin-card p-6">
-        <div className="flex justify-between items-center">
+      <div className="p-4">
+        <div className="flex md:flex-row flex-col justify-between md:items-center items-start">
           <div>
             <h1 className="admin-title text-3xl font-bold mb-2">
               Agenda de Eventos
             </h1>
-            <p className="admin-subtitle text-lg">
+            <p className="admin-subtitle text-lg mb-4">
               Gerencie os eventos da sua agenda
             </p>
           </div>
@@ -199,7 +199,7 @@ export default function AgendaPage() {
 
       {/* Dialog for Create/Edit */}
       <Dialog open={isDialogOpen} onOpenChange={handleCloseDialog}>
-        <DialogContent className="admin-card max-w-md">
+        <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle className="admin-title text-xl">
               {selectedAgenda?.id ? "Editar Evento" : "Novo Evento"}

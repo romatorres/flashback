@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Bell } from "lucide-react";
+import Image from "next/image";
 
 interface AdminHeaderProps {
   user?: {
@@ -12,11 +13,16 @@ interface AdminHeaderProps {
 
 export function AdminHeader({}: AdminHeaderProps) {
   return (
-    <header className="admin-header fixed top-0 right-0 z-50 lg:w-[calc(100%-16rem)]">
-      <div className="flex items-center justify-between h-[58px] px-6">
+    <header className="admin-header fixed top-0 left-0 right-0 z-30 md:left-64">
+      <div className="flex items-center md:justify-between justify-end h-[57px] px-6">
         {/* Left side */}
-        <div>
-          <h3 className="admin-header-logo text-xl font-bold">FLASHBACK</h3>
+        <div className="md:block hidden">
+          <Image
+            src="/img/logo-icon_gradient.png"
+            alt="Logo Icon"
+            width={36}
+            height={36}
+          />
         </div>
         {/* Right side */}
         <div className="flex items-center space-x-4">
@@ -28,7 +34,7 @@ export function AdminHeader({}: AdminHeaderProps) {
           >
             <Bell className="h-5 w-5" />
             <span className="admin-notification-badge absolute -top-1 -right-1 h-4 w-4 flex items-center justify-center">
-              3
+              0
             </span>
           </Button>
         </div>

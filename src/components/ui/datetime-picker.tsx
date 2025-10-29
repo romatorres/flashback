@@ -26,61 +26,61 @@ export function DateTimePicker({
   setDate,
   className,
 }: DateTimePickerProps) {
-  const [time, setTime] = React.useState({
-    hour: date ? date.getHours() : 0,
-    minute: date ? date.getMinutes() : 0,
-  });
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [selectedDateTime, setSelectedDateTime] = React.useState<Date>(
+    date || new Date()
+  );
 
   React.useEffect(() => {
     if (date) {
-      setTime({
-        hour: date.getHours(),
-        minute: date.getMinutes(),
-      });
+      setSelectedDateTime(date);
     }
   }, [date]);
 
   const handleDateSelect = (selectedDate: Date | undefined) => {
-    if (!selectedDate) {
-      setDate(undefined);
-      return;
-    }
-    const newDate = new Date(
+    if (!selectedDate) return;
+    const newDateTime = new Date(
       selectedDate.getFullYear(),
       selectedDate.getMonth(),
       selectedDate.getDate(),
-      time.hour,
-      time.minute
+      selectedDateTime.getHours(),
+      selectedDateTime.getMinutes()
     );
-    setDate(newDate);
+    setSelectedDateTime(newDateTime);
   };
 
   const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    const newTime = { ...time, [name]: parseInt(value, 10) || 0 };
+    const newDateTime = new Date(selectedDateTime);
+    let hour = newDateTime.getHours();
+    let minute = newDateTime.getMinutes();
 
-    if (
-      newTime.hour >= 0 &&
-      newTime.hour < 24 &&
-      newTime.minute >= 0 &&
-      newTime.minute < 60
-    ) {
-      setTime(newTime);
-      if (date) {
-        const newDate = new Date(
-          date.getFullYear(),
-          date.getMonth(),
-          date.getDate(),
-          newTime.hour,
-          newTime.minute
-        );
-        setDate(newDate);
-      }
+    if (name === "hour") {
+      hour = parseInt(value, 10);
+    }
+    if (name === "minute") {
+      minute = parseInt(value, 10);
+    }
+
+    if (hour >= 0 && hour < 24 && minute >= 0 && minute < 60) {
+      newDateTime.setHours(hour);
+      newDateTime.setMinutes(minute);
+      setSelectedDateTime(newDateTime);
     }
   };
 
+  const handleConfirm = () => {
+    setDate(selectedDateTime);
+    setIsOpen(false);
+  };
+
+  const handleCancel = () => {
+    setSelectedDateTime(date || new Date());
+    setIsOpen(false);
+  };
+
   return (
-    <Popover>
+    <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
         <Button
           variant={"outline"}
@@ -89,6 +89,7 @@ export function DateTimePicker({
             !date && "text-muted-foreground",
             className
           )}
+          onClick={() => setIsOpen(true)}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
           {date ? (
@@ -101,17 +102,17 @@ export function DateTimePicker({
       <PopoverContent className="w-auto p-0">
         <Calendar
           mode="single"
-          selected={date}
+          selected={selectedDateTime}
           onSelect={handleDateSelect}
           initialFocus
           locale={ptBR}
         />
-        <div className="p-3 border-t border-border">
+        <div className="p-3 border-t border-border space-y-4">
           <div className="flex items-center justify-center gap-2">
             <Input
               type="number"
               name="hour"
-              value={String(time.hour).padStart(2, "0")}
+              value={String(selectedDateTime.getHours()).padStart(2, "0")}
               onChange={handleTimeChange}
               className="w-16 text-center"
               min="0"
@@ -121,12 +122,25 @@ export function DateTimePicker({
             <Input
               type="number"
               name="minute"
-              value={String(time.minute).padStart(2, "0")}
+              value={String(selectedDateTime.getMinutes()).padStart(2, "0")}
               onChange={handleTimeChange}
               className="w-16 text-center"
               min="0"
               max="59"
             />
+          </div>
+          <div className="flex justify-end gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleCancel}
+              className="w-full"
+            >
+              Cancelar
+            </Button>
+            <Button size="sm" onClick={handleConfirm} className="w-full">
+              Confirmar
+            </Button>
           </div>
         </div>
       </PopoverContent>

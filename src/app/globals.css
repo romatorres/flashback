@@ -276,7 +276,6 @@
     @apply bg-card border-border;
     background: linear-gradient(180deg, #1f122b 0%, #140a1f 100%);
     border-right: 1px solid var(--border);
-    box-shadow: 0 0 30px rgba(176, 58, 211, 0.1);
   }
 
   .admin-sidebar-header {
@@ -289,7 +288,6 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    border-bottom: 1px solid var(--border);
   }
 
   .admin-nav-item {
@@ -632,3 +630,29 @@
     }
   }
 }
+
+/* INICIO da Estilização do scrollbar para tema escuro */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(46, 46, 46) transparent;
+}
+
+/* Para navegadores Webkit (Chrome, Safari, Edge) */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(46 46 46);
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(44 44 44);
+}
+/* FIM da Estilização do scrollbar para tema escuro */
