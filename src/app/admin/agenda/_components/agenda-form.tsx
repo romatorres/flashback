@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Loader2, Calendar, Clock, MapPin, FileText, Type } from "lucide-react";
+import { Loader2, Calendar, MapPin, FileText, Type } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/form";
 import { toast } from "sonner";
 import { useAgendaStore } from "@/lib/store";
+import { DateTimePicker } from "@/components/ui/datetime-picker";
 
 const formSchema = z.object({
   Titulo: z
@@ -27,34 +28,23 @@ const formSchema = z.object({
     .min(1, { message: "O título é obrigatório." })
     .min(3, { message: "O título deve ter pelo menos 3 caracteres." })
     .max(100, { message: "O título deve ter no máximo 100 caracteres." }),
-  Data: z
-    .string()
-    .min(1, { message: "A data é obrigatória." })
-    .refine(
-      (date) => {
-        const selectedDate = new Date(date);
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        return selectedDate >= today;
-      },
-      { message: "A data não pode ser anterior a hoje." }
-    ),
+  DataHora: z
+    .date({
+      required_error: "A data e hora são obrigatórias.",
+    })
+    .min(new Date(), { message: "A data e hora não podem ser anteriores a agora." }),
   Local: z
     .string()
     .min(1, { message: "O local é obrigatório." })
     .min(3, { message: "O local deve ter pelo menos 3 caracteres." })
     .max(200, { message: "O local deve ter no máximo 200 caracteres." }),
-  Horario: z
-    .string()
-    .min(1, { message: "O horário é obrigatório." })
-    .regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, {
-      message: "Formato de horário inválido. Use HH:MM (ex: 14:30)",
-    }),
   Detalhes: z
     .string()
     .max(500, { message: "Os detalhes devem ter no máximo 500 caracteres." })
     .optional(),
 });
+
+type FormValues = z.infer<typeof formSchema>;
 
 interface AgendaFormProps {
   onSuccess?: () => void;
@@ -64,14 +54,13 @@ export function AgendaForm({ onSuccess }: AgendaFormProps) {
   const { createAgenda, updateAgenda, selectedAgenda, setSelectedAgenda } =
     useAgendaStore();
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       Titulo: "",
-      Data: "",
       Local: "",
-      Horario: "",
       Detalhes: "",
+      DataHora: undefined,
     },
   });
 
@@ -84,37 +73,41 @@ export function AgendaForm({ onSuccess }: AgendaFormProps) {
   const watchedDetalhes = watch("Detalhes");
 
   useEffect(() => {
-    if (selectedAgenda?.id && selectedAgenda.Data) {
+    if (isEditing && selectedAgenda?.id) {
       form.reset({
-        ...selectedAgenda,
-        Data: new Date(selectedAgenda.Data).toISOString().split("T")[0],
+        Titulo: selectedAgenda.Titulo || "",
+        Local: selectedAgenda.Local || "",
         Detalhes: selectedAgenda.Detalhes || "",
+        DataHora: selectedAgenda.Data ? new Date(selectedAgenda.Data) : undefined,
       });
     } else {
       form.reset({
         Titulo: "",
-        Data: "",
         Local: "",
-        Horario: "",
         Detalhes: "",
+        DataHora: undefined,
       });
     }
-  }, [selectedAgenda, form]);
+  }, [selectedAgenda, form, isEditing]);
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: FormValues) => {
     try {
+      const dataToSubmit = {
+        Titulo: values.Titulo,
+        Local: values.Local,
+        Detalhes: values.Detalhes,
+        Data: values.DataHora,
+        Horario: values.DataHora.toLocaleTimeString("pt-BR", {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+      };
+
       if (isEditing) {
-        await updateAgenda(selectedAgenda.id!, {
-          ...values,
-          Data: new Date(values.Data),
-        });
+        await updateAgenda(selectedAgenda.id!, dataToSubmit);
         toast.success("Evento atualizado com sucesso!");
       } else {
-        await createAgenda({
-          ...values,
-          Data: new Date(values.Data),
-          Detalhes: values.Detalhes || undefined,
-        });
+        await createAgenda(dataToSubmit);
         toast.success("Evento criado com sucesso!");
       }
 
@@ -158,49 +151,26 @@ export function AgendaForm({ onSuccess }: AgendaFormProps) {
           )}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <FormField
-            control={form.control}
-            name="Data"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="flex items-center text-foreground font-medium">
-                  <Calendar className="h-4 w-4 mr-2 text-disco-orange" />
-                  Data
-                </FormLabel>
-                <FormControl>
-                  <Input className="admin-input" type="date" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="Horario"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="flex items-center text-foreground font-medium">
-                  <Clock className="h-4 w-4 mr-2 text-disco-gold" />
-                  Horário
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    className="admin-input"
-                    type="time"
-                    placeholder="14:30"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription className="text-xs text-muted-foreground">
-                  Formato: HH:MM (24 horas)
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+        <FormField
+          control={form.control}
+          name="DataHora"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="flex items-center text-foreground font-medium">
+                <Calendar className="h-4 w-4 mr-2 text-disco-orange" />
+                Data e Horário
+              </FormLabel>
+              <FormControl>
+                <DateTimePicker
+                  date={field.value}
+                  setDate={field.onChange}
+                  className="admin-input"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <FormField
           control={form.control}
