@@ -4,9 +4,9 @@ import { prisma } from "@/lib/prisma";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { Titulo, Data, Local, Horario, Detalhes } = body;
+    const { titulo, data, local, horario, detalhes } = body;
 
-    if (!Titulo || !Data || !Local || !Horario) {
+    if (!titulo || !data || !local || !horario) {
       return NextResponse.json(
         { message: "Todos os campos obrigatórios devem ser preenchidos." },
         { status: 400 }
@@ -15,11 +15,11 @@ export async function POST(request: Request) {
 
     const newAgenda = await prisma.agenda.create({
       data: {
-        Titulo,
-        Data: new Date(Data),
-        Local,
-        Horario,
-        Detalhes,
+        titulo,
+        data: new Date(data),
+        local,
+        horario,
+        detalhes,
       },
     });
 
@@ -38,15 +38,15 @@ export async function GET() {
     const agenda = await prisma.agenda.findMany({
       select: {
         id: true,
-        Titulo: true,
-        Data: true,
-        Local: true,
-        Horario: true,
-        Detalhes: true,
+        titulo: true,
+        data: true,
+        local: true,
+        horario: true,
+        detalhes: true,
       },
       orderBy: {
-        Data: 'asc'
-      }
+        data: "asc",
+      },
     });
 
     return NextResponse.json(agenda);

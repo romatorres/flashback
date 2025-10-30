@@ -26,20 +26,20 @@ export async function PUT(
 ) {
   try {
     const { id } = await context.params;
-    const { Titulo, Data, Local, Horario, Detalhes } = await request.json();
+    const { titulo, data, local, horario, detalhes } = await request.json();
     const agendaUpdateData: {
-      Titulo?: string;
-      Data?: Date;
-      Local?: string;
-      Horario?: string;
-      Detalhes?: string;
+      titulo?: string;
+      data?: Date;
+      local?: string;
+      horario?: string;
+      detalhes?: string;
     } = {};
 
-    if (Titulo !== undefined) agendaUpdateData.Titulo = Titulo;
-    if (Data !== undefined) agendaUpdateData.Data = new Date(Data);
-    if (Local !== undefined) agendaUpdateData.Local = Local;
-    if (Horario !== undefined) agendaUpdateData.Horario = Horario;
-    if (Detalhes !== undefined) agendaUpdateData.Detalhes = Detalhes;
+    if (titulo !== undefined) agendaUpdateData.titulo = titulo;
+    if (data !== undefined) agendaUpdateData.data = new Date(data);
+    if (local !== undefined) agendaUpdateData.local = local;
+    if (horario !== undefined) agendaUpdateData.horario = horario;
+    if (detalhes !== undefined) agendaUpdateData.detalhes = detalhes;
 
     if (Object.keys(agendaUpdateData).length > 0) {
       await prisma.agenda.update({

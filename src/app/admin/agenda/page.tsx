@@ -140,31 +140,31 @@ export default function AgendaPage() {
                   <div className="space-y-4">
                     <div>
                       <h2 className="admin-title text-xl font-bold mb-2 line-clamp-2">
-                        {agenda.Titulo}
+                        {agenda.titulo}
                       </h2>
                     </div>
 
                     <div className="space-y-3">
                       <div className="flex items-center text-sm text-muted-foreground">
                         <Calendar className="h-4 w-4 mr-2 text-disco-purple" />
-                        <span>{formatDate(agenda.Data)}</span>
+                        <span>{formatDate(agenda.data)}</span>
                       </div>
 
                       <div className="flex items-center text-sm text-muted-foreground">
                         <Clock className="h-4 w-4 mr-2 text-disco-orange" />
-                        <span>{agenda.Horario}</span>
+                        <span>{agenda.horario}</span>
                       </div>
 
                       <div className="flex items-center text-sm text-muted-foreground">
                         <MapPin className="h-4 w-4 mr-2 text-disco-gold" />
-                        <span className="line-clamp-1">{agenda.Local}</span>
+                        <span className="line-clamp-1">{agenda.local}</span>
                       </div>
                     </div>
 
-                    {agenda.Detalhes && (
+                    {agenda.detalhes && (
                       <div className="pt-2 border-t border-border">
                         <p className="text-sm text-muted-foreground line-clamp-3">
-                          {agenda.Detalhes}
+                          {agenda.detalhes}
                         </p>
                       </div>
                     )}

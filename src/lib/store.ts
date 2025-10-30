@@ -1,14 +1,13 @@
-
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
 interface Agenda {
   id: string;
-  Titulo: string;
-  Data: Date;
-  Local: string;
-  Horario: string;
-  Detalhes?: string;
+  titulo: string;
+  data: Date;
+  local: string;
+  horario: string;
+  detalhes?: string;
 }
 
 interface AgendaState {

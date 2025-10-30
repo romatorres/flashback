@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { Calendar, MapPin, Clock } from "lucide-react";
+import { Calendar, MapPin, Clock, ClipboardCheck } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useAgendaStore } from "@/lib/store";
 
@@ -40,7 +40,7 @@ export default function Agenda() {
           </h2>
         </div>
         <div ref={cardsAnimation.ref} className="grid md:grid-cols-2 gap-6">
-          {agendas.map((show, index) => (
+          {agendas.map((agenda, index) => (
             <div
               key={index}
               className={`bg-card border-2 border-border rounded-2xl p-4
@@ -62,22 +62,26 @@ export default function Agenda() {
                 <div className="flex items-center gap-2 mb-3">
                   <Calendar className="w-5 h-5 text-accent" />
                   <p className="font-display text-2xl text-foreground">
-                    {formatDate(show.Data)}
+                    {formatDate(agenda.data)}
                   </p>
                 </div>
 
                 <h3 className="font-display text-3xl mb-2 text-accent group-hover:text-primary transition-colors">
-                  {show.Titulo}
+                  {agenda.titulo}
                 </h3>
 
                 <div className="space-y-2 mb-6">
                   <div className="flex items-center gap-2 text-muted-foreground">
                     <MapPin className="w-4 h-4" />
-                    <p className="font-body">{show.Local}</p>
+                    <p className="font-body">{agenda.local}</p>
                   </div>
                   <div className="flex items-center gap-2 text-muted-foreground">
                     <Clock className="w-4 h-4" />
-                    <p className="font-body">{show.Horario}</p>
+                    <p className="font-body">{agenda.horario}</p>
+                  </div>
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <ClipboardCheck className="w-4 h-4" />
+                    <p className="font-body">{agenda.detalhes}</p>
                   </div>
                 </div>
 

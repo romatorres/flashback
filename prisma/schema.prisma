@@ -75,11 +75,11 @@ model Verification {
 
 model Agenda {
   id        String   @id @default(cuid())
-  Titulo    String
-  Data      DateTime
-  Local     String
-  Horario   String
-  Detalhes  String?
+  titulo    String
+  data      DateTime
+  local     String
+  horario   String
+  detalhes  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

@@ -9,14 +9,15 @@ export default function Dashboard() {
           Bem-vindo ao painel de controle
         </p>
       </div>
-      <Link href="/admin/agenda">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="admin-card p-6">
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="admin-card p-6">
+          <Link href="/admin/agenda">
             <h3 className="admin-title text-lg font-semibold mb-2">Agenda</h3>
             <p className="admin-subtitle">Gerencie a sua agenda</p>
-          </div>
+          </Link>
         </div>
-      </Link>
+      </div>
     </div>
   );
 }

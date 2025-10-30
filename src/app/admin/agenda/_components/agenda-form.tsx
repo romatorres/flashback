@@ -23,24 +23,24 @@ import { useAgendaStore } from "@/lib/store";
 import { DateTimePicker } from "@/components/ui/datetime-picker";
 
 const formSchema = z.object({
-  Titulo: z
+  titulo: z
     .string()
     .min(1, { message: "O título é obrigatório." })
     .min(3, { message: "O título deve ter pelo menos 3 caracteres." })
     .max(100, { message: "O título deve ter no máximo 100 caracteres." }),
-  DataHora: z
+  dataHora: z
     .date({
       message: "A data e hora são obrigatórias.",
     })
     .refine((date) => date > new Date(), {
       message: "A data e hora não podem ser anteriores a agora.",
     }),
-  Local: z
+  local: z
     .string()
     .min(1, { message: "O local é obrigatório." })
     .min(3, { message: "O local deve ter pelo menos 3 caracteres." })
     .max(200, { message: "O local deve ter no máximo 200 caracteres." }),
-  Detalhes: z
+  detalhes: z
     .string()
     .max(500, { message: "Os detalhes devem ter no máximo 500 caracteres." })
     .optional(),
@@ -59,10 +59,10 @@ export function AgendaForm({ onSuccess }: AgendaFormProps) {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      Titulo: "",
-      Local: "",
-      Detalhes: "",
-      DataHora: undefined,
+      titulo: "",
+      local: "",
+      detalhes: "",
+      dataHora: undefined,
     },
   });
 
@@ -72,24 +72,24 @@ export function AgendaForm({ onSuccess }: AgendaFormProps) {
   } = form;
 
   const isEditing = !!selectedAgenda?.id;
-  const watchedDetalhes = watch("Detalhes");
+  const watchedDetalhes = watch("detalhes");
 
   useEffect(() => {
     if (isEditing && selectedAgenda?.id) {
       form.reset({
-        Titulo: selectedAgenda.Titulo || "",
-        Local: selectedAgenda.Local || "",
-        Detalhes: selectedAgenda.Detalhes || "",
-        DataHora: selectedAgenda.Data
-          ? new Date(selectedAgenda.Data)
+        titulo: selectedAgenda.titulo || "",
+        local: selectedAgenda.local || "",
+        detalhes: selectedAgenda.detalhes || "",
+        dataHora: selectedAgenda.data
+          ? new Date(selectedAgenda.data)
           : undefined,
       });
     } else {
       form.reset({
-        Titulo: "",
-        Local: "",
-        Detalhes: "",
-        DataHora: undefined,
+        titulo: "",
+        local: "",
+        detalhes: "",
+        dataHora: undefined,
       });
     }
   }, [selectedAgenda, form, isEditing]);
@@ -97,11 +97,11 @@ export function AgendaForm({ onSuccess }: AgendaFormProps) {
   const onSubmit = async (values: FormValues) => {
     try {
       const dataToSubmit = {
-        Titulo: values.Titulo,
-        Local: values.Local,
-        Detalhes: values.Detalhes,
-        Data: values.DataHora,
-        Horario: values.DataHora.toLocaleTimeString("pt-BR", {
+        titulo: values.titulo,
+        local: values.local,
+        detalhes: values.detalhes,
+        data: values.dataHora,
+        horario: values.dataHora.toLocaleTimeString("pt-BR", {
           hour: "2-digit",
           minute: "2-digit",
         }),
@@ -133,7 +133,7 @@ export function AgendaForm({ onSuccess }: AgendaFormProps) {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField
           control={form.control}
-          name="Titulo"
+          name="titulo"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="flex items-center text-foreground font-medium">
@@ -157,7 +157,7 @@ export function AgendaForm({ onSuccess }: AgendaFormProps) {
 
         <FormField
           control={form.control}
-          name="DataHora"
+          name="dataHora"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="flex items-center text-foreground font-medium">
@@ -178,7 +178,7 @@ export function AgendaForm({ onSuccess }: AgendaFormProps) {
 
         <FormField
           control={form.control}
-          name="Local"
+          name="local"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="flex items-center text-foreground font-medium">
@@ -202,7 +202,7 @@ export function AgendaForm({ onSuccess }: AgendaFormProps) {
 
         <FormField
           control={form.control}
-          name="Detalhes"
+          name="detalhes"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="flex items-center text-foreground font-medium">
