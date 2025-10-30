@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard,
-  Settings,
   Menu,
   X,
   User,
@@ -19,8 +18,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ButtonSignOut } from "./button-signout";
@@ -28,7 +25,7 @@ import { ButtonSignOut } from "./button-signout";
 const navigation = [
   { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { name: "Agenda", href: "/admin/agenda", icon: Calendar },
-  { name: "Configurações", href: "/admin/settings", icon: Settings },
+  { name: "Usuários", href: "/admin/users", icon: UserCircle },
 ];
 
 interface AdminSidebarProps {
@@ -125,18 +122,6 @@ function UserMenu({ user }: { user: { name: string; email: string } }) {
           side="top"
           align="start"
         >
-          <DropdownMenuLabel className="admin-title">
-            Minha Conta
-          </DropdownMenuLabel>
-          <DropdownMenuSeparator className="bg-border" />
-
-          <DropdownMenuItem className="admin-button-ghost cursor-pointer">
-            <UserCircle className="h-4 w-4 mr-2" />
-            Meu Perfil
-          </DropdownMenuItem>
-
-          <DropdownMenuSeparator className="bg-border" />
-
           <DropdownMenuItem
             className="text-destructive hover:text-destructive/80 hover:bg-destructive/10 cursor-pointer"
             asChild
