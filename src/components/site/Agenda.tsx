@@ -1,41 +1,27 @@
 "use client";
 
+import { useEffect } from "react";
 import { Calendar, MapPin, Clock } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useAgendaStore } from "@/lib/store";
 
 export default function Agenda() {
   const cardsAnimation = useScrollAnimation({ threshold: 0.2 });
   const titleAnimation = useScrollAnimation({ threshold: 0.2 });
-  const shows = [
-    {
-      date: "14 de Novembro, 2025",
-      venue: "Aria Hall",
-      city: "Feida de Santana, BA",
-      time: "21:00",
-      ticketLink: "#",
-    },
-    {
-      date: "13 de Dezembro, 2025",
-      venue: "Evento Particular",
-      city: "Valente, BA",
-      time: "22:00",
-      ticketLink: "#",
-    },
-    {
-      date: "18 de Dezembro, 2025",
-      venue: "Natal Encantado",
-      city: "Feira de Santana, BA",
-      time: "22:00",
-      ticketLink: "#",
-    },
-    {
-      date: "18 de Janeiro, 2026",
-      venue: "Evento Particular",
-      city: "Feira de Santana, BA",
-      time: "21:00",
-      ticketLink: "#",
-    },
-  ];
+  const { agendas, fetchAgendas } = useAgendaStore();
+
+  useEffect(() => {
+    fetchAgendas();
+  }, [fetchAgendas]);
+
+  const formatDate = (dateString: Date) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("pt-BR", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
+  };
 
   return (
     <section id="shows" className="py-20 px-4 relative">
@@ -54,7 +40,7 @@ export default function Agenda() {
           </h2>
         </div>
         <div ref={cardsAnimation.ref} className="grid md:grid-cols-2 gap-6">
-          {shows.map((show, index) => (
+          {agendas.map((show, index) => (
             <div
               key={index}
               className={`bg-card border-2 border-border rounded-2xl p-4
@@ -76,22 +62,22 @@ export default function Agenda() {
                 <div className="flex items-center gap-2 mb-3">
                   <Calendar className="w-5 h-5 text-accent" />
                   <p className="font-display text-2xl text-foreground">
-                    {show.date}
+                    {formatDate(show.Data)}
                   </p>
                 </div>
 
                 <h3 className="font-display text-3xl mb-2 text-accent group-hover:text-primary transition-colors">
-                  {show.venue}
+                  {show.Titulo}
                 </h3>
 
                 <div className="space-y-2 mb-6">
                   <div className="flex items-center gap-2 text-muted-foreground">
                     <MapPin className="w-4 h-4" />
-                    <p className="font-body">{show.city}</p>
+                    <p className="font-body">{show.Local}</p>
                   </div>
                   <div className="flex items-center gap-2 text-muted-foreground">
                     <Clock className="w-4 h-4" />
-                    <p className="font-body">{show.time}</p>
+                    <p className="font-body">{show.Horario}</p>
                   </div>
                 </div>
 
