@@ -18,8 +18,12 @@ interface SparkleStyle {
 
 export default function Hero() {
   const [sparkles, setSparkles] = useState<SparkleStyle[]>([]);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    // Marca que estamos no cliente para evitar problemas de hidratação
+    setIsClient(true);
+
     const generateSparkles = () => {
       const newSparkles: SparkleStyle[] = [...Array(20)].map(() => ({
         left: `${Math.random() * 100}%`,
@@ -29,7 +33,11 @@ export default function Hero() {
       }));
       setSparkles(newSparkles);
     };
-    generateSparkles();
+
+    // Pequeno delay para garantir que a hidratação termine
+    const timer = setTimeout(generateSparkles, 100);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -47,26 +55,35 @@ export default function Hero() {
         <div className="absolute z-20 inset-0 bg-gradient-to-b from-background/90 via-background/50 to-background"></div>
       </div>
 
-      {/* Animated sparkles */}
-      <div className="absolute z-10 inset-0 overflow-hidden pointer-events-none">
-        {sparkles.map((style, i) => (
-          <div key={i} className="absolute animate-pulse" style={style}>
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="white"
-              className="drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]"
+      {/* Animated sparkles - só renderiza no cliente */}
+      {isClient && (
+        <div className="absolute z-10 inset-0 overflow-hidden pointer-events-none">
+          {sparkles.map((style, i) => (
+            <div
+              key={i}
+              className="absolute opacity-0 animate-fade-in"
               style={{
-                filter:
-                  "drop-shadow(0 0 12px rgba(255,255,255,0.9)) drop-shadow(0 0 80px rgba(255,255,255,0.6))",
+                ...style,
+                animationFillMode: "forwards",
               }}
             >
-              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-            </svg>
-          </div>
-        ))}
-      </div>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="white"
+                className="drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]"
+                style={{
+                  filter:
+                    "drop-shadow(0 0 12px rgba(255,255,255,0.9)) drop-shadow(0 0 80px rgba(255,255,255,0.6))",
+                }}
+              >
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Content */}
       <div className="relative z-30 flex flex-col items-center text-center px-4 max-w-5xl mx-auto">

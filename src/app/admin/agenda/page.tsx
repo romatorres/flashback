@@ -138,10 +138,19 @@ export default function AgendaPage() {
               {agendas.map((agenda) => (
                 <div key={agenda.id} className="admin-card p-6 admin-fade-in">
                   <div className="space-y-4">
-                    <div>
-                      <h2 className="admin-title text-xl font-bold mb-2 line-clamp-2">
+                    <div className="flex items-start justify-between">
+                      <h2 className="admin-title text-xl font-bold mb-2 line-clamp-2 flex-1">
                         {agenda.titulo}
                       </h2>
+                      <span
+                        className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ml-2 ${
+                          agenda.ativo
+                            ? "admin-badge-success"
+                            : "admin-badge-danger"
+                        }`}
+                      >
+                        {agenda.ativo ? "Ativo" : "Inativo"}
+                      </span>
                     </div>
 
                     <div className="space-y-3">
@@ -160,15 +169,7 @@ export default function AgendaPage() {
                         <span className="line-clamp-1">{agenda.local}</span>
                       </div>
                     </div>
-                    <span
-                      className={`inline-flex px-2 py-0.5 text-xs font-semibold rounded-full ${
-                        agenda.ativo
-                          ? "bg-green-200 text-green-900"
-                          : "bg-red-200 text-red-800"
-                      }`}
-                    >
-                      {agenda.ativo ? "Ativo" : "Inativo"}
-                    </span>
+
                     {agenda.detalhes && (
                       <div className="pt-2 border-t border-border">
                         <p className="text-sm text-muted-foreground line-clamp-3">

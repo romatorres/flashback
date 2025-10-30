@@ -656,3 +656,19 @@
   background-color: rgb(44 44 44);
 }
 /* FIM da Estilização do scrollbar para tema escuro */
+
+/* Animação para fade-in das estrelas */
+.animate-fade-in {
+  animation: fadeInSparkle 0.8s ease-out forwards;
+}
+
+@keyframes fadeInSparkle {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

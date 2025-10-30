@@ -13,10 +13,14 @@ interface Agenda {
 
 interface AgendaState {
   agendas: Agenda[];
+  publicAgendas: Agenda[]; // Eventos públicos (ativos)
   selectedAgenda: Partial<Agenda> | null;
   loading: boolean;
+  publicLoading: boolean; // Loading específico para eventos públicos
   error: string | null;
+  publicError: string | null; // Error específico para eventos públicos
   fetchAgendas: () => Promise<void>;
+  fetchPublicAgendas: () => Promise<void>; // Nova função para eventos públicos
   createAgenda: (newAgenda: Omit<Agenda, "id">) => Promise<void>;
   updateAgenda: (id: string, updatedAgenda: Partial<Agenda>) => Promise<void>;
   deleteAgenda: (id: string) => Promise<void>;
@@ -26,9 +30,12 @@ interface AgendaState {
 export const useAgendaStore = create<AgendaState>()(
   devtools((set, get) => ({
     agendas: [],
+    publicAgendas: [],
     selectedAgenda: null,
     loading: false,
+    publicLoading: false,
     error: null,
+    publicError: null,
     fetchAgendas: async () => {
       if (get().agendas.length > 0) {
         return; // Evita a busca se os dados já estiverem carregados
@@ -44,6 +51,31 @@ export const useAgendaStore = create<AgendaState>()(
       } catch (error: unknown) {
         if (error instanceof Error) {
           set({ error: error.message, loading: false });
+        }
+      }
+    },
+    fetchPublicAgendas: async () => {
+      if (get().publicAgendas.length > 0) {
+        return; // Evita a busca se os dados já estiverem carregados
+      }
+      set({ publicLoading: true, publicError: null });
+
+      try {
+        const response = await fetch("/api/agenda/public");
+
+        if (!response.ok) {
+          throw new Error(
+            `Erro ao buscar eventos públicos: ${response.status}`
+          );
+        }
+
+        const data = await response.json();
+        set({ publicAgendas: data, publicLoading: false });
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          set({ publicError: error.message, publicLoading: false });
+        } else {
+          set({ publicError: "Erro desconhecido", publicLoading: false });
         }
       }
     },

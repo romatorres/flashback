@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { titulo, data, local, horario, detalhes } = body;
+    const { titulo, data, local, horario, detalhes, ativo = true } = body;
 
     if (!titulo || !data || !local || !horario) {
       return NextResponse.json(
@@ -20,6 +20,7 @@ export async function POST(request: Request) {
         local,
         horario,
         detalhes,
+        ativo,
       },
     });
 
