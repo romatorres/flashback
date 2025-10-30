@@ -160,7 +160,15 @@ export default function AgendaPage() {
                         <span className="line-clamp-1">{agenda.local}</span>
                       </div>
                     </div>
-
+                    <span
+                      className={`inline-flex px-2 py-0.5 text-xs font-semibold rounded-full ${
+                        agenda.ativo
+                          ? "bg-green-200 text-green-900"
+                          : "bg-red-200 text-red-800"
+                      }`}
+                    >
+                      {agenda.ativo ? "Ativo" : "Inativo"}
+                    </span>
                     {agenda.detalhes && (
                       <div className="pt-2 border-t border-border">
                         <p className="text-sm text-muted-foreground line-clamp-3">

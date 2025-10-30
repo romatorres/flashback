@@ -21,6 +21,7 @@ import {
 import { toast } from "sonner";
 import { useAgendaStore } from "@/lib/store";
 import { DateTimePicker } from "@/components/ui/datetime-picker";
+import { Switch } from "@/components/ui/switch";
 
 const formSchema = z.object({
   titulo: z
@@ -44,9 +45,10 @@ const formSchema = z.object({
     .string()
     .max(500, { message: "Os detalhes devem ter no máximo 500 caracteres." })
     .optional(),
+  ativo: z.boolean(),
 });
 
-type FormValues = z.infer<typeof formSchema>;
+type FormValues = z.infer<typeof formSchema> & { ativo: boolean };
 
 interface AgendaFormProps {
   onSuccess?: () => void;
@@ -63,6 +65,7 @@ export function AgendaForm({ onSuccess }: AgendaFormProps) {
       local: "",
       detalhes: "",
       dataHora: undefined,
+      ativo: true,
     },
   });
 
@@ -83,6 +86,7 @@ export function AgendaForm({ onSuccess }: AgendaFormProps) {
         dataHora: selectedAgenda.data
           ? new Date(selectedAgenda.data)
           : undefined,
+        ativo: selectedAgenda.ativo ?? true,
       });
     } else {
       form.reset({
@@ -90,6 +94,7 @@ export function AgendaForm({ onSuccess }: AgendaFormProps) {
         local: "",
         detalhes: "",
         dataHora: undefined,
+        ativo: true,
       });
     }
   }, [selectedAgenda, form, isEditing]);
@@ -105,6 +110,7 @@ export function AgendaForm({ onSuccess }: AgendaFormProps) {
           hour: "2-digit",
           minute: "2-digit",
         }),
+        ativo: values.ativo,
       };
 
       if (isEditing) {
@@ -223,6 +229,29 @@ export function AgendaForm({ onSuccess }: AgendaFormProps) {
             </FormItem>
           )}
         />
+
+        {isEditing && (
+          <FormField
+            control={form.control}
+            name="ativo"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                <div className="space-y-0.5">
+                  <FormLabel className="text-base">Ativar Evento</FormLabel>
+                  <FormDescription>
+                    Define se o evento estará visível na página principal.
+                  </FormDescription>
+                </div>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+        )}
 
         <div className="flex justify-end gap-3 pt-4 border-t border-border">
           <Button

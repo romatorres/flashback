@@ -26,13 +26,15 @@ export async function PUT(
 ) {
   try {
     const { id } = await context.params;
-    const { titulo, data, local, horario, detalhes } = await request.json();
+    const { titulo, data, local, horario, detalhes, ativo } =
+      await request.json();
     const agendaUpdateData: {
       titulo?: string;
       data?: Date;
       local?: string;
       horario?: string;
       detalhes?: string;
+      ativo?: boolean;
     } = {};
 
     if (titulo !== undefined) agendaUpdateData.titulo = titulo;
@@ -40,6 +42,7 @@ export async function PUT(
     if (local !== undefined) agendaUpdateData.local = local;
     if (horario !== undefined) agendaUpdateData.horario = horario;
     if (detalhes !== undefined) agendaUpdateData.detalhes = detalhes;
+    if (ativo !== undefined) agendaUpdateData.ativo = ativo;
 
     if (Object.keys(agendaUpdateData).length > 0) {
       await prisma.agenda.update({

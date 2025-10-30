@@ -80,6 +80,7 @@ model Agenda {
   local     String
   horario   String
   detalhes  String?
+  ativo     Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

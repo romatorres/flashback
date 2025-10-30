@@ -43,6 +43,7 @@ export async function GET() {
         local: true,
         horario: true,
         detalhes: true,
+        ativo: true,
       },
       orderBy: {
         data: "asc",

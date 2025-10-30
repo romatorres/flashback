@@ -8,6 +8,7 @@ interface Agenda {
   local: string;
   horario: string;
   detalhes?: string;
+  ativo?: boolean;
 }
 
 interface AgendaState {
