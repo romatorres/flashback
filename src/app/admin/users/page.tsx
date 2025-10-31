@@ -46,6 +46,13 @@ export default function UsersPage() {
       </div>
 
       <div className="">
+        <table className="w-full">
+          <thead className="bg-gray01">
+            <tr>
+              <th>Nome</th>
+            </tr>
+          </thead>
+        </table>
         <div className="admin-card">
           <div className="p-4 border-b border-border">
             <h3 className="admin-title text-lg font-semibold">Usuários</h3>
