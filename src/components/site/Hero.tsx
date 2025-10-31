@@ -28,8 +28,8 @@ export default function Hero() {
       const newSparkles: SparkleStyle[] = [...Array(20)].map(() => ({
         left: `${Math.random() * 100}%`,
         top: `${Math.random() * 100}%`,
-        animationDelay: `${Math.random() * 3}s`,
-        animationDuration: `${2 + Math.random() * 2}s`,
+        animationDelay: `${Math.random() * 2}s`,
+        animationDuration: `${1 + Math.random() * 1}s`,
       }));
       setSparkles(newSparkles);
     };
@@ -154,6 +154,7 @@ export default function Hero() {
             </a>
           </div>
         </div>
+        <div className="absolute bottom-88 left-1/2 -translate-x-1/2 h-68 w-68 bg-gradient-disco rounded-full blur-3xl opacity-20 transition duration-500 animate-pulse -z-10 delay-500"></div>
       </div>
     </section>
   );

@@ -659,7 +659,8 @@
 
 /* Animação para fade-in das estrelas */
 .animate-fade-in {
-  animation: fadeInSparkle 0.8s ease-out forwards;
+  animation: fadeInSparkle 0.8s ease-out forwards,
+    sparkle 1.5s ease-in-out infinite;
 }
 
 @keyframes fadeInSparkle {
@@ -670,5 +671,19 @@
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.9);
+    filter: brightness(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+    filter: brightness(1.5);
   }
 }
