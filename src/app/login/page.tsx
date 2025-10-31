@@ -1,9 +1,16 @@
-import Link from "next/link";
 import { LoginForm } from "./_components/login-form";
+import Image from "next/image";
 
 export default function Login() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-4">
+      <Image
+        src="/img/logo-branco.svg"
+        alt="Banda Flashback"
+        width={180}
+        height={140}
+        className="mb-8"
+      />
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
           <h1 className="text-3xl font-bold">Login</h1>
@@ -13,18 +20,6 @@ export default function Login() {
         </div>
 
         <LoginForm />
-
-        <div className="text-center text-sm pt-8">
-          <p>
-            Não tem uma conta?{" "}
-            <Link
-              href="/signup"
-              className="font-medium text-primary hover:underline"
-            >
-              Cadastre-se
-            </Link>
-          </p>
-        </div>
       </div>
     </div>
   );

@@ -14,19 +14,26 @@ export async function POST(request: Request) {
       );
     }
 
-    const { data: newUser, error } = await auth.api.signUpEmail({
-      body: {
-        email,
-        password,
-        name,
-      },
-    });
-
-    if (error) {
-      return NextResponse.json({ message: error.message }, { status: 500 });
+    try {
+      await auth.api.signUpEmail({
+        body: {
+          email,
+          password,
+          name,
+        },
+      });
+    } catch (authError) {
+      console.error("Auth error:", authError);
+      return NextResponse.json(
+        { message: "Erro ao criar usuário. Email pode já estar em uso." },
+        { status: 400 }
+      );
     }
 
-    return NextResponse.json({ message: "Usuário criado com sucesso!" }, { status: 201 });
+    return NextResponse.json(
+      { message: "Usuário criado com sucesso!" },
+      { status: 201 }
+    );
   } catch (error) {
     console.error("Error creating user:", error);
     return NextResponse.json(

@@ -108,9 +108,9 @@ export function LoginForm() {
                     disabled={isLoading}
                   >
                     {showPassword ? (
-                      <Eye className="h-4 w-4 text-muted-foreground" />
-                    ) : (
                       <EyeOff className="h-4 w-4 text-muted-foreground" />
+                    ) : (
+                      <Eye className="h-4 w-4 text-muted-foreground" />
                     )}
                     <span className="sr-only">
                       {showPassword ? "Esconder senha" : "Mostrar senha"}
@@ -125,7 +125,7 @@ export function LoginForm() {
 
         <Button
           type="submit"
-          className="w-full"
+          className="w-full admin-button-primary"
           disabled={form.formState.isSubmitting}
         >
           {form.formState.isSubmitting ? (
