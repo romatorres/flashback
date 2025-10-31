@@ -17,6 +17,12 @@ export default function Dashboard() {
             <p className="admin-subtitle">Gerencie a sua agenda</p>
           </Link>
         </div>
+        <div className="admin-card p-6">
+          <Link href="/admin/users">
+            <h3 className="admin-title text-lg font-semibold mb-2">Usuários</h3>
+            <p className="admin-subtitle">Gerencie os usuários</p>
+          </Link>
+        </div>
       </div>
     </div>
   );
