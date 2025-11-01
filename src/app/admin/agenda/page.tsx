@@ -72,9 +72,9 @@ export default function AgendaPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 sm:p-4 p-1">
       {/* Header */}
-      <div className="p-4">
+      <div>
         <div className="flex md:flex-row flex-col justify-between md:items-center items-start">
           <div>
             <h1 className="admin-title text-3xl font-bold mb-2">
@@ -85,7 +85,7 @@ export default function AgendaPage() {
             </p>
           </div>
           <Button
-            className="admin-button-primary"
+            className="admin-button-primary sm:w-auto w-full"
             onClick={() => handleOpenDialog()}
           >
             <Plus className="h-4 w-4 mr-2" />

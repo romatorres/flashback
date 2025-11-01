@@ -89,9 +89,9 @@ export default function UsersPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 sm:p-4 p-1">
       {/* Header */}
-      <div className="p-4">
+      <div>
         <div className="flex md:flex-row flex-col justify-between md:items-center items-start">
           <div>
             <h1 className="admin-title text-3xl font-bold mb-2">Usuários</h1>
@@ -100,7 +100,7 @@ export default function UsersPage() {
             </p>
           </div>
           <Button
-            className="admin-button-primary"
+            className="admin-button-primary sm:w-auto w-full"
             onClick={() => handleOpenDialog()}
           >
             <Plus className="h-4 w-4 mr-2" />
@@ -111,7 +111,7 @@ export default function UsersPage() {
 
       <div className="relative flex flex-col w-full h-full shadow-md bg-clip-border border rounded-xl overflow-hidden">
         {isLoading ? (
-          <div className="flex items-center justify-center p-4">
+          <div className="flex items-center justify-center">
             <Loader2 className="h-8 w-8 animate-spin text-primary mr-3" />
             <span className="text-muted-foreground">
               Carregando usuários...

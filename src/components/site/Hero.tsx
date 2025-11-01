@@ -102,7 +102,8 @@ export default function Hero() {
             Dance
           </p>
           <p className="font-outfit-sans text-xl md:text-2xl mb-6 text-foreground tracking-wide max-w-3xl mx-auto">
-            Reviva a magia dos anos 60 e 70 com clássicos que marcaram gerações!
+            Reviva a magia dos anos 60, 70 e 80 com clássicos que marcaram
+            gerações!
           </p>
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center md:mb-10 mb-0">

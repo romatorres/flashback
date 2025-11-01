@@ -23,7 +23,7 @@ import {
 import { ButtonSignOut } from "./button-signout";
 
 const navigation = [
-  { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
+  { name: "Home", href: "/admin", icon: LayoutDashboard },
   { name: "Agenda", href: "/admin/agenda", icon: Calendar },
   { name: "Usuários", href: "/admin/users", icon: UserCircle },
 ];

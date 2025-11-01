@@ -3,8 +3,10 @@ import Link from "next/link";
 export default function Dashboard() {
   return (
     <div className="space-y-6">
-      <div className="p-6">
-        <h1 className="admin-title text-3xl font-bold mb-2">Dashboard</h1>
+      <div className="sm:p-4 p-2">
+        <h1 className="admin-title text-3xl font-bold mb-2">
+          Painel de Controle
+        </h1>
         <p className="admin-subtitle text-lg">
           Bem-vindo ao painel de controle
         </p>
