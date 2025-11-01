@@ -79,7 +79,7 @@ export function UserForm({
   onSuccess,
 }: {
   user?: UserType | null;
-  onSuccess?: () => void;
+  onSuccess?: (shouldReload: boolean) => void;
 }) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -177,12 +177,27 @@ export function UserForm({
         user ? "Usuário atualizado com sucesso!" : "Usuário criado com sucesso!"
       );
       if (onSuccess) {
-        onSuccess();
+        onSuccess(true);
       }
     } catch (error: unknown) {
       toast.error(error instanceof Error ? error.message : "Erro desconhecido");
     }
   }
+
+  const {
+    formState: { isSubmitting },
+  } = form;
+
+  const handleCancel = () => {
+    setShowPassword(false);
+    setShowConfirmPassword(false);
+    setShowCurrentPassword(false);
+    setShowNewPassword(false);
+    setShowConfirmNewPassword(false);
+    setIsChangingPassword(false);
+    form.reset();
+    onSuccess?.(false);
+  };
 
   return (
     <Form {...form}>
@@ -451,23 +466,33 @@ export function UserForm({
             </div>
           </>
         )}
-
-        <Button
-          type="submit"
-          className="admin-button-primary w-full"
-          disabled={form.formState.isSubmitting}
-        >
-          {form.formState.isSubmitting ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              {user ? "Salvando..." : "Cadastrando..."}
-            </>
-          ) : user ? (
-            "Salvar Alterações"
-          ) : (
-            "Cadastrar"
-          )}
-        </Button>
+        <div className="flex justify-end gap-3 pt-4 border-t border-border">
+          <Button
+            type="button"
+            variant="secondary"
+            className="admin-button-secondary"
+            onClick={handleCancel}
+            disabled={isSubmitting}
+          >
+            Cancelar
+          </Button>
+          <Button
+            type="submit"
+            className="admin-button-primary"
+            disabled={form.formState.isSubmitting}
+          >
+            {form.formState.isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                {user ? "Salvando..." : "Cadastrando..."}
+              </>
+            ) : user ? (
+              "Salvar Alterações"
+            ) : (
+              "Cadastrar Usuário"
+            )}
+          </Button>
+        </div>
       </form>
     </Form>
   );

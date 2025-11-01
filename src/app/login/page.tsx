@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Login() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-4">
+    <div className="flex min-h-screen flex-col items-center justify-center px-4">
       <Image
         src="/img/logo-branco.svg"
         alt="Banda Flashback"

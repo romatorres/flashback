@@ -66,10 +66,12 @@ export default function UsersPage() {
     setIsDialogOpen(true);
   };
 
-  const handleCloseDialog = () => {
+  const handleCloseDialog = (shouldReload = false) => {
     setSelectedUser(null);
     setIsDialogOpen(false);
-    loadUsers();
+    if (shouldReload) {
+      loadUsers();
+    }
   };
 
   const handleDelete = async (id: string) => {
@@ -172,7 +174,15 @@ export default function UsersPage() {
         )}
       </div>
       {/* Dialog for Create/Edit */}
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      <Dialog
+        open={isDialogOpen}
+        onOpenChange={(open) => {
+          if (!open) {
+            setSelectedUser(null);
+          }
+          setIsDialogOpen(open);
+        }}
+      >
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle className="admin-title text-xl">

@@ -62,7 +62,7 @@ export default function Contact() {
                 : "opacity-0 translate-x-10"
             }`}
           >
-            <div className="w-full pb-20">
+            <div className="w-full sm:mb-20 mb-10 ">
               <div className="text-start p-6 rounded-2xl bg-gradient-to-br from-accent/10 to-transparent border border-accent/20 hover:border-accent/40 transition-all duration-300">
                 <span className="text-5xl text-disco-orange">
                   <TfiComments />
@@ -99,35 +99,36 @@ export default function Contact() {
                       75 98122-6159
                     </a>
                   </div>
-                  <div className="md:hidden flex justify-center mt-6 gap-6">
-                    <a
-                      href="https://www.facebook.com/bandaflashbackfsa/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"
-                    >
-                      <BiLogoFacebookCircle size={20} />
-                    </a>
-
-                    <a
-                      href="https://www.instagram.com/toflashbackoficial/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"
-                    >
-                      <BiLogoInstagramAlt size={20} />
-                    </a>
-
-                    <a
-                      href="https://www.youtube.com/@BandaFlashback"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"
-                    >
-                      <BiLogoYoutube size={20} />
-                    </a>
-                  </div>
                 </div>
+              </div>
+              {/* ICONS SOCIAL MOBILE */}
+              <div className="md:hidden flex justify-center mt-12 gap-10">
+                <a
+                  href="https://www.facebook.com/bandaflashbackfsa/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"
+                >
+                  <BiLogoFacebookCircle size={28} />
+                </a>
+
+                <a
+                  href="https://www.instagram.com/toflashbackoficial/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"
+                >
+                  <BiLogoInstagramAlt size={28} />
+                </a>
+
+                <a
+                  href="https://www.youtube.com/@BandaFlashback"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"
+                >
+                  <BiLogoYoutube size={28} />
+                </a>
               </div>
             </div>
           </div>

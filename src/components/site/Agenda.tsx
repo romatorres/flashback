@@ -113,17 +113,17 @@ export default function Agenda() {
                     </h3>
 
                     <div className="space-y-2 mb-6">
-                      <div className="flex items-center gap-2 text-muted-foreground">
-                        <MapPin className="w-4 h-4" />
+                      <div className="flex items-start gap-2 text-muted-foreground">
+                        <MapPin className="w-4 h-4 flex-shrink-0 mt-1" />
                         <p className="font-body">{agenda.local}</p>
                       </div>
-                      <div className="flex items-center gap-2 text-muted-foreground">
-                        <Clock className="w-4 h-4" />
+                      <div className="flex items-start gap-2 text-muted-foreground">
+                        <Clock className="w-4 h-4 flex-shrink-0 mt-1" />
                         <p className="font-body">{agenda.horario}</p>
                       </div>
                       {agenda.detalhes && (
-                        <div className="flex items-center gap-2 text-muted-foreground">
-                          <ClipboardCheck className="w-4 h-4" />
+                        <div className="flex items-start gap-2 text-muted-foreground">
+                          <ClipboardCheck className="w-4 h-4 flex-shrink-0 mt-1" />
                           <p className="font-body">{agenda.detalhes}</p>
                         </div>
                       )}

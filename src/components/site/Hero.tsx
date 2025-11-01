@@ -155,7 +155,7 @@ export default function Hero() {
           </div>
         </div>
         {/*luz logo*/}
-        <div className="absolute bottom-100 left-1/2 -translate-x-1/2 h-48 w-48 bg-gradient-disco rounded-full blur-3xl opacity-10 transition duration-700 animate-pulse -z-10 delay-700"></div>
+        <div className="absolute sm:bottom-[420px] bottom-[470px] left-1/2 -translate-x-1/2 sm:h-52 sm:w-52 h-48 w-48 bg-gradient-disco rounded-full blur-3xl opacity-5 transition duration-700 animate-pulse -z-10 delay-700"></div>
       </div>
     </section>
   );
