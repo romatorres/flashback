@@ -152,7 +152,7 @@ export default function Header() {
       {/* Fixed social icons on desktop - vertical on right side */}
       <div className="hidden md:flex fixed right-4 top-1/2 -translate-y-1/2 z-50 flex-col gap-8">
         <a
-          href="https://facebook.com"
+          href="https://www.facebook.com/bandaflashbackfsa/"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"
@@ -161,7 +161,7 @@ export default function Header() {
         </a>
 
         <a
-          href="https://instagram.com"
+          href="https://www.instagram.com/toflashbackoficial/"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"
@@ -170,7 +170,7 @@ export default function Header() {
         </a>
 
         <a
-          href="https://youtube.com"
+          href="https://www.youtube.com/@BandaFlashback"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"

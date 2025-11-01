@@ -127,7 +127,7 @@ export default function Hero() {
           {/* Social icons on mobile */}
           <div className="md:hidden flex items-center justify-center gap-6 my-8">
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/bandaflashbackfsa/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-colors hover:translate-y-[-2px]"
@@ -136,7 +136,7 @@ export default function Hero() {
             </a>
 
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/toflashbackoficial/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-colors hover:translate-y-[-2px]"
@@ -145,7 +145,7 @@ export default function Hero() {
             </a>
 
             <a
-              href="https://youtube.com"
+              href="https://www.youtube.com/@BandaFlashback"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-colors hover:translate-y-[-2px]"
@@ -154,7 +154,8 @@ export default function Hero() {
             </a>
           </div>
         </div>
-        <div className="absolute bottom-88 left-1/2 -translate-x-1/2 h-68 w-68 bg-gradient-disco rounded-full blur-3xl opacity-20 transition duration-500 animate-pulse -z-10 delay-500"></div>
+        {/*luz logo*/}
+        <div className="absolute bottom-100 left-1/2 -translate-x-1/2 h-48 w-48 bg-gradient-disco rounded-full blur-3xl opacity-10 transition duration-700 animate-pulse -z-10 delay-700"></div>
       </div>
     </section>
   );
