@@ -118,59 +118,61 @@ export default function UsersPage() {
             </span>
           </div>
         ) : (
-          <table className="w-full text-left table-auto min-w-max">
-            <thead className="bg-background">
-              <tr>
-                <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                  <p className="block font-sans text-sm antialiased font-semibold leading-none text-blue-gray-900 opacity-70">
-                    Nome
-                  </p>
-                </th>
-                <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                  <p className="block font-sans text-sm antialiased font-semibold leading-none text-blue-gray-900 opacity-70">
-                    E-mail
-                  </p>
-                </th>
-                <th className="p-4 border-b">
-                  <p className="block font-sans text-sm antialiased font-semibold leading-none text-blue-gray-900 opacity-70">
-                    Ações
-                  </p>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((user) => (
-                <tr key={user.id}>
-                  <td className="p-4 border-b border-blue-gray-50">
-                    <p className="block text-sm antialiased font-normal leading-normal">
-                      {user.name}
+          <div className="overflow-x-auto">
+            <table className="w-full text-left table-auto">
+              <thead className="bg-background">
+                <tr>
+                  <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                    <p className="block font-sans text-sm antialiased font-semibold leading-none text-blue-gray-900 opacity-70">
+                      Nome
                     </p>
-                  </td>
-                  <td className="p-4 border-b border-blue-gray-50">
-                    <p className="block text-sm antialiased font-normal leading-normal">
-                      {user.email}
+                  </th>
+                  <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                    <p className="block font-sans text-sm antialiased font-semibold leading-none text-blue-gray-900 opacity-70">
+                      E-mail
                     </p>
-                  </td>
-                  <td className="p-4 border-b border-blue-gray-50">
-                    <div className="flex gap-6">
-                      <button
-                        className="text-sm text-foreground hover:text-foreground/70 antialiased font-normal leading-normal cursor-pointer"
-                        onClick={() => handleOpenDialog(user)}
-                      >
-                        Editar
-                      </button>
-                      <button
-                        className="text-sm text-destructive hover:text-destructive/70 antialiased font-normal leading-normal cursor-pointer"
-                        onClick={() => setDeleteId(user.id)}
-                      >
-                        Excluir
-                      </button>
-                    </div>
-                  </td>
+                  </th>
+                  <th className="p-4 border-b">
+                    <p className="block font-sans text-sm antialiased font-semibold leading-none text-blue-gray-900 opacity-70">
+                      Ações
+                    </p>
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {users.map((user) => (
+                  <tr key={user.id}>
+                    <td className="p-4 border-b border-blue-gray-50">
+                      <p className="block text-sm antialiased font-normal leading-normal">
+                        {user.name}
+                      </p>
+                    </td>
+                    <td className="p-4 border-b border-blue-gray-50">
+                      <p className="block text-sm antialiased font-normal leading-normal">
+                        {user.email}
+                      </p>
+                    </td>
+                    <td className="p-4 border-b border-blue-gray-50">
+                      <div className="flex gap-6">
+                        <button
+                          className="text-sm text-foreground hover:text-foreground/70 antialiased font-normal leading-normal cursor-pointer"
+                          onClick={() => handleOpenDialog(user)}
+                        >
+                          Editar
+                        </button>
+                        <button
+                          className="text-sm text-destructive hover:text-destructive/70 antialiased font-normal leading-normal cursor-pointer"
+                          onClick={() => setDeleteId(user.id)}
+                        >
+                          Excluir
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
       {/* Dialog for Create/Edit */}

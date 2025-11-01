@@ -52,7 +52,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
       {/* Mobile sidebar */}
       <div
         className={cn(
-          "fixed inset-y-0 left-0 z-50 w-64 admin-sidebar shadow-lg transform transition-transform duration-300 ease-in-out md:hidden",
+          "fixed inset-y-0 left-0 z-50 flex w-64 flex-col admin-sidebar shadow-lg transform transition-transform duration-300 ease-in-out md:hidden",
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
@@ -145,7 +145,7 @@ function SidebarContent({
   user: { name: string; email: string };
 }) {
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-1 flex-col overflow-y-hidden">
       <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
         {navigation.map((item) => {
           const isActive = pathname === item.href;
