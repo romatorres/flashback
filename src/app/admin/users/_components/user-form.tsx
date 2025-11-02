@@ -74,12 +74,17 @@ const userFormSchema = z
 
 type UserFormValues = z.infer<typeof userFormSchema>;
 
+export type UserFormSuccessData = {
+  user: UserType;
+  operation: "create" | "update";
+};
+
 export function UserForm({
   user,
   onSuccess,
 }: {
   user?: UserType | null;
-  onSuccess?: (shouldReload: boolean) => void;
+  onSuccess?: (data?: UserFormSuccessData) => void;
 }) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -115,7 +120,7 @@ export function UserForm({
     }
   }, [user, form]);
 
-  async function createUser(formData: UserFormValues) {
+  async function createUser(formData: UserFormValues): Promise<UserType> {
     const response = await fetch("/api/users", {
       method: "POST",
       headers: {
@@ -132,9 +137,10 @@ export function UserForm({
       const errorData = await response.json();
       throw new Error(errorData.message || "Falha ao criar usuário.");
     }
+    return response.json();
   }
 
-  async function updateUser(formData: UserFormValues) {
+  async function updateUser(formData: UserFormValues): Promise<UserType> {
     // Atualizar dados básicos (nome e email)
     const response = await fetch(`/api/users/${user!.id}`, {
       method: "PUT",
@@ -152,6 +158,8 @@ export function UserForm({
       throw new Error(errorData.message || "Falha ao atualizar usuário.");
     }
 
+    const updatedUser = await response.json();
+
     // Se há nova senha, alterar senha usando Better Auth
     if (formData.newPassword && formData.currentPassword) {
       const { error } = await authClient.changePassword({
@@ -163,21 +171,23 @@ export function UserForm({
         throw new Error(error.message || "Falha ao alterar senha.");
       }
     }
+    return updatedUser;
   }
 
   async function onSubmit(formData: UserFormValues) {
     try {
       if (user) {
-        await updateUser(formData);
+        const updatedUser = await updateUser(formData);
+        toast.success("Usuário atualizado com sucesso!");
+        if (onSuccess) {
+          onSuccess({ user: updatedUser, operation: "update" });
+        }
       } else {
-        await createUser(formData);
-      }
-
-      toast.success(
-        user ? "Usuário atualizado com sucesso!" : "Usuário criado com sucesso!"
-      );
-      if (onSuccess) {
-        onSuccess(true);
+        const newUser = await createUser(formData);
+        toast.success("Usuário criado com sucesso!");
+        if (onSuccess) {
+          onSuccess({ user: newUser, operation: "create" });
+        }
       }
     } catch (error: unknown) {
       toast.error(error instanceof Error ? error.message : "Erro desconhecido");
@@ -196,7 +206,7 @@ export function UserForm({
     setShowConfirmNewPassword(false);
     setIsChangingPassword(false);
     form.reset();
-    onSuccess?.(false);
+    onSuccess?.();
   };
 
   return (

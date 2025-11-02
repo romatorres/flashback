@@ -7,9 +7,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Loader2, Plus, Trash2 } from "lucide-react";
+import { Edit, Loader2, Mail, Plus, Trash2, User } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
-import { UserForm } from "@/app/admin/users/_components/user-form";
+import {
+  UserForm,
+  UserFormSuccessData,
+} from "@/app/admin/users/_components/user-form";
 import { toast } from "sonner";
 
 export interface UserType {
@@ -66,11 +69,18 @@ export default function UsersPage() {
     setIsDialogOpen(true);
   };
 
-  const handleCloseDialog = (shouldReload = false) => {
-    setSelectedUser(null);
+  const handleCloseDialog = (data?: UserFormSuccessData) => {
     setIsDialogOpen(false);
-    if (shouldReload) {
-      loadUsers();
+    setSelectedUser(null);
+
+    if (data) {
+      if (data.operation === "create") {
+        setUsers((prevUsers) => [data.user, ...prevUsers]);
+      } else if (data.operation === "update") {
+        setUsers((prevUsers) =>
+          prevUsers.map((user) => (user.id === data.user.id ? data.user : user))
+        );
+      }
     }
   };
 
@@ -109,7 +119,7 @@ export default function UsersPage() {
         </div>
       </div>
 
-      <div className="relative flex flex-col w-full h-full shadow-md bg-clip-border border rounded-xl overflow-hidden">
+      <div className="relative flex flex-col w-full h-full overflow-hidden py-2">
         {isLoading ? (
           <div className="flex items-center justify-center">
             <Loader2 className="h-8 w-8 animate-spin text-primary mr-3" />
@@ -118,60 +128,40 @@ export default function UsersPage() {
             </span>
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left table-auto">
-              <thead className="bg-background">
-                <tr>
-                  <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                    <p className="block font-sans text-sm antialiased font-semibold leading-none text-blue-gray-900 opacity-70">
-                      Nome
-                    </p>
-                  </th>
-                  <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                    <p className="block font-sans text-sm antialiased font-semibold leading-none text-blue-gray-900 opacity-70">
-                      E-mail
-                    </p>
-                  </th>
-                  <th className="p-4 border-b">
-                    <p className="block font-sans text-sm antialiased font-semibold leading-none text-blue-gray-900 opacity-70">
-                      Ações
-                    </p>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.map((user) => (
-                  <tr key={user.id}>
-                    <td className="p-4 border-b border-blue-gray-50">
-                      <p className="block text-sm antialiased font-normal leading-normal">
-                        {user.name}
-                      </p>
-                    </td>
-                    <td className="p-4 border-b border-blue-gray-50">
-                      <p className="block text-sm antialiased font-normal leading-normal">
-                        {user.email}
-                      </p>
-                    </td>
-                    <td className="p-4 border-b border-blue-gray-50">
-                      <div className="flex gap-6">
-                        <button
-                          className="text-sm text-foreground hover:text-foreground/70 antialiased font-normal leading-normal cursor-pointer"
-                          onClick={() => handleOpenDialog(user)}
-                        >
-                          Editar
-                        </button>
-                        <button
-                          className="text-sm text-destructive hover:text-destructive/70 antialiased font-normal leading-normal cursor-pointer"
-                          onClick={() => setDeleteId(user.id)}
-                        >
-                          Excluir
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="w-full text-left flex flex-col gap-4">
+            {users.map((user) => (
+              <div key={user.id} className="p-4 admin-card">
+                <div className="flex flex-col gap-2">
+                  <p className="flex gap-2 justify-start">
+                    <User className="text-disco-purple" />
+                    <span className="text-xl">{user.name}</span>
+                  </p>
+                  <p className="flex gap-2 items-center antialiased leading-normal">
+                    <Mail className="w-4 h-4 text-disco-orange" />
+                    <span className="text-sm text-muted-foreground">
+                      {user.email}
+                    </span>
+                  </p>
+                </div>
+
+                <div className="flex gap-5 justify-end mt-4">
+                  <button
+                    className="flex text-sm text-foreground hover:text-foreground/70 antialiased font-normal leading-normal cursor-pointer"
+                    onClick={() => handleOpenDialog(user)}
+                  >
+                    <Edit className="h-4 w-4 mr-1" />
+                    Editar
+                  </button>
+                  <button
+                    className="flex text-sm text-destructive hover:text-destructive/70 antialiased font-normal leading-normal cursor-pointer"
+                    onClick={() => setDeleteId(user.id)}
+                  >
+                    <Trash2 className="h-4 w-4 mr-1" />
+                    Excluir
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         )}
       </div>

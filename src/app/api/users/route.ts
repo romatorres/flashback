@@ -30,10 +30,19 @@ export async function POST(request: Request) {
       );
     }
 
-    return NextResponse.json(
-      { message: "Usuário criado com sucesso!" },
-      { status: 201 }
-    );
+    const newUser = await prisma.user.findUnique({
+      where: { email },
+      select: { id: true, name: true, email: true },
+    });
+
+    if (!newUser) {
+      return NextResponse.json(
+        { message: "Usuário criado, mas não encontrado." },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json(newUser, { status: 201 });
   } catch (error) {
     console.error("Error creating user:", error);
     return NextResponse.json(

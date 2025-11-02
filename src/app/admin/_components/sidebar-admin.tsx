@@ -67,7 +67,11 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
             <X className="h-5 w-5" />
           </Button>
         </div>
-        <SidebarContent pathname={pathname} user={user} />
+        <SidebarContent
+          pathname={pathname}
+          user={user}
+          onNavigate={() => setSidebarOpen(false)}
+        />
       </div>
 
       {/* Desktop sidebar */}
@@ -85,7 +89,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
         <Button
           variant="ghost"
           size="sm"
-          className="admin-button-primary fixed top-4 left-4 z-40"
+          className="admin-button-primary fixed top-3 left-4 z-40"
           onClick={() => setSidebarOpen(true)}
         >
           <Menu className="h-5 w-5" />
@@ -140,9 +144,11 @@ function UserMenu({ user }: { user: { name: string; email: string } }) {
 function SidebarContent({
   pathname,
   user,
+  onNavigate,
 }: {
   pathname: string;
   user: { name: string; email: string };
+  onNavigate?: () => void;
 }) {
   return (
     <div className="flex flex-1 flex-col overflow-y-hidden">
@@ -153,6 +159,7 @@ function SidebarContent({
             <Link
               key={item.name}
               href={item.href}
+              onClick={onNavigate}
               className={cn(
                 "admin-nav-item group flex items-center px-3 py-3 text-sm font-medium transition-all duration-300",
                 isActive && "active"
