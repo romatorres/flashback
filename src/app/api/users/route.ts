@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-import { auth } from "@/lib/auth";
+import { createUser, listUsers } from "@/actions/users";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, password } = body;
+    const { name, email, password, role } = body;
 
     if (!name || !email || !password) {
       return NextResponse.json(
@@ -14,60 +13,30 @@ export async function POST(request: Request) {
       );
     }
 
-    try {
-      await auth.api.signUpEmail({
-        body: {
-          email,
-          password,
-          name,
-        },
-      });
-    } catch (authError) {
-      console.error("Auth error:", authError);
-      return NextResponse.json(
-        { message: "Erro ao criar usuário. Email pode já estar em uso." },
-        { status: 400 }
-      );
-    }
-
-    const newUser = await prisma.user.findUnique({
-      where: { email },
-      select: { id: true, name: true, email: true },
-    });
-
-    if (!newUser) {
-      return NextResponse.json(
-        { message: "Usuário criado, mas não encontrado." },
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json(newUser, { status: 201 });
-  } catch (error) {
+    const user = await createUser({ name, email, password, role });
+    return NextResponse.json(user, { status: 201 });
+  } catch (error: unknown) {
     console.error("Error creating user:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Erro ao criar usuário.";
     return NextResponse.json(
-      { message: "Erro ao criar um usuário." },
-      { status: 500 }
+      { message: errorMessage },
+      { status: errorMessage.includes("Apenas administradores") ? 403 : 500 }
     );
   }
 }
 
 export async function GET() {
   try {
-    const users = await prisma.user.findMany({
-      select: {
-        id: true,
-        name: true,
-        email: true,
-      },
-    });
-
+    const users = await listUsers();
     return NextResponse.json(users);
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error fetching users:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Erro ao buscar usuários.";
     return NextResponse.json(
-      { message: "Erro ao buscar usuários." },
-      { status: 500 }
+      { message: errorMessage },
+      { status: errorMessage.includes("Apenas administradores") ? 403 : 500 }
     );
   }
 }

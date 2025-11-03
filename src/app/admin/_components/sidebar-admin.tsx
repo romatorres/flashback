@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -9,8 +9,8 @@ import {
   Menu,
   X,
   User,
+  Users,
   Calendar,
-  UserCircle,
   LogOut,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -21,17 +21,39 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ButtonSignOut } from "./button-signout";
+import { canManageUsers, canManageContent } from "@/lib/auth-utils";
+import { type UserRole } from "@/lib/types";
 
-const navigation = [
-  { name: "Home", href: "/admin", icon: LayoutDashboard },
-  { name: "Agenda", href: "/admin/agenda", icon: Calendar },
-  { name: "Usuários", href: "/admin/users", icon: UserCircle },
-];
+const getNavigation = (userRole: UserRole) => {
+  const baseNavigation = [
+    { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
+  ];
+
+  if (canManageContent(userRole)) {
+    baseNavigation.push({
+      name: "Agenda",
+      href: "/admin/agenda",
+      icon: Calendar,
+    });
+  }
+
+  if (canManageUsers(userRole)) {
+    baseNavigation.push({
+      name: "Usuários",
+      href: "/admin/users",
+      icon: Users,
+    });
+  }
+
+  return baseNavigation;
+};
 
 interface AdminSidebarProps {
   user: {
+    id: string;
     name: string;
     email: string;
+    role: UserRole;
   };
 }
 
@@ -147,33 +169,41 @@ function SidebarContent({
   onNavigate,
 }: {
   pathname: string;
-  user: { name: string; email: string };
+  user: { name: string; email: string; role: UserRole };
   onNavigate?: () => void;
 }) {
+  const navigation = getNavigation(user.role);
+
   return (
     <div className="flex flex-1 flex-col overflow-y-hidden">
       <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
-        {navigation.map((item) => {
-          const isActive = pathname === item.href;
-          return (
-            <Link
-              key={item.name}
-              href={item.href}
-              onClick={onNavigate}
-              className={cn(
-                "admin-nav-item group flex items-center px-3 py-3 text-sm font-medium transition-all duration-300",
-                isActive && "active"
-              )}
-            >
-              <item.icon
+        {navigation.map(
+          (item: {
+            name: string;
+            href: string;
+            icon: React.ComponentType<{ className?: string }>;
+          }) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={onNavigate}
                 className={cn(
-                  "admin-nav-icon mr-3 h-5 w-5 flex-shrink-0 transition-all duration-300"
+                  "admin-nav-item group flex items-center px-3 py-3 text-sm font-medium transition-all duration-300",
+                  isActive && "active"
                 )}
-              />
-              {item.name}
-            </Link>
-          );
-        })}
+              >
+                <item.icon
+                  className={cn(
+                    "admin-nav-icon mr-3 h-5 w-5 flex-shrink-0 transition-all duration-300"
+                  )}
+                />
+                {item.name}
+              </Link>
+            );
+          }
+        )}
       </nav>
 
       {/* User menu at bottom */}

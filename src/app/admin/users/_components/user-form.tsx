@@ -1,7 +1,7 @@
 "use client";
 
 import { toast } from "sonner";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -9,6 +9,13 @@ import { Eye, EyeOff, Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Form,
   FormControl,
@@ -19,14 +26,34 @@ import {
 } from "@/components/ui/form";
 import { UserType } from "@/app/admin/users/page";
 import { authClient } from "@/lib/auth-client";
+import { type UserRole, userRoles } from "@/lib/types";
 import { useUserStore } from "@/stores/usersStore";
+
+// Objeto para mapear roles a seus nomes e estilos
+const roleDisplayConfig: Record<
+  UserRole,
+  { label: string; className: string }
+> = {
+  ADMIN: { label: "Admin - Acesso total", className: "admin-badge-success" },
+  EDITOR: {
+    label: "Editor - Gerencia conteúdo",
+    className: "bg-yellow-100 text-yellow-800",
+  },
+  USER: {
+    label: "Usuário - Acesso básico",
+    className: "admin-badge-primary",
+  },
+};
 
 const userFormSchema = z
   .object({
     name: z
       .string()
       .min(3, { message: "O nome deve ter pelo menos 3 caracteres" }),
-    email: z.string().email({ message: "Email inválido" }),
+    email: z.string().email("Email inválido"),
+    role: z.enum(userRoles, {
+      message: "Selecione um role válido",
+    }),
     password: z
       .string()
       .min(8, { message: "A senha deve ter pelo menos 8 caracteres" })
@@ -100,8 +127,9 @@ export function UserForm({
   const form = useForm<UserFormValues>({
     resolver: zodResolver(userFormSchema),
     defaultValues: {
-      name: "",
-      email: "",
+      name: user?.name || "",
+      email: user?.email || "",
+      role: (user?.role as UserRole) || "USER",
       password: "",
       confirmPassword: "",
       currentPassword: "",
@@ -109,20 +137,6 @@ export function UserForm({
       confirmNewPassword: "",
     },
   });
-
-  useEffect(() => {
-    if (user) {
-      form.reset({
-        name: user.name,
-        email: user.email,
-        password: "",
-        confirmPassword: "",
-        currentPassword: "",
-        newPassword: "",
-        confirmNewPassword: "",
-      });
-    }
-  }, [user, form]);
 
   async function handlePasswordChange(formData: UserFormValues) {
     if (formData.newPassword && formData.currentPassword) {
@@ -144,6 +158,7 @@ export function UserForm({
         await updateUserStore(user.id, {
           name: formData.name,
           email: formData.email,
+          role: formData.role,
         });
 
         // Se há nova senha, alterar senha usando Better Auth
@@ -152,7 +167,12 @@ export function UserForm({
         toast.success("Usuário atualizado com sucesso!");
         if (onSuccess) {
           onSuccess({
-            user: { ...user, name: formData.name, email: formData.email },
+            user: {
+              ...user,
+              name: formData.name,
+              email: formData.email,
+              role: formData.role,
+            },
             operation: "update",
           });
         }
@@ -162,12 +182,18 @@ export function UserForm({
           name: formData.name,
           email: formData.email,
           password: formData.password!,
+          role: formData.role,
         });
 
         toast.success("Usuário criado com sucesso!");
         if (onSuccess) {
           onSuccess({
-            user: { id: "", name: formData.name, email: formData.email },
+            user: {
+              id: "",
+              name: formData.name,
+              email: formData.email,
+              role: formData.role,
+            },
             operation: "create",
           });
         }
@@ -229,6 +255,31 @@ export function UserForm({
                   disabled={form.formState.isSubmitting}
                 />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="role"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="admin-title">Função</FormLabel>
+              <Select onValueChange={field.onChange} value={field.value}>
+                <FormControl>
+                  <SelectTrigger className="admin-input">
+                    <SelectValue placeholder="Selecione uma função" />
+                  </SelectTrigger>
+                </FormControl>{" "}
+                <SelectContent className="admin-card">
+                  {userRoles.map((role) => (
+                    <SelectItem key={role} value={role}>
+                      {roleDisplayConfig[role].label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}

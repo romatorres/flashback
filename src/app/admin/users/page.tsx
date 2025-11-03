@@ -9,20 +9,20 @@ import {
 } from "@/components/ui/dialog";
 import { Edit, Loader2, Mail, Plus, Trash2, User } from "lucide-react";
 import { useState, useEffect } from "react";
-import {
-  UserForm,
-  UserFormSuccessData,
-} from "@/app/admin/users/_components/user-form";
+import { UserForm } from "@/app/admin/users/_components/user-form";
 import { toast } from "sonner";
 import { useUserStore } from "@/stores/usersStore";
+import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 
 export interface UserType {
   id: string;
   name: string;
   email: string;
+  role: string;
 }
 
 export default function UsersPage() {
+  // Esta página é apenas para ADMIN - será protegida pelo ProtectedRoute
   const {
     users,
     loading: isLoading,
@@ -53,7 +53,7 @@ export default function UsersPage() {
     setIsDialogOpen(true);
   };
 
-  const handleCloseDialog = (data?: UserFormSuccessData) => {
+  const handleCloseDialog = () => {
     setIsDialogOpen(false);
     setSelectedUser(null);
     setStoreSelectedUser(null);
@@ -74,135 +74,162 @@ export default function UsersPage() {
   };
 
   return (
-    <div className="space-y-6 sm:p-4 p-1">
-      {/* Header */}
-      <div>
-        <div className="flex md:flex-row flex-col justify-between md:items-center items-start">
-          <div>
-            <h1 className="admin-title text-3xl font-bold mb-2">Usuários</h1>
-            <p className="admin-subtitle text-lg mb-4">
-              Gerencie os usuários do sistema
-            </p>
-          </div>
-          <Button
-            className="admin-button-primary sm:w-auto w-full"
-            onClick={() => handleOpenDialog()}
-          >
-            <Plus className="h-4 w-4 mr-2" />
-            Novo Usuário
-          </Button>
+    <ProtectedRoute
+      requireAdmin
+      fallback={
+        <div className="p-8 text-center">
+          <h2 className="text-xl font-semibold mb-2">Acesso Restrito</h2>
+          <p className="text-muted-foreground">
+            Apenas administradores podem acessar esta página.
+          </p>
         </div>
-      </div>
-
-      <div className="relative flex flex-col w-full h-full overflow-hidden py-2">
-        {isLoading ? (
-          <div className="flex items-center justify-center">
-            <Loader2 className="h-8 w-8 animate-spin text-primary mr-3" />
-            <span className="text-muted-foreground">
-              Carregando usuários...
-            </span>
+      }
+    >
+      <div className="space-y-6 sm:p-4 p-1">
+        {/* Header */}
+        <div>
+          <div className="flex md:flex-row flex-col justify-between md:items-center items-start">
+            <div>
+              <h1 className="admin-title text-3xl font-bold mb-2">Usuários</h1>
+              <p className="admin-subtitle text-lg mb-4">
+                Gerencie os usuários do sistema
+              </p>
+            </div>
+            <Button
+              className="admin-button-primary sm:w-auto w-full"
+              onClick={() => handleOpenDialog()}
+            >
+              <Plus className="h-4 w-4 mr-2" />
+              Novo Usuário
+            </Button>
           </div>
-        ) : (
-          <div className="w-full text-left flex flex-col gap-4">
-            {users.map((user) => (
-              <div key={user.id} className="p-4 admin-card">
-                <div className="flex flex-col gap-2">
-                  <p className="flex gap-2 justify-start">
-                    <User className="text-disco-purple" />
-                    <span className="text-xl">{user.name}</span>
-                  </p>
-                  <p className="flex gap-2 items-center antialiased leading-normal">
-                    <Mail className="w-4 h-4 text-disco-orange" />
-                    <span className="text-sm text-muted-foreground">
-                      {user.email}
-                    </span>
-                  </p>
-                </div>
+        </div>
 
-                <div className="flex gap-5 justify-end mt-4">
-                  <button
-                    className="flex text-sm text-foreground hover:text-foreground/70 antialiased font-normal leading-normal cursor-pointer"
-                    onClick={() => handleOpenDialog(user)}
-                  >
-                    <Edit className="h-4 w-4 mr-1" />
-                    Editar
-                  </button>
-                  <button
-                    className="flex text-sm text-destructive hover:text-destructive/70 antialiased font-normal leading-normal cursor-pointer"
-                    onClick={() => setDeleteId(user.id)}
-                  >
-                    <Trash2 className="h-4 w-4 mr-1" />
+        <div className="relative flex flex-col w-full h-full overflow-hidden py-2">
+          {isLoading ? (
+            <div className="flex items-center justify-center">
+              <Loader2 className="h-8 w-8 animate-spin text-primary mr-3" />
+              <span className="text-muted-foreground">
+                Carregando usuários...
+              </span>
+            </div>
+          ) : (
+            <div className="w-full text-left flex flex-col gap-4">
+              {users.map((user) => (
+                <div key={user.id} className="p-4 admin-card">
+                  <div className="flex flex-col gap-2">
+                    <p className="flex gap-2 justify-start">
+                      <User className="text-disco-purple" />
+                      <span className="text-xl">{user.name}</span>
+                    </p>
+                    <p className="flex gap-2 items-center antialiased leading-normal">
+                      <Mail className="w-4 h-4 text-disco-orange" />
+                      <span className="text-sm text-muted-foreground">
+                        {user.email}
+                      </span>
+                    </p>
+                    <div className="flex gap-2 items-center mt-2">
+                      <span
+                        className={`px-2 py-1 text-xs rounded ${
+                          user.role === "ADMIN"
+                            ? "bg-green-100 text-green-800"
+                            : "bg-blue-100 text-blue-800"
+                        }`}
+                      >
+                        {user.role}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-5 justify-end mt-4">
+                    <button
+                      className="flex text-sm text-foreground hover:text-foreground/70 antialiased font-normal leading-normal cursor-pointer"
+                      onClick={() => handleOpenDialog(user)}
+                    >
+                      <Edit className="h-4 w-4 mr-1" />
+                      Editar
+                    </button>
+                    <button
+                      className="flex text-sm text-destructive hover:text-destructive/70 antialiased font-normal leading-normal cursor-pointer"
+                      onClick={() => setDeleteId(user.id)}
+                    >
+                      <Trash2 className="h-4 w-4 mr-1" />
+                      Excluir
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        {/* Dialog for Create/Edit */}
+        <Dialog
+          open={isDialogOpen}
+          onOpenChange={(open) => {
+            if (!open) {
+              setSelectedUser(null);
+            }
+            setIsDialogOpen(open);
+          }}
+        >
+          <DialogContent className="max-w-md">
+            <DialogHeader>
+              <DialogTitle className="admin-title text-xl">
+                {selectedUser ? "Editar Usuário" : "Novo Usuário"}
+              </DialogTitle>
+            </DialogHeader>
+            <UserForm
+              key={selectedUser ? selectedUser.id : "new"}
+              user={selectedUser}
+              onSuccess={handleCloseDialog}
+            />
+          </DialogContent>
+        </Dialog>
+
+        {/* Dialog for Delete Confirmation */}
+        <Dialog open={!!deleteId} onOpenChange={() => setDeleteId(null)}>
+          <DialogContent className="admin-card max-w-md">
+            <DialogHeader>
+              <DialogTitle className="admin-title text-xl">
+                Confirmar Exclusão
+              </DialogTitle>
+            </DialogHeader>
+            <div className="py-4">
+              <p className="admin-subtitle">
+                Tem certeza que deseja excluir este usuário? Esta ação não pode
+                ser desfeita.
+              </p>
+            </div>
+            <div className="flex justify-end gap-3">
+              <Button
+                variant="secondary"
+                className="admin-button-secondary"
+                onClick={() => setDeleteId(null)}
+                disabled={isDeleting}
+              >
+                Cancelar
+              </Button>
+              <Button
+                className="bg-destructive hover:bg-destructive/90 text-destructive-foreground"
+                onClick={() => deleteId && handleDelete(deleteId)}
+                disabled={isDeleting}
+              >
+                {isDeleting ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    Excluindo...
+                  </>
+                ) : (
+                  <>
+                    <Trash2 className="h-4 w-4 mr-2" />
                     Excluir
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+                  </>
+                )}
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
-      {/* Dialog for Create/Edit */}
-      <Dialog
-        open={isDialogOpen}
-        onOpenChange={(open) => {
-          if (!open) {
-            setSelectedUser(null);
-          }
-          setIsDialogOpen(open);
-        }}
-      >
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle className="admin-title text-xl">
-              {selectedUser ? "Editar Usuário" : "Novo Usuário"}
-            </DialogTitle>
-          </DialogHeader>
-          <UserForm user={selectedUser} onSuccess={handleCloseDialog} />
-        </DialogContent>
-      </Dialog>
-
-      {/* Dialog for Delete Confirmation */}
-      <Dialog open={!!deleteId} onOpenChange={() => setDeleteId(null)}>
-        <DialogContent className="admin-card max-w-md">
-          <DialogHeader>
-            <DialogTitle className="admin-title text-xl">
-              Confirmar Exclusão
-            </DialogTitle>
-          </DialogHeader>
-          <div className="py-4">
-            <p className="admin-subtitle">
-              Tem certeza que deseja excluir este usuário? Esta ação não pode
-              ser desfeita.
-            </p>
-          </div>
-          <div className="flex justify-end gap-3">
-            <Button
-              variant="secondary"
-              className="admin-button-secondary"
-              onClick={() => setDeleteId(null)}
-              disabled={isDeleting}
-            >
-              Cancelar
-            </Button>
-            <Button
-              className="bg-destructive hover:bg-destructive/90 text-destructive-foreground"
-              onClick={() => deleteId && handleDelete(deleteId)}
-              disabled={isDeleting}
-            >
-              {isDeleting ? (
-                <>
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Excluindo...
-                </>
-              ) : (
-                <>
-                  <Trash2 className="h-4 w-4 mr-2" />
-                  Excluir
-                </>
-              )}
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
-    </div>
+    </ProtectedRoute>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { LogOut } from "lucide-react";
 
@@ -10,8 +9,6 @@ interface ButtonSignOutProps {
 }
 
 export function ButtonSignOut({ variant = "default" }: ButtonSignOutProps) {
-  const router = useRouter();
-
   async function signOut() {
     await authClient.signOut({
       fetchOptions: {

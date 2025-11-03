@@ -1,11 +1,13 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-
 interface User {
   id: string;
   name: string;
   email: string;
+  role: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 interface UserState {
@@ -14,8 +16,14 @@ interface UserState {
   loading: boolean;
   error: string | null;
   fetchUsers: () => Promise<void>;
-  createUser: (newUser: Omit<User, "id"> & { password: string }) => Promise<void>;
-  updateUser: (id: string, updatedUser: Partial<User>) => Promise<void>;
+  createUser: (
+    newUser: Omit<User, "id" | "createdAt" | "updatedAt"> & { password: string }
+  ) => Promise<void>;
+  updateUser: (
+    id: string,
+    updatedUser: Partial<Omit<User, "id" | "createdAt" | "updatedAt">>
+  ) => Promise<void>;
+  updateUserRole: (id: string, role: string) => Promise<void>;
   deleteUser: (id: string) => Promise<void>;
   setSelectedUser: (user: Partial<User> | null) => void;
   refreshUsers: () => Promise<void>; // Força uma nova busca
@@ -100,9 +108,7 @@ export const useUserStore = create<UserState>()(
         }
         const data = await response.json();
         set((state) => ({
-          users: state.users.map((user) =>
-            user.id === id ? data : user
-          ),
+          users: state.users.map((user) => (user.id === id ? data : user)),
           loading: false,
         }));
       } catch (error: unknown) {
@@ -129,6 +135,31 @@ export const useUserStore = create<UserState>()(
         if (error instanceof Error) {
           set({ error: error.message, loading: false });
           throw error; // Re-throw para que o componente possa tratar
+        }
+      }
+    },
+    updateUserRole: async (id, role) => {
+      set({ loading: true, error: null });
+      try {
+        const response = await fetch(`/api/users/${id}/role`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ role }),
+        });
+        if (!response.ok) {
+          throw new Error("Erro ao atualizar role do usuário.");
+        }
+        const data = await response.json();
+        set((state) => ({
+          users: state.users.map((user) => (user.id === id ? data : user)),
+          loading: false,
+        }));
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          set({ error: error.message, loading: false });
+          throw error;
         }
       }
     },

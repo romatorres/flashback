@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { UserRole } from "@prisma/client";
 
 export async function PUT(
   request: Request,
@@ -7,10 +8,10 @@ export async function PUT(
 ) {
   try {
     const body = await request.json();
-    const { name, email } = body;
+    const { name, email, role } = body;
     const { id } = await params;
 
-    const updateData: { name?: string; email?: string } = {};
+    const updateData: { name?: string; email?: string; role?: UserRole } = {};
 
     if (name) {
       updateData.name = name;
@@ -18,6 +19,10 @@ export async function PUT(
 
     if (email) {
       updateData.email = email;
+    }
+
+    if (role) {
+      updateData.role = role as UserRole;
     }
 
     const updatedUser = await prisma.user.update({

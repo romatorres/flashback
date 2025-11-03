@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { createAgenda, listAgendas } from "@/actions/agenda";
 
 export async function POST(request: Request) {
   try {
@@ -13,50 +13,40 @@ export async function POST(request: Request) {
       );
     }
 
-    const newAgenda = await prisma.agenda.create({
-      data: {
-        titulo,
-        data: new Date(data),
-        local,
-        horario,
-        detalhes,
-        ativo,
-      },
+    const agenda = await createAgenda({
+      titulo,
+      data: new Date(data),
+      local,
+      horario,
+      detalhes,
+      ativo,
     });
 
-    return NextResponse.json(newAgenda, { status: 201 });
-  } catch (error) {
+    return NextResponse.json(agenda, { status: 201 });
+  } catch (error: unknown) {
     console.error("Error creating agenda:", error);
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : "Erro ao criar evento na agenda.";
     return NextResponse.json(
-      { message: "Erro ao criar um evento na agenda." },
-      { status: 500 }
+      { message: errorMessage },
+      { status: errorMessage.includes("permissão") ? 403 : 500 }
     );
   }
 }
 
 export async function GET() {
   try {
-    const agenda = await prisma.agenda.findMany({
-      select: {
-        id: true,
-        titulo: true,
-        data: true,
-        local: true,
-        horario: true,
-        detalhes: true,
-        ativo: true,
-      },
-      orderBy: {
-        data: "asc",
-      },
-    });
-
+    const agenda = await listAgendas();
     return NextResponse.json(agenda);
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error fetching agenda:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Erro ao buscar agenda.";
     return NextResponse.json(
-      { message: "Erro ao buscar a agenda." },
-      { status: 500 }
+      { message: errorMessage },
+      { status: errorMessage.includes("permissão") ? 403 : 500 }
     );
   }
 }
