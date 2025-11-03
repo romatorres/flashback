@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/form";
 import { UserType } from "@/app/admin/users/page";
 import { authClient } from "@/lib/auth-client";
+import { useUserStore } from "@/lib/store";
 
 const userFormSchema = z
   .object({
@@ -86,6 +87,8 @@ export function UserForm({
   user?: UserType | null;
   onSuccess?: (data?: UserFormSuccessData) => void;
 }) {
+  const { createUser: createUserStore, updateUser: updateUserStore } = useUserStore();
+  
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
@@ -120,47 +123,7 @@ export function UserForm({
     }
   }, [user, form]);
 
-  async function createUser(formData: UserFormValues): Promise<UserType> {
-    const response = await fetch("/api/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-      }),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Falha ao criar usuário.");
-    }
-    return response.json();
-  }
-
-  async function updateUser(formData: UserFormValues): Promise<UserType> {
-    // Atualizar dados básicos (nome e email)
-    const response = await fetch(`/api/users/${user!.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: formData.name,
-        email: formData.email,
-      }),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Falha ao atualizar usuário.");
-    }
-
-    const updatedUser = await response.json();
-
-    // Se há nova senha, alterar senha usando Better Auth
+  async function handlePasswordChange(formData: UserFormValues) {
     if (formData.newPassword && formData.currentPassword) {
       const { error } = await authClient.changePassword({
         currentPassword: formData.currentPassword,
@@ -171,22 +134,35 @@ export function UserForm({
         throw new Error(error.message || "Falha ao alterar senha.");
       }
     }
-    return updatedUser;
   }
 
   async function onSubmit(formData: UserFormValues) {
     try {
       if (user) {
-        const updatedUser = await updateUser(formData);
+        // Atualizar dados básicos usando o store
+        await updateUserStore(user.id, {
+          name: formData.name,
+          email: formData.email,
+        });
+
+        // Se há nova senha, alterar senha usando Better Auth
+        await handlePasswordChange(formData);
+
         toast.success("Usuário atualizado com sucesso!");
         if (onSuccess) {
-          onSuccess({ user: updatedUser, operation: "update" });
+          onSuccess({ user: { ...user, name: formData.name, email: formData.email }, operation: "update" });
         }
       } else {
-        const newUser = await createUser(formData);
+        // Criar usuário usando o store
+        await createUserStore({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password!,
+        });
+
         toast.success("Usuário criado com sucesso!");
         if (onSuccess) {
-          onSuccess({ user: newUser, operation: "create" });
+          onSuccess({ user: { id: "", name: formData.name, email: formData.email }, operation: "create" });
         }
       }
     } catch (error: unknown) {

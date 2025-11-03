@@ -50,7 +50,7 @@ export default function Hero() {
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url("img/disco-hero.jpg")` }}
+        style={{ backgroundImage: `url("/img/disco-hero.jpg")` }}
       >
         <div className="absolute z-20 inset-0 bg-gradient-to-b from-background/90 via-background/50 to-background"></div>
       </div>

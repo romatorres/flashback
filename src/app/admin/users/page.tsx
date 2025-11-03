@@ -8,12 +8,13 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Edit, Loader2, Mail, Plus, Trash2, User } from "lucide-react";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import {
   UserForm,
   UserFormSuccessData,
 } from "@/app/admin/users/_components/user-form";
 import { toast } from "sonner";
+import { useUserStore } from "@/lib/store";
 
 export interface UserType {
   id: string;
@@ -21,67 +22,42 @@ export interface UserType {
   email: string;
 }
 
-async function getUsers(): Promise<UserType[]> {
-  const res = await fetch("/api/users");
-  if (!res.ok) {
-    throw new Error("Failed to fetch users");
-  }
-  const data = await res.json();
-  return data;
-}
-
-async function deleteUser(id: string): Promise<void> {
-  const res = await fetch(`/api/users/${id}`, {
-    method: "DELETE",
-  });
-  if (!res.ok) {
-    throw new Error("Failed to delete user");
-  }
-}
-
 export default function UsersPage() {
-  const [users, setUsers] = useState<UserType[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const {
+    users,
+    loading: isLoading,
+    error,
+    fetchUsers,
+    deleteUser,
+    setSelectedUser: setStoreSelectedUser,
+  } = useUserStore();
+
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<UserType | null>(null);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const loadUsers = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      const fetchedUsers = await getUsers();
-      setUsers(fetchedUsers);
-    } catch (error) {
-      console.error(error);
-      toast.error("Falha ao carregar usuários.");
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
 
   useEffect(() => {
-    loadUsers();
-  }, [loadUsers]);
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   const handleOpenDialog = (user: UserType | null = null) => {
     setSelectedUser(user);
+    setStoreSelectedUser(user);
     setIsDialogOpen(true);
   };
 
   const handleCloseDialog = (data?: UserFormSuccessData) => {
     setIsDialogOpen(false);
     setSelectedUser(null);
-
-    if (data) {
-      if (data.operation === "create") {
-        setUsers((prevUsers) => [data.user, ...prevUsers]);
-      } else if (data.operation === "update") {
-        setUsers((prevUsers) =>
-          prevUsers.map((user) => (user.id === data.user.id ? data.user : user))
-        );
-      }
-    }
+    setStoreSelectedUser(null);
+    // Não precisamos mais atualizar manualmente o estado, o Zustand já faz isso
   };
 
   const handleDelete = async (id: string) => {
@@ -90,7 +66,6 @@ export default function UsersPage() {
       await deleteUser(id);
       toast.success("Usuário excluído com sucesso!");
       setDeleteId(null);
-      loadUsers();
     } catch {
       toast.error("Ocorreu um erro ao excluir o usuário.");
     } finally {

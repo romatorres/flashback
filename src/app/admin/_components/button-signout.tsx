@@ -16,7 +16,8 @@ export function ButtonSignOut({ variant = "default" }: ButtonSignOutProps) {
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
-          router.replace("/");
+          // Força uma navegação completa para limpar qualquer estado
+          window.location.href = "/";
         },
       },
     });
