@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useAgendaStore } from "@/lib/store";
+import { useAgendaStore } from "@/stores/agendaStores";
 import { AgendaForm } from "./_components/agenda-form";
 import { Button } from "@/components/ui/button";
 import {

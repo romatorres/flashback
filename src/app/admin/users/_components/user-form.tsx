@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/form";
 import { UserType } from "@/app/admin/users/page";
 import { authClient } from "@/lib/auth-client";
-import { useUserStore } from "@/lib/store";
+import { useUserStore } from "@/stores/usersStore";
 
 const userFormSchema = z
   .object({
@@ -87,8 +87,9 @@ export function UserForm({
   user?: UserType | null;
   onSuccess?: (data?: UserFormSuccessData) => void;
 }) {
-  const { createUser: createUserStore, updateUser: updateUserStore } = useUserStore();
-  
+  const { createUser: createUserStore, updateUser: updateUserStore } =
+    useUserStore();
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
@@ -150,7 +151,10 @@ export function UserForm({
 
         toast.success("Usuário atualizado com sucesso!");
         if (onSuccess) {
-          onSuccess({ user: { ...user, name: formData.name, email: formData.email }, operation: "update" });
+          onSuccess({
+            user: { ...user, name: formData.name, email: formData.email },
+            operation: "update",
+          });
         }
       } else {
         // Criar usuário usando o store
@@ -162,7 +166,10 @@ export function UserForm({
 
         toast.success("Usuário criado com sucesso!");
         if (onSuccess) {
-          onSuccess({ user: { id: "", name: formData.name, email: formData.email }, operation: "create" });
+          onSuccess({
+            user: { id: "", name: formData.name, email: formData.email },
+            operation: "create",
+          });
         }
       }
     } catch (error: unknown) {

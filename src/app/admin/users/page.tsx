@@ -14,7 +14,7 @@ import {
   UserFormSuccessData,
 } from "@/app/admin/users/_components/user-form";
 import { toast } from "sonner";
-import { useUserStore } from "@/lib/store";
+import { useUserStore } from "@/stores/usersStore";
 
 export interface UserType {
   id: string;

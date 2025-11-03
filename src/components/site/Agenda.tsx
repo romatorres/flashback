@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { Calendar, MapPin, Clock, ClipboardCheck } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { useAgendaStore } from "@/lib/store";
+import { useAgendaStore } from "@/stores/agendaStores";
 
 export default function Agenda() {
   const cardsAnimation = useScrollAnimation({ threshold: 0.2 });

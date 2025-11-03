@@ -19,7 +19,7 @@ import {
   FormDescription,
 } from "@/components/ui/form";
 import { toast } from "sonner";
-import { useAgendaStore } from "@/lib/store";
+import { useAgendaStore } from "@/stores/agendaStores";
 import { DateTimePicker } from "@/components/ui/datetime-picker";
 import { Switch } from "@/components/ui/switch";
 
