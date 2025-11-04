@@ -67,31 +67,31 @@ export default function Header() {
           <nav className="hidden md:flex items-center gap-10 text-xl font-semibold">
             <button
               onClick={() => scrollToSection("/")}
-              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:text-disco-orange transition-colors"
+              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:scale-105"
             >
               Home
             </button>
             <button
               onClick={() => scrollToSection("about")}
-              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:text-disco-orange transition-colors"
+              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:scale-105"
             >
               Sobre
             </button>
             <button
               onClick={() => scrollToSection("agenda")}
-              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:text-disco-orange transition-colors"
+              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:scale-105"
             >
               Agenda
             </button>
             <button
               onClick={() => scrollToSection("videos")}
-              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:text-disco-orange transition-colors"
+              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:scale-105"
             >
               Vídeos
             </button>
             <button
               onClick={() => scrollToSection("contact")}
-              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:text-disco-orange transition-colors"
+              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:scale-105"
             >
               Contatos
             </button>
@@ -155,7 +155,7 @@ export default function Header() {
           href="https://www.facebook.com/bandaflashbackfsa/"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"
+          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-75 hover:translate-y-[-4px]"
         >
           <BiLogoFacebookCircle size={26} />
         </a>
@@ -164,7 +164,7 @@ export default function Header() {
           href="https://www.instagram.com/toflashbackoficial/"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"
+          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-75 hover:translate-y-[-4px]"
         >
           <BiLogoInstagramAlt size={26} />
         </a>
@@ -173,7 +173,7 @@ export default function Header() {
           href="https://www.youtube.com/@BandaFlashback"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"
+          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-75 hover:translate-y-[-4px]"
         >
           <BiLogoYoutube size={24} />
         </a>

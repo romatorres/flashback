@@ -135,7 +135,7 @@ export default function Contact() {
           {/* Gradiente abaixo da imagem */}
           <div
             ref={photoAnimation.ref}
-            className="absolute bottom-8 left-40 -translate-x-1/2 h-68 w-68 bg-gradient-disco rounded-full blur-3xl opacity-20 transition duration-700 animate-pulse -z-10 delay-700"
+            className="absolute bottom-8 left-40 -translate-x-1/2 h-60 w-60 bg-gradient-disco rounded-full blur-3xl opacity-10 transition duration-700 animate-pulse -z-10 delay-700"
           ></div>
         </div>
       </div>
