@@ -13,6 +13,7 @@ import { UserForm } from "@/app/admin/users/_components/user-form";
 import { toast } from "sonner";
 import { useUserStore } from "@/stores/usersStore";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
+import { useAuth } from "@/hooks/useAuth";
 
 export interface UserType {
   id: string;
@@ -22,7 +23,7 @@ export interface UserType {
 }
 
 export default function UsersPage() {
-  // Esta página é apenas para ADMIN - será protegida pelo ProtectedRoute
+  const { isAdmin, isLoading: isAuthLoading } = useAuth();
   const {
     users,
     loading: isLoading,
@@ -30,6 +31,7 @@ export default function UsersPage() {
     fetchUsers,
     deleteUser,
     setSelectedUser: setStoreSelectedUser,
+    refreshUsers,
   } = useUserStore();
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -38,8 +40,10 @@ export default function UsersPage() {
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    fetchUsers();
-  }, [fetchUsers]);
+    if (!isAuthLoading && isAdmin) {
+      fetchUsers();
+    }
+  }, [fetchUsers, isAdmin, isAuthLoading]);
 
   useEffect(() => {
     if (error) {
@@ -53,11 +57,13 @@ export default function UsersPage() {
     setIsDialogOpen(true);
   };
 
-  const handleCloseDialog = () => {
+  const handleSuccess = (data?: { operation: "create" | "update" }) => {
     setIsDialogOpen(false);
     setSelectedUser(null);
     setStoreSelectedUser(null);
-    // Não precisamos mais atualizar manualmente o estado, o Zustand já faz isso
+    if (data?.operation) {
+      refreshUsers();
+    }
   };
 
   const handleDelete = async (id: string) => {
@@ -181,7 +187,7 @@ export default function UsersPage() {
             <UserForm
               key={selectedUser ? selectedUser.id : "new"}
               user={selectedUser}
-              onSuccess={handleCloseDialog}
+              onSuccess={handleSuccess}
             />
           </DialogContent>
         </Dialog>

@@ -23,7 +23,7 @@ export function ButtonSignOut({ variant = "default" }: ButtonSignOutProps) {
   if (variant === "menu") {
     return (
       <span onClick={signOut} className="w-full text-sm cursor-pointer">
-        Sair da conta
+        Sair do painel
       </span>
     );
   }
@@ -31,7 +31,7 @@ export function ButtonSignOut({ variant = "default" }: ButtonSignOutProps) {
   return (
     <Button onClick={signOut} className="admin-button-secondary w-full">
       <LogOut className="h-4 w-4 mr-2" />
-      Sair da conta
+      Sair do painel
     </Button>
   );
 }

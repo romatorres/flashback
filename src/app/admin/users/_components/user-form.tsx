@@ -252,7 +252,7 @@ export function UserForm({
                   placeholder="seu@email.com"
                   type="email"
                   {...field}
-                  disabled={form.formState.isSubmitting}
+                  disabled={true} // Email should not be editable
                 />
               </FormControl>
               <FormMessage />

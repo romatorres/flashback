@@ -1,7 +1,7 @@
 "use server";
 
 import { auth } from "@/lib/auth";
-import { requireAdmin } from "@/lib/auth-server-utils";
+import { requireAdmin, requireAuth } from "@/lib/auth-server-utils";
 import { type UserRole } from "@/lib/types";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
@@ -157,4 +157,27 @@ export async function deleteUser(userId: string) {
 
   revalidatePath("/admin/users");
   return { success: true };
+}
+
+// Atualizar o próprio perfil (usuário logado)
+export async function updateMyProfile(data: {
+  name?: string;
+  email?: string;
+}) {
+  const user = await requireAuth();
+
+  const updatedUser = await prisma.user.update({
+    where: { id: user.id },
+    data,
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true,
+    },
+  });
+
+  revalidatePath("/admin/profile");
+
+  return updatedUser;
 }

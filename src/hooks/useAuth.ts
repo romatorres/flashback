@@ -2,7 +2,7 @@ import { authClient } from "@/lib/auth-client";
 import { type UserRole } from "@/lib/types";
 
 export function useAuth() {
-  const { data: session, isPending } = authClient.useSession();
+  const { data: session, isPending, refetch } = authClient.useSession();
 
   const user = session?.user;
   const userRole = ((user as { role?: string })?.role as UserRole) || "USER";
@@ -52,5 +52,6 @@ export function useAuth() {
     signIn: authClient.signIn.email,
     signOut: authClient.signOut,
     signUp: authClient.signUp.email,
+    refetchSession: refetch,
   };
 }

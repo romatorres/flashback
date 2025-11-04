@@ -18,6 +18,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ButtonSignOut } from "./button-signout";
@@ -148,10 +149,18 @@ function UserMenu({ user }: { user: { name: string; email: string } }) {
           side="top"
           align="start"
         >
-          <DropdownMenuItem
-            className="text-destructive hover:text-destructive/80 hover:bg-destructive/10 cursor-pointer"
-            asChild
-          >
+          <Link href="/admin/profile">
+            <DropdownMenuItem>
+              <div className="flex items-center w-full cursor-pointer">
+                <button className="flex cursor-pointer">
+                  <User className="h-4 w-4 mr-2" />
+                  Meu Perfil
+                </button>
+              </div>
+            </DropdownMenuItem>
+          </Link>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem className="text-destructive cursor-pointer" asChild>
             <div className="flex items-center">
               <LogOut className="h-4 w-4 mr-2" />
               <ButtonSignOut variant="menu" />
