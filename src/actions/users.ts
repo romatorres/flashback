@@ -1,7 +1,7 @@
 "use server";
 
 import { auth } from "@/lib/auth";
-import { requireAdmin } from "@/lib/auth-middleware";
+import { requireAdmin } from "@/lib/auth-server-utils";
 import { type UserRole } from "@/lib/types";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";

@@ -1,6 +1,6 @@
 "use server";
 
-import { requireAuth, requireEditorOrAdmin } from "@/lib/auth-middleware";
+import { requireAuth, requireEditorOrAdmin } from "@/lib/auth-server-utils";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 

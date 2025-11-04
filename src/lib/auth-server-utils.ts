@@ -31,35 +31,31 @@ export async function getAuthUser(): Promise<AuthUser | null> {
   }
 }
 
-export async function requireAuth(): Promise<AuthUser> {
-  const user = await getAuthUser();
-
-  if (!user) {
-    throw new Error("Usuário não autenticado");
-  }
-
-  return user;
+export async function requireAdmin() {
+    const user = await getAuthUser();
+    if (user?.role !== 'ADMIN') {
+        throw new Error("Unauthorized");
+    }
+    return user;
 }
 
-export async function requireAdmin(): Promise<AuthUser> {
-  const user = await requireAuth();
-
-  if (user.role !== "ADMIN") {
-    throw new Error("Acesso negado: apenas administradores");
-  }
-
-  return user;
+export async function requireAuth() {
+    const user = await getAuthUser();
+    if (!user) {
+        throw new Error("Unauthorized");
+    }
+    return user;
 }
 
-export async function requireEditorOrAdmin(): Promise<AuthUser> {
-  const user = await requireAuth();
-
-  if (user.role !== "ADMIN" && user.role !== "EDITOR") {
-    throw new Error("Acesso negado: apenas administradores ou editores");
-  }
-
-  return user;
+export async function requireEditorOrAdmin() {
+    const user = await getAuthUser();
+    if (user?.role !== 'ADMIN' && user?.role !== 'EDITOR') {
+        throw new Error("Unauthorized");
+    }
+    return user;
 }
+
+
 
 // Re-export das funções utilitárias para compatibilidade
 export { isAdmin, canManageUsers, canManageContent } from "@/lib/auth-utils";
