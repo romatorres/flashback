@@ -124,6 +124,8 @@ export function UserForm({
   const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
   const [isChangingPassword, setIsChangingPassword] = useState(false);
 
+  const isEditing = !!user;
+
   const form = useForm<UserFormValues>({
     resolver: zodResolver(userFormSchema),
     defaultValues: {
@@ -252,7 +254,7 @@ export function UserForm({
                   placeholder="seu@email.com"
                   type="email"
                   {...field}
-                  disabled={true} // Email should not be editable
+                  disabled={isEditing} // Desabilita na edição do Email
                 />
               </FormControl>
               <FormMessage />
