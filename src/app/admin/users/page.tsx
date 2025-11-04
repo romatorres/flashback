@@ -122,7 +122,7 @@ export default function UsersPage() {
           ) : (
             <div className="w-full text-left flex flex-col gap-4">
               {users.map((user) => (
-                <div key={user.id || index} className="p-4 admin-card">
+                <div key={user.id} className="p-4 admin-card">
                   <div className="flex flex-col gap-2">
                     <p className="flex gap-2 justify-start">
                       <User className="text-disco-purple" />
