@@ -86,7 +86,7 @@ export default function Agenda() {
                 <div
                   key={agenda.id}
                   className={`bg-card border-2 border-border rounded-2xl p-4
-               hover:border-accent transition-all duration-300 group relative overflow-hidden  ${
+               hover:border-accent transition-colors duration-300 group relative overflow-hidden  ${
                  cardsAnimation.isVisible
                    ? "opacity-100 translate-y-0"
                    : "opacity-0 translate-y-10"

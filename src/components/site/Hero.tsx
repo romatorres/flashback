@@ -61,7 +61,7 @@ export default function Hero() {
           {sparkles.map((style, i) => (
             <div
               key={i}
-              className="absolute opacity-0 animate-fade-in"
+              className="absolute opacity-0 animate-sparkle-effect"
               style={{
                 ...style,
                 animationFillMode: "forwards",
@@ -92,7 +92,7 @@ export default function Hero() {
           alt="Banda Flashback"
           width={288}
           height={96}
-          className="w-60 md:w-64 lg:w-72 h-auto mb-2 hover:scale-101 drop-shadow-[0_0_40px_rgba(0,0,0,1)] transition-all duration-300"
+          className="w-60 md:w-64 lg:w-72 h-auto mb-2 hover:scale-101 drop-shadow-[0_0_40px_rgba(0,0,0,1)] transition-transform duration-300"
         />
         <div>
           <p className="font-gravitas-one text-5xl md:text-6xl lg:text-7xl bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">
@@ -131,7 +131,7 @@ export default function Hero() {
               href="https://www.facebook.com/bandaflashbackfsa/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-colors hover:translate-y-[-2px]"
+              className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-transform hover:translate-y-[-2px]"
             >
               <BiLogoFacebookCircle size={30} />
             </a>
@@ -140,7 +140,7 @@ export default function Hero() {
               href="https://www.instagram.com/toflashbackoficial/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-colors hover:translate-y-[-2px]"
+              className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-transform hover:translate-y-[-2px]"
             >
               <BiLogoInstagramAlt size={30} />
             </a>
@@ -149,7 +149,7 @@ export default function Hero() {
               href="https://www.youtube.com/@BandaFlashback"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-colors hover:translate-y-[-2px]"
+              className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-transform hover:translate-y-[-2px]"
             >
               <BiLogoYoutube size={28} />
             </a>

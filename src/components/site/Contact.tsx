@@ -23,7 +23,7 @@ export default function Contact() {
       <div className="max-w-6xl mx-auto relative z-10">
         <div
           ref={titleAnimation.ref}
-          className={`text-center mb-20 transition-all duration-700 ${
+          className={`text-center mb-20 transition-[opacity,transform] duration-700 ${
             titleAnimation.isVisible
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-10"
@@ -37,7 +37,7 @@ export default function Contact() {
           {/* Image Column (40%) */}
           <div
             ref={photoAnimation.ref}
-            className={`w-full md:w-2/5 md:order-1 order-2 transition-all duration-500 delay-300  ${
+            className={`w-full md:w-2/5 md:order-1 order-2 transition-[opacity,transform] duration-500 delay-300  ${
               photoAnimation.isVisible
                 ? "opacity-100 scale-100"
                 : "opacity-0 scale-95"
@@ -56,14 +56,14 @@ export default function Contact() {
           {/* Contact Info Column (60%) */}
           <div
             ref={contentAnimation.ref}
-            className={`w-full flex justify-center items-center z-10 md:order-2 order-1 transition-all duration-700 delay-30 ${
+            className={`w-full flex justify-center items-center z-10 md:order-2 order-1 transition-[opacity,transform] duration-700 delay-30 ${
               contentAnimation.isVisible
                 ? "opacity-100 translate-x-0"
                 : "opacity-0 translate-x-10"
             }`}
           >
             <div className="w-full sm:mb-20 mb-10 ">
-              <div className="text-start p-6 rounded-2xl bg-gradient-to-br from-accent/10 to-transparent border border-accent/20 hover:border-accent/40 transition-all duration-300">
+              <div className="text-start p-6 rounded-2xl bg-gradient-to-br from-accent/10 to-transparent border border-accent/20 hover:border-accent/40 transition-colors duration-300">
                 <span className="text-5xl text-disco-orange">
                   <TfiComments />
                 </span>
@@ -107,7 +107,7 @@ export default function Contact() {
                   href="https://www.facebook.com/bandaflashbackfsa/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"
+                  className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-transform duration-300 hover:translate-y-[-4px]"
                 >
                   <BiLogoFacebookCircle size={28} />
                 </a>
@@ -116,7 +116,7 @@ export default function Contact() {
                   href="https://www.instagram.com/toflashbackoficial/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"
+                  className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-transform duration-300 hover:translate-y-[-4px]"
                 >
                   <BiLogoInstagramAlt size={28} />
                 </a>
@@ -125,7 +125,7 @@ export default function Contact() {
                   href="https://www.youtube.com/@BandaFlashback"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-300 hover:translate-y-[-4px]"
+                  className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-transform duration-300 hover:translate-y-[-4px]"
                 >
                   <BiLogoYoutube size={28} />
                 </a>

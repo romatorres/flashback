@@ -291,7 +291,7 @@
   }
 
   .admin-nav-item {
-    @apply text-muted-foreground hover:text-foreground transition-all duration-300;
+    @apply text-muted-foreground hover:text-foreground transition-colors duration-300;
     border-radius: var(--radius-md);
   }
 
@@ -341,7 +341,7 @@
   }
 
   .admin-card {
-    @apply bg-card border-border rounded-lg;
+    @apply bg-card border-border rounded-lg transition-transform duration-300 ease-out;
     background: rgba(31, 18, 43, 0.6);
     backdrop-filter: blur(10px);
     border: 1px solid var(--border);
@@ -350,7 +350,6 @@
 
   .admin-card:hover {
     transform: translateY(-2px);
-    transition: all 0.3s ease;
   }
 
   /* Títulos do admin */
@@ -373,7 +372,7 @@
       var(--disco-purple),
       var(--disco-orange)
     );
-    @apply text-white border-0 rounded-lg font-medium transition-all duration-300;
+    @apply text-white border-0 rounded-lg font-medium transition-colors duration-300;
   }
 
   .admin-button-primary:hover {
@@ -385,7 +384,7 @@
   }
 
   .admin-button-secondary {
-    @apply bg-secondary text-secondary-foreground border border-border rounded-lg font-medium transition-all duration-300;
+    @apply bg-secondary text-secondary-foreground border border-border rounded-lg font-medium transition-colors duration-300;
   }
 
   .admin-button-secondary:hover {
@@ -397,7 +396,7 @@
   }
 
   .admin-button-ghost {
-    @apply text-muted-foreground hover:text-foreground hover:bg-black/20 transition-all duration-300;
+    @apply text-muted-foreground hover:text-foreground hover:bg-black/20 transition-colors duration-300;
   }
 
   /* Menu do usuário */
@@ -412,7 +411,7 @@
   }
 
   .admin-user-button {
-    @apply hover:bg-accent/10 transition-all duration-300 cursor-pointer;
+    @apply hover:bg-accent/10 transition-colors duration-300 cursor-pointer;
   }
 
   .admin-user-button:hover {
@@ -484,7 +483,7 @@
   .admin-input {
     @apply bg-input border-border text-foreground placeholder-muted-foreground;
     @apply focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent;
-    @apply transition-all duration-300 rounded-lg;
+    @apply transition-[color,background-color,border-color,box-shadow,ring-color] duration-300 rounded-lg;
   }
 
   .admin-input:focus {
@@ -494,7 +493,7 @@
   .admin-select {
     @apply bg-input border-border text-foreground placeholder-muted-foreground;
     @apply focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent;
-    @apply transition-all duration-300 rounded-lg;
+    @apply transition-[color,background-color,border-color,box-shadow,ring-color] duration-300 rounded-lg;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
     background-position: right 0.5rem center;
     background-repeat: no-repeat;
@@ -505,7 +504,7 @@
   .admin-textarea {
     @apply bg-input border-border text-foreground placeholder-muted-foreground;
     @apply focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent;
-    @apply transition-all duration-300 rounded-lg resize-none;
+    @apply transition-[color,background-color,border-color,box-shadow,ring-color] duration-300 rounded-lg resize-none;
   }
 
   /* Toggle switch do admin */
@@ -587,47 +586,15 @@
 
   /* Animações específicas do admin */
   .admin-fade-in {
-    animation: adminFadeIn 0.5s ease-out;
+    animation: fade-in 0.5s ease-out;
   }
 
   .admin-slide-up {
-    animation: adminSlideUp 0.3s ease-out;
+    animation: fade-up 0.3s ease-out;
   }
 
   .admin-glow-pulse {
     animation: adminGlowPulse 2s ease-in-out infinite;
-  }
-
-  @keyframes adminFadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes adminSlideUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes adminGlowPulse {
-    0%,
-    100% {
-      box-shadow: 0 0 20px rgba(176, 58, 211, 0.3);
-    }
-    50% {
-      box-shadow: 0 0 30px rgba(176, 58, 211, 0.6);
-    }
   }
 }
 
@@ -658,7 +625,7 @@
 /* FIM da Estilização do scrollbar para tema escuro */
 
 /* Animação para fade-in das estrelas */
-.animate-fade-in {
+.animate-sparkle-effect {
   animation: fadeInSparkle 0.8s ease-out forwards,
     sparkle 1.5s ease-in-out infinite;
 }

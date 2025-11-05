@@ -40,7 +40,7 @@ const About = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         <div
           ref={titleAnimation.ref}
-          className={`text-center mb-20 transition-all duration-700 ${
+          className={`text-center mb-20 transition-[opacity,transform] duration-700 ${
             titleAnimation.isVisible
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-10"
@@ -54,7 +54,7 @@ const About = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
           <div
             ref={photoAnimation.ref}
-            className={`relative group transition-all duration-700 delay-150 ${
+            className={`relative group transition-[opacity,transform] duration-700 delay-150 ${
               photoAnimation.isVisible
                 ? "opacity-100 scale-100"
                 : "opacity-0 scale-95"
@@ -102,7 +102,7 @@ const About = () => {
 
           <div
             ref={contentAnimation.ref}
-            className={`space-y-8 order-1 md:order-2 transition-all duration-700 delay-300 ${
+            className={`space-y-8 order-1 md:order-2 transition-[opacity,transform] duration-700 delay-300 ${
               contentAnimation.isVisible
                 ? "opacity-100 translate-x-0"
                 : "opacity-0 translate-x-10"
@@ -144,7 +144,7 @@ const About = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className={`text-start p-6 rounded-2xl bg-gradient-to-br from-accent/10 to-transparent border border-accent/20 hover:border-accent/40 hover:bg-accent/5 transition-all duration-700 delay-300 ${
+              className={`text-start p-6 rounded-2xl bg-gradient-to-br from-accent/10 to-transparent border border-accent/20 hover:border-accent/40 hover:bg-accent/5 transition-colors duration-300 delay-300 ${
                 featuresAnimation.isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-10"
@@ -162,7 +162,7 @@ const About = () => {
                 href="https://wa.me/75981226159?text=Olá!%20Vim%20pelo%20site,%20quero%20mais%20informações%20sobre%20a%20banda"
                 target="_blank"
               >
-                <button className="cursor-pointer bg-gradient-disco animate-shimmer bg-[length:200%_auto] text-foreground font-semibold px-10 py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg">
+                <button className="cursor-pointer bg-gradient-disco animate-shimmer bg-[length:200%_auto] text-foreground font-semibold px-10 py-3 rounded-md transition-transform duration-300 transform hover:scale-105 shadow-lg">
                   Contrate
                 </button>
               </a>

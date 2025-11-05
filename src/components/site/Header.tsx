@@ -43,7 +43,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
           scrolled ? "bg-background/80 backdrop-blur-sm" : "bg-transparent"
         }`}
       >
@@ -55,7 +55,7 @@ export default function Header() {
               width={40}
               height={40}
               onClick={() => scrollToSection("/")}
-              className={`sm:hidden transition-all duration-300 ${
+              className={`sm:hidden transition-[opacity,transform] duration-300 ${
                 scrolled
                   ? "opacity-100 scale-100 translate-y-0"
                   : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
@@ -67,31 +67,31 @@ export default function Header() {
           <nav className="hidden md:flex items-center gap-10 text-xl font-semibold">
             <button
               onClick={() => scrollToSection("/")}
-              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:scale-105"
+              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer"
             >
               Home
             </button>
             <button
               onClick={() => scrollToSection("about")}
-              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:scale-105"
+              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer"
             >
               Sobre
             </button>
             <button
               onClick={() => scrollToSection("agenda")}
-              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:scale-105"
+              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer"
             >
               Agenda
             </button>
             <button
               onClick={() => scrollToSection("videos")}
-              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:scale-105"
+              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer"
             >
               Vídeos
             </button>
             <button
               onClick={() => scrollToSection("contact")}
-              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer hover:scale-105"
+              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer"
             >
               Contatos
             </button>
@@ -155,7 +155,7 @@ export default function Header() {
           href="https://www.facebook.com/bandaflashbackfsa/"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-75 hover:translate-y-[-4px]"
+          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-transform duration-75 hover:translate-y-[-4px]"
         >
           <BiLogoFacebookCircle size={26} />
         </a>
@@ -164,7 +164,7 @@ export default function Header() {
           href="https://www.instagram.com/toflashbackoficial/"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-75 hover:translate-y-[-4px]"
+          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-transform duration-75 hover:translate-y-[-4px]"
         >
           <BiLogoInstagramAlt size={26} />
         </a>
@@ -173,7 +173,7 @@ export default function Header() {
           href="https://www.youtube.com/@BandaFlashback"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 duration-75 hover:translate-y-[-4px]"
+          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-transform duration-75 hover:translate-y-[-4px]"
         >
           <BiLogoYoutube size={24} />
         </a>
