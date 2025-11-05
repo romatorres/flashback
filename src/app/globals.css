@@ -348,10 +348,6 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   }
 
-  .admin-card:hover {
-    transform: translateY(-2px);
-  }
-
   /* Títulos do admin */
   .admin-title {
     background: linear-gradient(135deg, var(--disco-purple), var(--disco-gold));
@@ -457,7 +453,7 @@
     animation: shimmer 1.5s infinite;
   }
 
-  /* Scrollbar customizada para o admin */
+  /* Scrollbar customizada para o admin 
   .admin-scrollbar::-webkit-scrollbar {
     width: 6px;
   }
@@ -477,7 +473,7 @@
 
   .admin-scrollbar::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(135deg, var(--disco-orange), var(--disco-gold));
-  }
+  } */
 
   /* Inputs e forms do admin */
   .admin-input {
@@ -584,7 +580,7 @@
     @apply px-6 py-4 whitespace-nowrap text-sm;
   }
 
-  /* Animações específicas do admin */
+  /* Animações específicas do admin 
   .admin-fade-in {
     animation: fade-in 0.5s ease-out;
   }
@@ -595,7 +591,7 @@
 
   .admin-glow-pulse {
     animation: adminGlowPulse 2s ease-in-out infinite;
-  }
+  }*/
 }
 
 /* INICIO da Estilização do scrollbar para tema escuro */

@@ -19,22 +19,25 @@ interface SparkleStyle {
 export default function Hero() {
   const [sparkles, setSparkles] = useState<SparkleStyle[]>([]);
   const [isClient, setIsClient] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
-    // Marca que estamos no cliente para evitar problemas de hidratação
     setIsClient(true);
 
+    // Detecta preferência de movimento reduzido
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+
     const generateSparkles = () => {
-      const newSparkles: SparkleStyle[] = [...Array(20)].map(() => ({
-        left: `${Math.random() * 100}%`,
-        top: `${Math.random() * 100}%`,
+      const newSparkles: SparkleStyle[] = [...Array(10)].map(() => ({
+        left: `${35 + Math.random() * 30}%`,
+        top: `${20 + Math.random() * 60}%`,
         animationDelay: `${Math.random() * 2}s`,
-        animationDuration: `${1 + Math.random() * 1}s`,
+        animationDuration: `${1.5 + Math.random() * 1}s`,
       }));
       setSparkles(newSparkles);
     };
 
-    // Pequeno delay para garantir que a hidratação termine
     const timer = setTimeout(generateSparkles, 100);
 
     return () => clearTimeout(timer);
@@ -55,28 +58,24 @@ export default function Hero() {
         <div className="absolute z-20 inset-0 bg-gradient-to-b from-background/90 via-background/50 to-background"></div>
       </div>
 
-      {/* Animated sparkles - só renderiza no cliente */}
-      {isClient && (
+      {/* Animated sparkles - otimizado e com suporte a prefers-reduced-motion */}
+      {isClient && !prefersReducedMotion && (
         <div className="absolute z-10 inset-0 overflow-hidden pointer-events-none">
           {sparkles.map((style, i) => (
             <div
               key={i}
-              className="absolute opacity-0 animate-sparkle-effect"
+              className="absolute opacity-0 animate-sparkle-effect will-change-[opacity,transform]"
               style={{
                 ...style,
                 animationFillMode: "forwards",
               }}
             >
               <svg
-                width="20"
-                height="20"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="white"
-                className="drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]"
-                style={{
-                  filter:
-                    "drop-shadow(0 0 12px rgba(255,255,255,0.9)) drop-shadow(0 0 80px rgba(255,255,255,0.6))",
-                }}
+                className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]"
               >
                 <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
               </svg>
@@ -93,6 +92,7 @@ export default function Hero() {
           width={288}
           height={96}
           className="w-60 md:w-64 lg:w-72 h-auto mb-2 hover:scale-101 drop-shadow-[0_0_40px_rgba(0,0,0,1)] transition-transform duration-300"
+          priority
         />
         <div>
           <p className="font-gravitas-one text-5xl md:text-6xl lg:text-7xl bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">
@@ -132,6 +132,7 @@ export default function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-transform hover:translate-y-[-2px]"
+              aria-label="Facebook da Banda Flashback"
             >
               <BiLogoFacebookCircle size={30} />
             </a>
@@ -141,6 +142,7 @@ export default function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-transform hover:translate-y-[-2px]"
+              aria-label="Instagram da Banda Flashback"
             >
               <BiLogoInstagramAlt size={30} />
             </a>
@@ -150,12 +152,13 @@ export default function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-transform hover:translate-y-[-2px]"
+              aria-label="YouTube da Banda Flashback"
             >
               <BiLogoYoutube size={28} />
             </a>
           </div>
         </div>
-        {/*luz logo*/}
+        {/* Luz logo */}
         <div className="absolute sm:bottom-[420px] bottom-[470px] left-1/2 -translate-x-1/2 sm:h-52 sm:w-52 h-48 w-48 bg-gradient-disco rounded-full blur-3xl opacity-5 transition duration-700 animate-pulse -z-10 delay-700"></div>
       </div>
     </section>
