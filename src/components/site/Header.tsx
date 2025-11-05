@@ -155,7 +155,7 @@ export default function Header() {
           href="https://www.facebook.com/bandaflashbackfsa/"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-transform duration-75 hover:translate-y-[-4px]"
+          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-all duration-300 transform hover:scale-105"
         >
           <BiLogoFacebookCircle size={26} />
         </a>
@@ -164,7 +164,7 @@ export default function Header() {
           href="https://www.instagram.com/toflashbackoficial/"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-transform duration-75 hover:translate-y-[-4px]"
+          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-all duration-300 transform hover:scale-105"
         >
           <BiLogoInstagramAlt size={26} />
         </a>
@@ -173,7 +173,7 @@ export default function Header() {
           href="https://www.youtube.com/@BandaFlashback"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-transform duration-75 hover:translate-y-[-4px]"
+          className="flex items-center justify-center border-2 border-foreground/80 text-disco-orange/90 rounded-full p-1.5 transition-all duration-300 transform hover:scale-105"
         >
           <BiLogoYoutube size={24} />
         </a>
