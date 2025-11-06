@@ -47,8 +47,8 @@ export default function Contact() {
               <Image
                 src="/img/vivinho.png"
                 alt="foto do cantor vivinho"
-                width={350}
-                height={480}
+                width={250}
+                height={380}
               />
             </div>
           </div>
@@ -135,7 +135,7 @@ export default function Contact() {
           {/* Gradiente abaixo da imagem */}
           <div
             ref={photoAnimation.ref}
-            className="absolute bottom-8 left-40 -translate-x-1/2 h-60 w-60 bg-gradient-disco rounded-full blur-3xl opacity-10 transition duration-700 animate-pulse -z-10 delay-700"
+            className="absolute bottom-8 left-34 -translate-x-1/2 h-52 w-52 bg-gradient-disco rounded-full blur-3xl opacity-10 transition duration-700 animate-pulse -z-10 delay-700"
           ></div>
         </div>
       </div>

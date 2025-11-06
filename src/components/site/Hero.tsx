@@ -30,7 +30,7 @@ export default function Hero() {
 
     const generateSparkles = () => {
       const newSparkles: SparkleStyle[] = [...Array(10)].map(() => ({
-        left: `${35 + Math.random() * 30}%`,
+        left: `${25 + Math.random() * 50}%`,
         top: `${20 + Math.random() * 60}%`,
         animationDelay: `${Math.random() * 2}s`,
         animationDuration: `${1.5 + Math.random() * 1}s`,
