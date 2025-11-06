@@ -49,10 +49,10 @@ const Videos = () => {
             <div
               key={`${video.id}-${index}`}
               onClick={() => openVideo(video.id)}
-              className={`group relative overflow-hidden rounded-2xl bg-card border-2 border-border hover:border-accent transition-colors duration-300 cursor-pointer${
+              className={`group relative overflow-hidden rounded-2xl bg-card border-2 border-border hover:border-accent transition-all ease-out duration-700 cursor-pointer${
                 featuresAnimation.isVisible
                   ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-10"
+                  : "opacity-0 translate-y-20"
               }`}
               style={{ transitionDelay: `${index * 150}ms` }}
             >

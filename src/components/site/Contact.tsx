@@ -23,7 +23,7 @@ export default function Contact() {
       <div className="max-w-6xl mx-auto relative z-10">
         <div
           ref={titleAnimation.ref}
-          className={`text-center mb-20 transition-[opacity,transform] duration-700 ${
+          className={`text-center mb-20 transition-all duration-700 ${
             titleAnimation.isVisible
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-10"
@@ -37,7 +37,7 @@ export default function Contact() {
           {/* Image Column (40%) */}
           <div
             ref={photoAnimation.ref}
-            className={`w-full md:w-2/5 md:order-1 order-2 transition-[opacity,transform] duration-500 delay-300  ${
+            className={`w-full md:w-2/5 md:order-1 order-2 transition-all duration-500 delay-300  ${
               photoAnimation.isVisible
                 ? "opacity-100 scale-100"
                 : "opacity-0 scale-95"
@@ -56,10 +56,10 @@ export default function Contact() {
           {/* Contact Info Column (60%) */}
           <div
             ref={contentAnimation.ref}
-            className={`w-full flex justify-center items-center z-10 md:order-2 order-1 transition-[opacity,transform] duration-700 delay-30 ${
+            className={`w-full flex justify-center items-center z-10 md:order-2 order-1 transition-all duration-700 delay-300 ${
               contentAnimation.isVisible
                 ? "opacity-100 translate-x-0"
-                : "opacity-0 translate-x-10"
+                : "opacity-0 translate-x-20"
             }`}
           >
             <div className="w-full sm:mb-20 mb-10 ">

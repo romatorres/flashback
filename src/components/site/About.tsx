@@ -8,7 +8,7 @@ const About = () => {
   const titleAnimation = useScrollAnimation({ threshold: 0.2 });
   const photoAnimation = useScrollAnimation({ threshold: 0.3 });
   const contentAnimation = useScrollAnimation({ threshold: 0.3 });
-  const featuresAnimation = useScrollAnimation({ threshold: 0.2 });
+  const featuresAnimation = useScrollAnimation({ threshold: 0.4 });
   const features = [
     {
       icon: Music,
@@ -40,7 +40,7 @@ const About = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         <div
           ref={titleAnimation.ref}
-          className={`text-center mb-20 transition-[opacity,transform] duration-700 ${
+          className={`text-center mb-20 transition-all duration-700 ${
             titleAnimation.isVisible
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-10"
@@ -54,7 +54,7 @@ const About = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
           <div
             ref={photoAnimation.ref}
-            className={`relative group transition-[opacity,transform] duration-700 delay-150 ${
+            className={`relative group transition-all duration-700 delay-150 ${
               photoAnimation.isVisible
                 ? "opacity-100 scale-100"
                 : "opacity-0 scale-95"
@@ -102,7 +102,7 @@ const About = () => {
 
           <div
             ref={contentAnimation.ref}
-            className={`space-y-8 order-1 md:order-2 transition-[opacity,transform] duration-700 delay-300 ${
+            className={`space-y-8 order-1 md:order-2 transition-all duration-700 delay-300 ${
               contentAnimation.isVisible
                 ? "opacity-100 translate-x-0"
                 : "opacity-0 translate-x-10"
@@ -144,12 +144,14 @@ const About = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className={`text-start p-6 rounded-2xl bg-gradient-to-br from-accent/10 to-transparent border border-accent/20 hover:border-accent/40 hover:bg-accent/5 transition-colors duration-300 delay-300 ${
+              className={`text-start p-6 rounded-2xl bg-gradient-to-br from-accent/10 to-transparent border border-accent/20 hover:border-accent/40 hover:bg-accent/5 transition-all duration-700 ease-out ${
                 featuresAnimation.isVisible
                   ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-10"
+                  : "opacity-0 translate-y-20"
               }`}
-              style={{ transitionDelay: `${index * 150}ms` }}
+              style={{
+                transitionDelay: `${index * 200}ms`,
+              }}
             >
               <feature.icon className="w-12 h-12 mb-4 text-disco-orange group-hover:scale-110 transition-transform" />
               <h3 className="font-display text-2xl mb-3 text-foreground">

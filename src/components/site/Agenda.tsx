@@ -86,12 +86,12 @@ export default function Agenda() {
                 <div
                   key={agenda.id}
                   className={`bg-card border-2 border-border rounded-2xl p-4
-               hover:border-accent transition-colors duration-300 group relative overflow-hidden  ${
+               hover:border-accent transition-all ease-out duration-700 group relative overflow-hidden  ${
                  cardsAnimation.isVisible
                    ? "opacity-100 translate-y-0"
-                   : "opacity-0 translate-y-10"
+                   : "opacity-0 translate-y-20"
                }`}
-                  style={{ transitionDelay: `${index * 150}ms` }}
+                  style={{ transitionDelay: `${index * 200}ms` }}
                 >
                   {/* Ticket stub notch */}
                   <div className="absolute top-0 right-6 w-8 h-8 bg-background rounded-full transform -translate-y-1/2"></div>
