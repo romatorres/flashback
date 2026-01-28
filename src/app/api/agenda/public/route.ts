@@ -17,7 +17,7 @@ export async function GET() {
         ativo: true,
       },
       orderBy: {
-        data: "asc",
+        data: "desc",
       },
     });
 
