@@ -47,7 +47,7 @@ export default function Header() {
           scrolled ? "bg-background/80 backdrop-blur-sm" : "bg-transparent"
         }`}
       >
-        <div className="container mx-auto px-4 h-[72px] flex items-center justify-between">
+        <div className="container mx-auto px-4 h-18 flex items-center justify-between">
           <div className="flex-1">
             <Image
               src="/img/logo-icon.png"
@@ -67,31 +67,31 @@ export default function Header() {
           <nav className="hidden md:flex items-center gap-10 text-xl font-semibold">
             <button
               onClick={() => scrollToSection("/")}
-              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer"
+              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-size-[200%_auto] cursor-pointer"
             >
               Home
             </button>
             <button
               onClick={() => scrollToSection("about")}
-              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer"
+              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-size-[200%_auto] cursor-pointer"
             >
               Sobre
             </button>
             <button
               onClick={() => scrollToSection("agenda")}
-              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer"
+              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-size-[200%_auto] cursor-pointer"
             >
               Agenda
             </button>
             <button
               onClick={() => scrollToSection("videos")}
-              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer"
+              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-size-[200%_auto] cursor-pointer"
             >
               Vídeos
             </button>
             <button
               onClick={() => scrollToSection("contact")}
-              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto] cursor-pointer"
+              className="bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-size-[200%_auto] cursor-pointer"
             >
               Contatos
             </button>
@@ -106,7 +106,7 @@ export default function Header() {
                     <BiMenuAltRight className="w-10 h-10 text-foreground" />
                   </button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-[300px]">
+                <SheetContent side="right" className="w-75">
                   <SheetHeader>
                     <SheetTitle className="sr-only">Menu Principal</SheetTitle>
                   </SheetHeader>

@@ -5,12 +5,14 @@ import Agenda from "@/components/site/Agenda";
 import Videos from "@/components/site/Videos";
 import Contact from "@/components/site/Contact";
 import Footer from "@/components/site/Footer";
+import PromoModal from "@/components/site/PromoModal";
 
 export default function Home() {
   return (
     <div>
       <Header />
       <Hero />
+      <PromoModal />
       <div id="about">
         <About />
       </div>

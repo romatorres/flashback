@@ -217,7 +217,7 @@ export function AgendaForm({ onSuccess }: AgendaFormProps) {
               </FormLabel>
               <FormControl>
                 <Textarea
-                  className="admin-textarea min-h-[100px]"
+                  className="admin-textarea min-h-25"
                   placeholder="Adicione informações extras sobre o evento, agenda, participantes, materiais necessários..."
                   {...field}
                 />

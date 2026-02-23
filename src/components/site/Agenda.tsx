@@ -34,7 +34,7 @@ export default function Agenda() {
   return (
     <section id="shows" className="py-20 px-4 relative">
       {
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background"></div>
+        <div className="absolute inset-0 bg-linear-to-b from-background via-muted/20 to-background"></div>
       }
       <div className="relative max-w-6xl mx-auto z-10">
         <div
@@ -45,7 +45,7 @@ export default function Agenda() {
               : "opacity-0 translate-y-10"
           }`}
         >
-          <h2 className="flex justify-center font-gravitas-one text-4xl md:text-5xl lg:text-6xl sm:mb-24 mb-20 bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-[length:200%_auto]">
+          <h2 className="flex justify-center font-gravitas-one text-4xl md:text-5xl lg:text-6xl sm:mb-24 mb-20 bg-gradient-disco bg-clip-text text-transparent animate-shimmer bg-size-[200%_auto]">
             Nossa agenda
           </h2>
         </div>
@@ -114,22 +114,22 @@ export default function Agenda() {
 
                     <div className="space-y-2 mb-6">
                       <div className="flex items-start gap-2 text-muted-foreground">
-                        <MapPin className="w-4 h-4 flex-shrink-0 mt-1" />
+                        <MapPin className="w-4 h-4 shrink-0 mt-1" />
                         <p className="font-body">{agenda.local}</p>
                       </div>
                       <div className="flex items-start gap-2 text-muted-foreground">
-                        <Clock className="w-4 h-4 flex-shrink-0 mt-1" />
+                        <Clock className="w-4 h-4 shrink-0 mt-1" />
                         <p className="font-body">{agenda.horario}</p>
                       </div>
                       {agenda.detalhes && (
                         <div className="flex items-start gap-2 text-muted-foreground">
-                          <ClipboardCheck className="w-4 h-4 flex-shrink-0 mt-1" />
+                          <ClipboardCheck className="w-4 h-4 shrink-0 mt-1" />
                           <p className="font-body">{agenda.detalhes}</p>
                         </div>
                       )}
                     </div>
 
-                    <button className="cursor-pointer bg-gradient-disco animate-shimmer bg-[length:200%_auto] text-foreground font-semibold px-10 py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    <button className="cursor-pointer bg-gradient-disco animate-shimmer bg-size-[200%_auto] text-foreground font-semibold px-10 py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg">
                       <a
                         href="https://wa.me/75981226159?text=Olá!%20Vim%20pelo%20site,%20quero%20mais%20informações%20sobre%20a%20festa"
                         target="_blank"
