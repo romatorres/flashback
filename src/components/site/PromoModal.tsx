@@ -6,12 +6,17 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const PROMO_MODAL_SEEN_KEY = "promo_modal_seen";
 
-export default function PromoModal() {
+export default function PromoModal({ 
+  active = process.env.NEXT_PUBLIC_SHOW_PROMO === "true" 
+}: { 
+  active?: boolean 
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // Exibir o modal apenas uma vez por sessão.
+    // Exibir o modal apenas uma vez por sessão e se estiver ativo.
     if (
+      active &&
       typeof window !== "undefined" &&
       !sessionStorage.getItem(PROMO_MODAL_SEEN_KEY)
     ) {
@@ -21,7 +26,9 @@ export default function PromoModal() {
 
       return () => clearTimeout(timer);
     }
-  }, []);
+  }, [active]);
+
+  if (!active) return null;
 
   const handleOpenChange = (open: boolean) => {
     if (!open) {

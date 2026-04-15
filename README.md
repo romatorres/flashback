@@ -42,3 +42,7 @@ Agora você pode usar essas animações no seu código com as classes:
 - animate-fade-in - Fade com movimento vertical de 20px
 - animate-fade-up - Fade com movimento vertical de 40px
 - animate-scale-in - Fade com escala
+
+## PARA ATIVAR e DESATIVAR O MODAL
+
+- const showPromo = process.env.NEXT_PUBLIC_SHOW_PROMO === "true";

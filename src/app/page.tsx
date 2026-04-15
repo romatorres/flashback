@@ -8,11 +8,13 @@ import Footer from "@/components/site/Footer";
 import PromoModal from "@/components/site/PromoModal";
 
 export default function Home() {
+  const showPromo = process.env.NEXT_PUBLIC_SHOW_PROMO === "false";
+
   return (
     <div>
       <Header />
       <Hero />
-      <PromoModal />
+      <PromoModal active={showPromo} />
       <div id="about">
         <About />
       </div>
