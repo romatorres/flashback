@@ -27,7 +27,7 @@ export default function Footer() {
         </div>
         <div className=" sm:mt-0 mt-3">
           <a
-            href="https://romatorres.dev.br"
+            href="https://romatorres-dev.vercel.app/"
             target="_blank"
             className="hover:-translate-x-0.5 duration-300"
           >
