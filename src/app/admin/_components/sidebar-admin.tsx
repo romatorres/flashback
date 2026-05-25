@@ -12,6 +12,7 @@ import {
   Users,
   Calendar,
   LogOut,
+  Settings as SettingsIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -43,6 +44,11 @@ const getNavigation = (userRole: UserRole) => {
       name: "Usuários",
       href: "/admin/users",
       icon: Users,
+    });
+    baseNavigation.push({
+      name: "Configurações",
+      href: "/admin/settings",
+      icon: SettingsIcon,
     });
   }
 

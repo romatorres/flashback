@@ -6,15 +6,16 @@ import Videos from "@/components/site/Videos";
 import Contact from "@/components/site/Contact";
 import Footer from "@/components/site/Footer";
 import PromoModal from "@/components/site/PromoModal";
+import { getSettings } from "@/actions/settings";
 
-export default function Home() {
-  const showPromo = process.env.NEXT_PUBLIC_SHOW_PROMO === "false";
+export default async function Home() {
+  const settings = await getSettings();
 
   return (
     <div>
       <Header />
       <Hero />
-      <PromoModal active={showPromo} />
+      <PromoModal active={settings?.showPromoModal ?? false} />
       <div id="about">
         <About />
       </div>
